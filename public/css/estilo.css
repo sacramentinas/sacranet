@@ -1,0 +1,37 @@
+body{
+    background-color:#ECF0F5;
+
+}
+.envio{
+    margin-bottom:20px;
+
+}
+.margintop{
+    margin-top:20px;
+}
+#mensagem{
+    width:100%;
+    z-index: 20000;
+    position:fixed;
+    top:-80px;
+
+
+}
+.alert-danger, .alert-success{
+    display:none;
+}
+.alert{
+    padding-bottom:5px;
+    text-align:center;
+    box-shadow: rgba(0,0,0,.3) 1px 1px 10px;
+
+}
+.botao{
+    margin-top:15px;
+}
+.erro input,select,textarea{
+    border:1px solid #dd4b39;
+}
+.erro > .checkboxmsg{
+    border:1px solid #dd4b39;
+}
