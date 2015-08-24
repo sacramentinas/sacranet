@@ -65,7 +65,7 @@ class Aluno extends Model
                  $dados['municipio'] = trim(substr($a,$ini += strlen($quant[12]) ,strlen($quant[13])));
                  $dados['nomemae'] = trim(substr($a,$ini += strlen($quant[13]) ,strlen($quant[14])));
                  $dados['nomepai'] = trim(substr($a,$ini += strlen($quant[14]) ,strlen($quant[15])));
-                 $dados['senha'] =  trim(substr($a,$ini += strlen($quant[15]) ,strlen($quant[16])));
+                 $dados['senha'] =  \Hash::make(trim(substr($a,$ini += strlen($quant[15]) ,strlen($quant[16]))));
                  $dados['telefone'] = trim(substr($a,$ini += strlen($quant[16]) ,strlen($quant[17])));
                  $dados['telefonemae'] = trim(substr($a,$ini += strlen($quant[17]) ,strlen($quant[18])));
                  $dados['telefonepai'] = trim(substr($a,$ini += strlen($quant[18]) ,strlen($quant[19])));

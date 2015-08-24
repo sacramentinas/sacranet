@@ -18,7 +18,8 @@ class CreateAlunosTable extends Migration
             $table->string('nomealuno',100);
             $table->date('datanascimento')->nullable();
             $table->string('sexo',1)->nullable();
-            $table->integer('curso_id')->nullable();
+            $table->integer('turma_id')->unsigned()->nullable();
+            $table->foreign('turma_id')->references('id')->on('turmas')->onDelete('SET NULL');
             $table->string('codcurso',5)->nullable();
             $table->string('turma',1)->nullable();
             $table->integer('numero')->nullable();

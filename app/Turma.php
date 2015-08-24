@@ -3,7 +3,7 @@
 namespace Sacranet;
 
 use Illuminate\Database\Eloquent\Model;
-use Sacranet\Serie;
+
 
 class Turma extends Model
 {
@@ -12,7 +12,7 @@ class Turma extends Model
 
     public function serie(){
 
-        return $this->belongsTo(Serie::class);
+        return $this->belongsTo('Sacranet\Serie');
 
     }
 

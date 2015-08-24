@@ -69,7 +69,8 @@ class TurmaController extends Controller
      */
     public function show($id)
     {
-        //
+
+
     }
 
     /**
@@ -80,7 +81,9 @@ class TurmaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $serie = Serie::find($id);
+
+        dd($serie->turmas());
     }
 
     /**

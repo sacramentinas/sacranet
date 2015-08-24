@@ -26,7 +26,7 @@
 
                 </div><!-- /.box-header -->
                 <div class="box-footer text-black">
-                    <form action="{!! route('aluno.upload') !!}" method="post" enctype="multipart/form-data">
+                    <form action="{!! route('alunos.upload') !!}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" >
                         <div class="input-group envio">
                             <input type="file" name="alunos" class="form-control" >

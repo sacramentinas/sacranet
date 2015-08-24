@@ -20,6 +20,8 @@ class AlunoController extends Controller
             $arquivo->move('upload','alunos.txt');
 
             $arraydados = Aluno::geradados('upload/alunos.txt');
+
+
             Aluno::truncate();
 
             foreach($arraydados as $aluno){
