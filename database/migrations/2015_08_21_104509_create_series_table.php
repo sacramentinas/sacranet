@@ -15,7 +15,7 @@ class CreateSeriesTable extends Migration
         Schema::create('series', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cod_sei',10);
-            $table->string('serie',50);
+            $table->string('nome',50);
             $table->timestamps();
 
         });

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Serie extends Model
 {
-    protected $fillable = ['cod_sei','serie'];
+    protected $fillable = ['cod_sei','nome'];
 
     public function turmas()
     {

@@ -10,7 +10,7 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Inicial</a></li>
             <li>Turmas</li>
-            <li class="active">Cadastrar</li>
+            <li class="active">Editar</li>
         </ol>
     </section>
 
@@ -22,11 +22,11 @@
         <div class="col-md-12">
             <div class="box box-info ">
                 <div class="box-header">
-                    <h3 class="box-title">Cadastrar Turmas</h3>
+                    <h3 class="box-title">Editar Turmas</h3>
 
                 </div><!-- /.box-header -->
                 <div class="box-footer text-black">
-                    {!! Form::open( ['route' =>'turmas.store','id' => 'form'] ) !!}
+                    {!! Form::model($serie->toArray(), ['route' =>'turmas.store','id' => 'form'] ) !!}
                     <div clas="row">
                         <div class="col-md-4">
                     {!! Form::label('cod_sei','Código vindo do SEI:') !!}
@@ -45,14 +45,15 @@
                                 <div class="checkboxmsg">
                             <div class="checkbox-inline">
                                 <label>
-                                    {!! Form::checkbox('','',false,['id' => 'todas']) !!}
+
+                                    <input type="checkbox" value="" name="" id="todas">
                                     Todas
                                 </label>
                             </div>
 
                             <div class="checkbox-inline">
                                <label>
-                                    {!! Form::checkbox('turmas[]','A',null) !!}A
+                                    {!! Form::checkbox('turmas[]','A',null,['checked' => (in_array('A', $turmas) ? "checked" : "")]) !!}A
                                </label>
                             </div>
 
@@ -189,4 +190,3 @@
         });
     </script>
 @endsection
-

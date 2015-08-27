@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Turma extends Model
 {
-    protected $fillable = ['serie_id','turma'];
+    protected $fillable = ['letra'];
 
 
     public function serie(){

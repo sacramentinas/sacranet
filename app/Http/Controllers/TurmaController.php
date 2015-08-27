@@ -49,7 +49,7 @@ class TurmaController extends Controller
 
           foreach($turmas as $turma){
 
-              $serie->turmas()->save(Turma::create(['turma' => $turma ]));
+              $serie->turmas()->save(Turma::create(['letra' => $turma ]));
 
           }
 
@@ -82,8 +82,13 @@ class TurmaController extends Controller
     public function edit($id)
     {
         $serie = Serie::find($id);
+        $turmas = [];
+        foreach( $serie->turmas->toArray() as $turma){
+          $turmas[] = $turma['letra'];
+        }
 
-        dd($serie->turmas());
+        return view('turma.edit',compact('serie','turmas'));
+
     }
 
     /**

@@ -25,7 +25,7 @@ class TurmaRequest extends Request
     {
         return [
             'cod_sei' => 'required|min:2|unique:series',
-            'serie'   => 'required|unique:series',
+            'nome'   => 'required|unique:series',
             'turmas'  => 'required'
         ];
     }
