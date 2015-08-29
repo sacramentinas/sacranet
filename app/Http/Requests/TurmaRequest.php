@@ -24,8 +24,8 @@ class TurmaRequest extends Request
     public function rules()
     {
         return [
-            'cod_sei' => 'required|min:2|unique:series',
-            'nome'   => 'required|unique:series',
+            'cod_sei' => 'required|min:2|unique:series,cod_sei,'.$this->id,
+            'nome'   => 'required|unique:series,nome,'.$this->id,
             'turmas'  => 'required'
         ];
     }

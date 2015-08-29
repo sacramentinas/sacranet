@@ -6,8 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Hash;
 use Sacranet\Http\Requests;
-use Sacranet\Http\Controllers\Controller;
-USE Sacranet\Aluno;
+use Sacranet\Aluno;
 
 class AlunoController extends Controller
 {

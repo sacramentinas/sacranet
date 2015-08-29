@@ -26,7 +26,7 @@
 
                 </div><!-- /.box-header -->
                 <div class="box-footer text-black">
-                    {!! Form::open( ['route' =>'turmas.store','id' => 'form'] ) !!}
+                    {!! Form::open( ['route' =>'turmas.store','id' => 'form','method' => 'POST'] ) !!}
                     <div clas="row">
                         <div class="col-md-4">
                     {!! Form::label('cod_sei','Código vindo do SEI:') !!}
@@ -115,6 +115,11 @@
 
                  var dados =  $(this).serialize();
                  var url = $(this).attr('action');
+                 var metodo = $("input[name='_method'").attr('value');
+                    if(!metodo){
+                        metodo = $(this).attr('method');
+                    }
+
 
                 $('.texto-erro').fadeOut();
                 $('.texto-erro').remove();
@@ -122,7 +127,7 @@
 
 
                 $.ajax({
-                    type     :   'POST',
+                    type     :   metodo,
                     url      :   url,
                     data     :   dados,
                     dataType :   'json',
@@ -132,7 +137,7 @@
 
 
 
-                       $('.sucesso').html("<i class='icon fa fa-check'></i> "+msg.sucesso)
+                        $('.sucesso').html("<i class='icon fa fa-check'></i> "+msg.sucesso)
                         $('.alert-success').fadeIn('fast');
                         $('#mensagem').animate({top:"0"}, 500);
 

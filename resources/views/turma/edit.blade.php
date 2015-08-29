@@ -26,7 +26,8 @@
 
                 </div><!-- /.box-header -->
                 <div class="box-footer text-black">
-                    {!! Form::model($serie->toArray(), ['route' =>'turmas.store','id' => 'form'] ) !!}
+
+                    {!! Form::model($serie->toArray(), ['route' => ['turmas.update',$serie->id],'method' => 'put','id' => 'form'] ) !!}
                     <div clas="row">
                         <div class="col-md-4">
                     {!! Form::label('cod_sei','Código vindo do SEI:') !!}
@@ -52,39 +53,40 @@
                             </div>
 
                             <div class="checkbox-inline">
+
                                <label>
-                                    {!! Form::checkbox('turmas[]','A',null,['checked' => (in_array('A', $turmas) ? "checked" : "")]) !!}A
+                                    {!! Form::checkbox('turmas[]','A',(in_array('A', $turmas) ? "true" : null)) !!}A
                                </label>
                             </div>
 
                             <div class="checkbox-inline">
                                 <label>
-                                    {!! Form::checkbox('turmas[]','B',null) !!} B
+                                    {!! Form::checkbox('turmas[]','B',(in_array('B', $turmas) ? "true" : null)) !!} B
                                 </label>
                             </div>
 
                             <div class="checkbox-inline">
 
                                <label>
-                                   {!! Form::checkbox('turmas[]','C',null) !!} C
+                                   {!! Form::checkbox('turmas[]','C',(in_array('C', $turmas) ? "true" : null)) !!} C
                                </label>
                             </div>
 
                             <div class="checkbox-inline">
                                 <label>
-                                    {!! Form::checkbox('turmas[]','D',null) !!} D
+                                    {!! Form::checkbox('turmas[]','D',(in_array('D', $turmas) ? "true" : null)) !!} D
                                 </label>
                             </div>
 
                             <div class="checkbox-inline">
                                 <label>
-                                    {!! Form::checkbox('turmas[]','E',null) !!} E
+                                    {!! Form::checkbox('turmas[]','E',(in_array('E', $turmas) ? "true" : null)) !!} E
                                 </label>
                             </div>
 
                             <div class="checkbox-inline">
                                <label>
-                                   {!! Form::checkbox('turmas[]','F',null) !!} F
+                                   {!! Form::checkbox('turmas[]','F',(in_array('F', $turmas) ? "true" : null)) !!} F
                                </label>
                             </div>
                         </div>
@@ -116,6 +118,12 @@
 
                  var dados =  $(this).serialize();
                  var url = $(this).attr('action');
+                var metodo = $("input[name='_method'").attr('value');
+                if(!metodo){
+                    metodo = $(this).attr('method');
+                }
+
+
 
                 $('.texto-erro').fadeOut();
                 $('.texto-erro').remove();
@@ -123,7 +131,7 @@
 
 
                 $.ajax({
-                    type     :   'POST',
+                    type     :   metodo,
                     url      :   url,
                     data     :   dados,
                     dataType :   'json',
@@ -142,7 +150,9 @@
                             $(".alert-success").fadeOut(3000);
                         },4000);
 
-                        $('#form').trigger("reset");
+                            if(metodo != 'PUT'){
+                            $('#form').trigger("reset");
+                            }
 
                     },
                     error   :   function(msg){

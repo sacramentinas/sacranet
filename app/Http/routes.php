@@ -20,7 +20,10 @@ Route::get('/alunos/importar', function () {
 
 Route::post('/alunos/upload',['as' => 'alunos.upload', 'uses' => 'AlunoController@upload'] );
 
+Route::get('/turmas',['as' => 'turmas.index', 'uses' => 'TurmaController@index']);
+Route::get('/turmas/dados',['as' => 'turmas.dados', 'uses' => 'TurmaController@dados']);
 Route::get('/turmas/cadastrar',['as' => 'turmas.cadastrar', 'uses' => 'TurmaController@create']);
 Route::get('/turmas/{id}/editar/',['as' => 'turmas.editar', 'uses' => 'TurmaController@edit']);
-
 Route::post('/turmas/cadastrar',['as' => 'turmas.store', 'uses' => 'TurmaController@store']);
+Route::put('/turmas/{id}/editar',['as' => 'turmas.update', 'uses' => 'TurmaController@update']);
+Route::delete('/turmas/{id}/excluir',['as' => 'turmas.excluir', 'uses' => 'TurmaController@destroy']);

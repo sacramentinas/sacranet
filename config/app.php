@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'providers' => [
+    'providers' => array(
 
         /*
          * Laravel Framework Service Providers...
@@ -146,8 +146,10 @@ return [
         Sacranet\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         GeneaLabs\LaravelCaffeine\LaravelCaffeineServiceProvider::class,
+        yajra\Datatables\DatatablesServiceProvider::class,
 
-    ],
+
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -196,6 +198,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Form'      => Collective\Html\FormFacade::class,
+        'Datatables' => yajra\Datatables\Datatables::class,
 
     ],
 

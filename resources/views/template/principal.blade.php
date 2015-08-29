@@ -14,9 +14,11 @@
     <!-- Ionicons 2.0.0 -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
+    {!! Html::style('plugins/datatables/dataTables.bootstrap.css') !!}
     {!! Html::style('css/AdminLTE.min.css') !!}
     {!! Html::style('css/skins/_all-skins.min.css') !!}
     {!! Html::style('css/estilo.css') !!}
+    {!! Html::style('css/sweet-alert.css') !!}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -78,7 +80,11 @@
 <!-- jQuery 2.1.4 -->
 {!! Html::script('plugins/jQuery/jQuery-2.1.4.min.js') !!}
 {!! Html::script('js/bootstrap.min.js') !!}
+{!! Html::script('js/sweet-alert.min.js') !!}
 {!! Html::script('js/app.min.js') !!}
+{!! Html::script('plugins/datatables/jquery.dataTables.min.js') !!}
+{!! Html::script('plugins/datatables/dataTables.bootstrap.min.js') !!}
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers:{
