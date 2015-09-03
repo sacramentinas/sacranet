@@ -29,9 +29,6 @@
                         <th>Codigo Sei</th>
                         <th>Nome</th>
                         <th></th>
-                        <th></th>
-
-
                     </tr>
                     </thead>
                 </table>
@@ -59,11 +56,11 @@
 
 
 
-               $('#dados-tabela').DataTable({
+              $('#dados-tabela').DataTable({
                     processing: true,
                     serverSide: true,
                     lengthChange: false,
-                    pageLength: 1,
+                    pageLength: 5,
                     stateSave: true,
                     ajax: {
                         'url' : '{!! route("turmas.dados") !!}'
@@ -71,8 +68,8 @@
                     columns: [
                     { data: 'cod_sei', name: 'cod_sei' },
                     { data: 'nome', name: 'nome' },
-                    {width:'100px', data: 'editar', name: 'editar', orderable: false, searchable: false},
-                    {width:'100px', data: 'excluir', name: 'excluir', orderable: false, searchable: false},
+                    {width:'100px', data: 'acoes', name: 'acoes', orderable: false, searchable: false},
+
                 ],
                 "language": {
                     url: ' {!! url("plugins/datatables/Portuguese-Brasil.json") !!}'
@@ -81,13 +78,12 @@
 
 
 
-
-               /* $(document).on("click","#excluir",function(e) {
+                $(document).on("click","#excluir",function(e) {
                     e.preventDefault();
                     var url = $(this).attr('href');
-                    /*var row = $(this).parent().parent();*/
+                    var row = $(this).parent().parent();
 
-                    /*
+
                     swal({
                                 title: "Você tem certeza?",
                                 text: "Não será possível recuperar esssa turma!",
@@ -107,7 +103,7 @@
                                         encode   :   true,
                                         success: function(msg){
 
-                                            /*  $('.sucesso').html("<i class='icon fa fa-check'></i> "+msg.sucesso)
+                                             $('.sucesso').html("<i class='icon fa fa-check'></i> "+msg.sucesso)
                                              $('.alert-success').fadeIn('fast');
                                              $('#mensagem').animate({top:"0"}, 500);
 
@@ -116,8 +112,8 @@
                                              $(".alert-success").fadeOut(3000);
                                              },4000);
 
-                                             $('#dados-tabela').dataTable().fnDeleteRow(row);*/
-                /* },
+                                             $('#dados-tabela').dataTable().fnDeleteRow(row);
+                 },
                                         error: function(msg){
                                             console.log(msg);
                                         }
@@ -128,7 +124,7 @@
                                 }
                             });
 
-                });*/
+                });
 
 
 

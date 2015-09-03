@@ -23,11 +23,11 @@ class TurmaController extends Controller
     {
         $series = Serie::select(['id','cod_sei','nome']);
 
-        return Datatables::of($series)->addColumn('editar', function ($serie) {
-            $rota = route('turmas.editar',[$serie->id]);
-            return '<a href="'.$rota.'" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
-        })->addColumn('excluir', function ($serie) { $rota = route('turmas.excluir',[$serie->id]);
-            return  '<a href="'.$rota.'" class="btn btn-danger" id="excluir"><i class="glyphicon glyphicon-remove" ></i> Excluir</a>';
+        return Datatables::of($series)->addColumn('acoes', function ($serie) {
+            $editarurl = route('turmas.editar',[$serie->id]);
+            $excluirurl = route('turmas.excluir',[$serie->id]);
+            return '<a href="'.$editarurl.'" class="btn btn-primary btn-sm" title="Editar"><i class="glyphicon glyphicon-pencil"></i></a>'.
+                   ' <a href="'.$excluirurl.'" class="btn btn-danger btn-sm" id="excluir" title="Excluir"><i class="glyphicon glyphicon-remove"></i></a>';
         })->make(true);
 
 
@@ -102,9 +102,10 @@ class TurmaController extends Controller
 
     public function destroy($id)
     {
+
         $serie = Serie::find($id);
         $serie->turmas()->delete();
-        $serie->destroy();
+        $serie->delete();
 
         return response()->json(['sucesso' => 'Turma Excluida com Sucesso']);
 
