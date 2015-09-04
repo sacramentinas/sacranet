@@ -19,6 +19,7 @@
     {!! Html::style('css/skins/_all-skins.min.css') !!}
     {!! Html::style('css/estilo.css') !!}
     {!! Html::style('css/sweet-alert.css') !!}
+    {!! Html::style('css/font-awesome-animation.min.css') !!}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,12 +37,12 @@
                         <h4 class="sucesso">
 
                         </h4>
-       </div>
+        </div>
 
         <div class="alert alert-danger alert-dismissable" >
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4 class="erro">
-                <i class='icon fa  fa-exclamation-triangle'></i> Dados Obrigatórios Não foram Preenchidos
+            <h4 class="erro-msg">
+
             </h4>
         </div>
 

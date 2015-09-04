@@ -8,11 +8,24 @@ use Carbon\Carbon;
 class Aluno extends Model
 {
 
-    protected $fillable = ['matricula','nomealuno','datanascimento','sexo','id_curso','codcurso','turma','numero','endereco',
+    protected $fillable = ['matricula','nomealuno','datanascimento','sexo','id_curso','numero','endereco',
                            'bairro','cep','municipio','nomemae','nomepai','senha','telefone','telefonemae','telefonepai',
                            'emailmae','emailpai','emailcontratante' ];
 
-     public static function geradados($arquivo){
+
+
+    public function turma()
+    {
+        return $this->belongsTo('Sacranet\Turma');
+    }
+
+
+
+
+
+
+     public static function geradados($arquivo)
+     {
 
          $arraydados = [];
          $dados = [];
@@ -26,6 +39,8 @@ class Aluno extends Model
              }
 
          }
+
+         if(isset($quant) and $quant > 0){
 
          $cont = 0;
          while($cont < count($quant)){
@@ -81,7 +96,11 @@ class Aluno extends Model
 
 
          }
-         return $arraydados ;
+          return $arraydados ;
+
+         }else{
+          return [];
+         }
 
      }
 }

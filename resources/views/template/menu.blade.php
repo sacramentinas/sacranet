@@ -29,8 +29,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                    <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                    <li><a href="{!! route('alunos.index') !!}"><i class="fa fa-circle-o"></i> Gerenciar Alunos</a></li>
+                    <li><a href="{!! route('alunos.importar') !!}"><i class="fa fa-circle-o"></i> Importar Alunos</a></li>
                     <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
                 </ul>
             </li>
@@ -49,6 +49,11 @@
                 <a href="pages/mailbox/mailbox.html">
                     <i class="fa fa-envelope"></i> <span>Mensagens</span>
                     <small class="label pull-right bg-yellow">12</small>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('turmas.index') }}">
+                    <i class="fa fa-users"></i> <span>Turmas</span>
                 </a>
             </li>
             <li class="treeview">

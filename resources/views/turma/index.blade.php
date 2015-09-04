@@ -62,6 +62,11 @@
                     lengthChange: false,
                     pageLength: 5,
                     stateSave: true,
+                  'fnDrawCallback': function (oSettings) {
+                      $('.add').each(function () {
+                          $(this).html(' <a href="{{ route('turmas.cadastrar') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Cadastrar</a>');
+                      });
+                  },
                     ajax: {
                         'url' : '{!! route("turmas.dados") !!}'
                          },
@@ -75,6 +80,8 @@
                     url: ' {!! url("plugins/datatables/Portuguese-Brasil.json") !!}'
                 }
             });
+
+
 
 
 

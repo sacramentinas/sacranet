@@ -93,7 +93,7 @@
                     <div clas="row">
                         <div class="col-md-12">
 
-                        <button type="submit" id="salvar" class="botao pull-right btn btn-flat btn-info btn-lg"><i class="fa fa-save"></i> Salvar</button>
+                        <button type="submit" id="salvar" class="botao pull-right btn btn-info btn-lg"><i class="fa fa-save"></i> Salvar</button>
 
                         </div>
                     </div>
@@ -112,6 +112,12 @@
 
             $('#form').submit(function(event){
                  event.preventDefault();
+
+                $('#salvar').html('<i class="fa fa-spinner faa-spin animated"></i> Carregando...').attr('disabled','disabled');
+
+
+
+
 
                  var dados =  $(this).serialize();
                  var url = $(this).attr('action');
@@ -132,7 +138,7 @@
                     data     :   dados,
                     dataType :   'json',
                     encode   :   true,
-
+                    contentType: false,
                     success  :   function(msg){
 
 
@@ -144,9 +150,12 @@
                         setTimeout(function(){
                             $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);
                             $(".alert-success").fadeOut(3000);
+
                         },4000);
 
                         $('#form').trigger("reset");
+                        $('#salvar').html('<i class="fa fa-save"></i> Salvar').removeAttr('disabled');
+
 
                     },
                     error   :   function(msg){
@@ -162,13 +171,15 @@
 
                         $('.alert-danger').fadeIn('fast');
                         $('#mensagem').animate({top:"0"}, 500);
+                        $('.erro-msg').html("<i class='icon fa  fa-exclamation-triangle'></i> Dados Obrigatórios Não foram Preenchidos");
 
                         setTimeout(function(){
                             $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);
                             $(".alert-danger").fadeOut(3000);
+
                         },4000);
 
-
+                        $('#salvar').html('<i class="fa fa-save"></i> Salvar').removeAttr('disabled');
                     }
 
                 });

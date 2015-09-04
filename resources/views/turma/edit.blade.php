@@ -168,6 +168,7 @@
 
                         $('.alert-danger').fadeIn('fast');
                         $('#mensagem').animate({top:"0"}, 500);
+                        $('.erro-msg').html("<i class='icon fa  fa-exclamation-triangle'></i> Dados Obrigatórios Não foram Preenchidos");
 
                         setTimeout(function(){
                             $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);

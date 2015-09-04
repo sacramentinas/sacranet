@@ -14,11 +14,11 @@
 Route::get('/', function () {
     return view('painel.inicial');
 });
-Route::get('/alunos/importar', function () {
-    return view('aluno.importar');
-});
 
+Route::get('/alunos',['as' => 'alunos.index', 'uses' => 'AlunoController@index']);
+Route::get('/alunos/importar', ['as' => 'alunos.importar', 'uses' => 'AlunoController@importar'] );
 Route::post('/alunos/upload',['as' => 'alunos.upload', 'uses' => 'AlunoController@upload'] );
+
 
 Route::get('/turmas',['as' => 'turmas.index', 'uses' => 'TurmaController@index']);
 Route::get('/turmas/dados',['as' => 'turmas.dados', 'uses' => 'TurmaController@dados']);
