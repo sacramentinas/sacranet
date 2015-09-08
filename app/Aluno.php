@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class Aluno extends Model
 {
 
-    protected $fillable = ['matricula','nomealuno','datanascimento','sexo','id_curso','numero','endereco',
+    protected $fillable = ['matricula','nomealuno','datanascimento','sexo','turma_id','numero','endereco',
                            'bairro','cep','municipio','nomemae','nomepai','senha','telefone','telefonemae','telefonepai',
                            'emailmae','emailpai','emailcontratante' ];
 
@@ -19,6 +19,11 @@ class Aluno extends Model
         return $this->belongsTo('Sacranet\Turma');
     }
 
+
+    public function setSenhaAttribute($value)
+    {
+        $this->attributes['senha'] = \Hash::make($value);
+    }
 
 
 
@@ -80,7 +85,7 @@ class Aluno extends Model
                  $dados['municipio'] = trim(substr($a,$ini += strlen($quant[12]) ,strlen($quant[13])));
                  $dados['nomemae'] = trim(substr($a,$ini += strlen($quant[13]) ,strlen($quant[14])));
                  $dados['nomepai'] = trim(substr($a,$ini += strlen($quant[14]) ,strlen($quant[15])));
-                 $dados['senha'] =  \Hash::make(trim(substr($a,$ini += strlen($quant[15]) ,strlen($quant[16]))));
+                 $dados['senha'] =  trim(substr($a,$ini += strlen($quant[15]) ,strlen($quant[16])));
                  $dados['telefone'] = trim(substr($a,$ini += strlen($quant[16]) ,strlen($quant[17])));
                  $dados['telefonemae'] = trim(substr($a,$ini += strlen($quant[17]) ,strlen($quant[18])));
                  $dados['telefonepai'] = trim(substr($a,$ini += strlen($quant[18]) ,strlen($quant[19])));

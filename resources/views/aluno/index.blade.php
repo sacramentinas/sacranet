@@ -5,6 +5,7 @@
         <h1>
             <i class="fa fa-user"></i>
             Alunos
+
             <span class="badge bg-teal">{!! $alunos->total() !!} alunos cadastrados</span>
         </h1>
 
@@ -81,13 +82,26 @@
 
         <div class="well profile_view">
             <div class="user-image">
-                <img  src="http://lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" class="img-circle img-responsive">
+                <?php
+
+                  if( file_exists( public_path().'/fotoaluno/'.intval($aluno->matricula).'.jpg')){
+                      $foto = asset('fotoaluno/'.intval($aluno->matricula).'.jpg');
+                  }else{
+                      $foto = asset('img/foto-indisponivel.png');
+                  }
+
+                ?>
+
+                <img  src=" {!! $foto !!}" >
             </div>
             <div class="col-sm-12 dados-aluno">
                 <h4 class="text-center text-aqua">{{ str_limit($aluno->nomealuno, 32) }}</h4>
+                <p class="text-center">
+                <span class="badge bg-aqua-active ">
+                   {{ $aluno->turma->serie->nome . " - " . $aluno->turma->letra  }}
 
-
-                    <p class="text-primary text-center">{{ $aluno->turma->serie->nome . " - " . $aluno->turma->letra  }} </p>
+                <span>
+                </p>
 
 
             </div>

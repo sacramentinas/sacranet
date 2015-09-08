@@ -20,6 +20,7 @@
     {!! Html::style('css/estilo.css') !!}
     {!! Html::style('css/sweet-alert.css') !!}
     {!! Html::style('css/font-awesome-animation.min.css') !!}
+    {!! Html::style('plugins/jQuery-File-Upload/css/jquery.fileupload.css') !!}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -81,10 +82,12 @@
 <!-- jQuery 2.1.4 -->
 {!! Html::script('plugins/jQuery/jQuery-2.1.4.min.js') !!}
 {!! Html::script('js/bootstrap.min.js') !!}
+
 {!! Html::script('js/sweet-alert.min.js') !!}
 {!! Html::script('js/app.min.js') !!}
 {!! Html::script('plugins/datatables/jquery.dataTables.min.js') !!}
 {!! Html::script('plugins/datatables/dataTables.bootstrap.min.js') !!}
+
 
 <script type="text/javascript">
     $.ajaxSetup({

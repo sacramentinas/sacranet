@@ -27,7 +27,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-footer text-black">
                     {!! Form::open( ['route' =>'turmas.store','id' => 'form','method' => 'POST'] ) !!}
-                    <div clas="row">
+                    <div class="row">
                         <div class="col-md-4">
                     {!! Form::label('cod_sei','Código vindo do SEI:') !!}
                     {!! Form::text('cod_sei',null,['class' => 'form-control input-lg','id' => 'cod_sei']) !!}
@@ -37,7 +37,7 @@
                     {!! Form::text('nome',null,['class' => 'form-control input-lg','id' => 'nome']) !!}
                         </div>
                     </div>
-                    <div clas="row ">
+                    <div class="row ">
                         <div class="col-md-12 margintop">
                             <div id="turmacontainer">
 
@@ -90,7 +90,7 @@
                      </div>
                         </div>
                     </div>
-                    <div clas="row">
+                    <div class="row">
                         <div class="col-md-12">
 
                         <button type="submit" id="salvar" class="botao pull-right btn btn-info btn-lg"><i class="fa fa-save"></i> Salvar</button>
@@ -138,7 +138,6 @@
                     data     :   dados,
                     dataType :   'json',
                     encode   :   true,
-                    contentType: false,
                     success  :   function(msg){
 
 

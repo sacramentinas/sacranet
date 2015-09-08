@@ -27,15 +27,19 @@ body{
 
 }
 .botao{
-    margin-top:15px;
+    margin-top:5px;
+    margin-right:10px;
+    margin-bottom:10px;
 }
-.erro input,select,textarea{
+.erro input,textarea{
     border:1px solid #dd4b39;
 }
 .erro > .checkboxmsg{
     border:1px solid #dd4b39;
 }
-
+.erro select{
+    border:1px solid #dd4b39;
+}
 .profile_view {
     margin-bottom: 20px;
     display: inline-block;
@@ -48,8 +52,38 @@ body{
 .well.profile_view {
     padding: 10px 0 15px 0;
 }
-.user-image img { clear: both; margin: auto; position: relative; width:100px;border:2px solid #a3d0ef; }
+/*
+.user-image{
+    width: 110px;
+    height: 120px;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size:110px;
+    border:2px solid #a3d0ef;
+    clear: both; margin: auto; position: relative;
+}
+.user-image img { width:100px;height:100px; }
+*/
+.user-image {
+    position: relative;
+    width: 100px;
+    height: 110px;
+    overflow: hidden;
+    border-radius: 50%;
+    border:2px solid #a3d0ef;
+    clear: both; margin: auto; position: relative;
 
+}
+.user-image img  {
+    position: absolute;
+    left: 50%;
+    top: 57%;
+    width: 100%;
+    height: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
 .dados-aluno{
     padding-bottom:10px;
 }

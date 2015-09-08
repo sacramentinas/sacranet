@@ -18,6 +18,9 @@ Route::get('/', function () {
 Route::get('/alunos',['as' => 'alunos.index', 'uses' => 'AlunoController@index']);
 Route::get('/alunos/importar', ['as' => 'alunos.importar', 'uses' => 'AlunoController@importar'] );
 Route::post('/alunos/upload',['as' => 'alunos.upload', 'uses' => 'AlunoController@upload'] );
+Route::get('/alunos/cadastrar',['as' => 'alunos.cadastrar', 'uses' => 'AlunoController@create'] );
+Route::post('/alunos/cadastrar', ['as' => 'alunos.store','uses' => 'AlunoController@store']);
+Route::get('/alunos/fotos', ['as' => 'alunos.fotos','uses' => 'AlunoController@uploadFotos']);
 
 
 Route::get('/turmas',['as' => 'turmas.index', 'uses' => 'TurmaController@index']);
