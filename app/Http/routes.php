@@ -19,8 +19,11 @@ Route::get('/alunos',['as' => 'alunos.index', 'uses' => 'AlunoController@index']
 Route::get('/alunos/importar', ['as' => 'alunos.importar', 'uses' => 'AlunoController@importar'] );
 Route::post('/alunos/upload',['as' => 'alunos.upload', 'uses' => 'AlunoController@upload'] );
 Route::get('/alunos/cadastrar',['as' => 'alunos.cadastrar', 'uses' => 'AlunoController@create'] );
+Route::get('/alunos/{id}/editar',['as' => 'alunos.editar', 'uses' => 'AlunoController@edit'] );
+Route::put('/alunos/{id}/editar',['as' => 'alunos.update', 'uses' => 'AlunoController@update'] );
 Route::post('/alunos/cadastrar', ['as' => 'alunos.store','uses' => 'AlunoController@store']);
-Route::get('/alunos/fotos', ['as' => 'alunos.fotos','uses' => 'AlunoController@uploadFotos']);
+Route::get('/alunos/fotos', ['as' => 'alunos.fotos','uses' => 'AlunoController@fotos']);
+Route::post('/alunos/uploadfotos',['as' => 'alunos.uploadfotos', 'uses' => 'AlunoController@uploadFotos']);
 
 
 Route::get('/turmas',['as' => 'turmas.index', 'uses' => 'TurmaController@index']);

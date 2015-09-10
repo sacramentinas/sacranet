@@ -30,7 +30,7 @@ class AlunoRequest extends Request
             'sexo'              =>      'required',
             'numero'            =>      'required',
             'turma_id'          =>      'required',
-            'senha'             =>      'required',
+            'senhatexto'        =>      'required',
 
         ];
     }

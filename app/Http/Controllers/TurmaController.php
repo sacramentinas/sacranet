@@ -57,7 +57,7 @@ class TurmaController extends Controller
 
             return response()->json(['sucesso' => 'Turma Criada com Sucesso!']);
 
-            //
+
 
         }
 

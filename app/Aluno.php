@@ -9,7 +9,7 @@ class Aluno extends Model
 {
 
     protected $fillable = ['matricula','nomealuno','datanascimento','sexo','turma_id','numero','endereco',
-                           'bairro','cep','municipio','nomemae','nomepai','senha','telefone','telefonemae','telefonepai',
+                           'bairro','cep','municipio','nomemae','nomepai','senha','senhatexto','telefone','telefonemae','telefonepai',
                            'emailmae','emailpai','emailcontratante' ];
 
 
@@ -20,15 +20,16 @@ class Aluno extends Model
     }
 
 
-    public function setSenhaAttribute($value)
+    public function setSenhatextoAttribute($value)
     {
+        $this->attributes['senhatexto'] = $value;
         $this->attributes['senha'] = \Hash::make($value);
     }
 
-
-
-
-
+    public function setMatriculaAttribute($value)
+    {
+        $this->attributes['matricula'] = intval($value);
+    }
      public static function geradados($arquivo)
      {
 
@@ -85,7 +86,7 @@ class Aluno extends Model
                  $dados['municipio'] = trim(substr($a,$ini += strlen($quant[12]) ,strlen($quant[13])));
                  $dados['nomemae'] = trim(substr($a,$ini += strlen($quant[13]) ,strlen($quant[14])));
                  $dados['nomepai'] = trim(substr($a,$ini += strlen($quant[14]) ,strlen($quant[15])));
-                 $dados['senha'] =  trim(substr($a,$ini += strlen($quant[15]) ,strlen($quant[16])));
+                 $dados['senhatexto'] =  trim(substr($a,$ini += strlen($quant[15]) ,strlen($quant[16])));
                  $dados['telefone'] = trim(substr($a,$ini += strlen($quant[16]) ,strlen($quant[17])));
                  $dados['telefonemae'] = trim(substr($a,$ini += strlen($quant[17]) ,strlen($quant[18])));
                  $dados['telefonepai'] = trim(substr($a,$ini += strlen($quant[18]) ,strlen($quant[19])));

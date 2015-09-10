@@ -9,6 +9,7 @@ use Sacranet\Http\Requests;
 use Sacranet\Aluno;
 use Sacranet\Turma;
 use Sacranet\Http\Requests\AlunoRequest;
+use Illuminate\Support\Facades\Session;
 
 class AlunoController extends Controller
 {
@@ -22,16 +23,19 @@ class AlunoController extends Controller
         $turma = $request->get('t');
 
         if($busca && $turma) {
-            $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->where('turma_id',$turma)->paginate(12);
+            $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->where('turma_id',$turma)->orderBy('id')->paginate(12);
         }
         elseif($turma){
-            $alunos = Aluno::where('turma_id',$turma)->paginate(70);
+            $alunos = Aluno::where('turma_id',$turma)->orderBy('numero')->paginate(70);
         }
         elseif($busca){
-            $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->paginate(12);
+            $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->orderBy('id')->paginate(12);
         }else{
-            $alunos = Aluno::paginate(12);
+            $alunos = Aluno::orderBy('id','desc')->paginate(12);
         }
+
+
+
 
 
         return view('aluno.index',compact('alunos','turmas'));
@@ -68,11 +72,94 @@ class AlunoController extends Controller
     }
 
 
+    public function edit($id)
+    {
+        $tu = Turma::with('serie')->get();
+        $turmas = [];
+        $turmas[""] = "Selecione uma Turma";
 
-    public function uploadFotos(){
+        foreach($tu as $t){
+            $turmas[$t->id] = $t->serie->nome." - ".$t->letra;
+        }
 
-         return view('aluno.upload');
+        $aluno = Aluno::find($id);
+
+        return view('aluno.edit',compact('turmas','aluno'));
+
     }
+
+    public function update($id,AlunoRequest $request)
+    {
+       $aluno = Aluno::find($id);
+       $aluno->update($request->all());
+        return response()->json(['sucesso' => 'Aluno Editado com Sucesso!']);
+
+    }
+
+    public function fotos(){
+
+        $tu = Turma::with('serie')->get();
+        $turmas = [];
+        $turmas["todas"] = "Todas as Turmas";
+
+        foreach($tu as $t){
+            $turmas[$t->id] = $t->serie->nome." - ".$t->letra;
+        }
+
+         return view('aluno.upload',compact('turmas'));
+    }
+
+
+
+    public function uploadFotos(Request $request)
+    {
+        if($request->hasFile('fotos')) {
+            $turma =  $request->input('turma');
+            $arquivo = $request->file('fotos');
+            $local = public_path() . "/fotoaluno";
+
+            if(Session::has('turma')){
+                if($turma != Session::get('turma')){
+                    Session::put('turma',$turma);
+                    Session::forget('alunos');
+                }else{
+                    if( empty( Session::get('alunos',[] ) ) ){
+                        Session::forget('alunos');
+                    }
+                }
+            }else{
+                Session::put('turma',$turma);
+                Session::forget('alunos');
+            }
+
+
+            if($turma == 'todas' ){
+                $nomearquivo = $arquivo->getClientOriginalName();
+
+            }  else{
+
+                if (Session::has('alunos'))
+                {
+                    $alunos = Session::get('alunos');
+                }else{
+                    $alunos = Aluno::where('turma_id',$turma)->select('matricula')->orderBy('numero')->get()->toArray();
+                }
+
+                $matricula = array_shift($alunos);
+                Session::put('alunos',$alunos);
+
+                $nomearquivo =  intval($matricula['matricula'] ).".".$arquivo->getClientOriginalExtension();
+
+            }
+
+
+
+            return $arquivo->move($local, $nomearquivo);
+        }
+    }
+
+
+
 
     public function importar()
     {

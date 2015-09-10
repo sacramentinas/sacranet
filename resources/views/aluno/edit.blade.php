@@ -4,12 +4,12 @@
     <section class="content-header">
         <h1>
             <i class="fa fa-user"></i> Alunos
-
+            <a href="javascript:history.back()"  class="btn btn-default">&larr; Voltar</a>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Inicial</a></li>
             <li>Alunos</li>
-            <li class="active">Cadastrar</li>
+            <li class="active">Editar</li>
         </ol>
     </section>
 
@@ -21,11 +21,11 @@
         <div class="col-md-12">
             <div class="box box-info ">
                 <div class="box-header">
-                    <h3 class="box-title">Cadastrar Alunos</h3>
+                    <h3 class="box-title">Editar Alunos</h3>
 
                 </div><!-- /.box-header -->
                 <div class="box-footer text-black">
-                    {!! Form::open( ['route' =>'alunos.store','id' => 'form','method' => 'POST'] ) !!}
+                    {!! Form::model($aluno->toArray(),['route' => ['alunos.update',$aluno->id],'id' => 'form','method' => 'PUT'] ) !!}
                     <div class="row">
                         <div class="col-md-8">
                             {!! Form::label('nomealuno','Nome do Aluno:') !!}
@@ -211,7 +211,9 @@
 
                         },4000);
 
-                        $('#form').trigger("reset");
+                        if(metodo != 'PUT'){
+                            $('#form').trigger("reset");
+                        }
                         $('#salvar').html('<i class="fa fa-save"></i> Salvar').removeAttr('disabled');
 
 
@@ -246,13 +248,6 @@
 
             });
 
-            $('#todas').change(function(){
-               if(this.checked){
-                  $('input[name="turmas[]"]').prop('checked',true) ;
-                }else{
-                  $('input[name="turmas[]"]').prop('checked',false) ;
-                }
-            });
 
 
 

@@ -28,6 +28,7 @@ class CreateAlunosTable extends Migration
             $table->string('nomemae',100)->nullable();
             $table->string('nomepai',100)->nullable();
             $table->string('senha',50)->nullable();
+            $table->string('senhatexto',10)->nullable();
             $table->string('telefone',250)->nullable();
             $table->string('telefonemae',250)->nullable();
             $table->string('telefonepai',250)->nullable();

@@ -106,10 +106,18 @@
 
             </div>
 
-                <div class="col-md-12 botoes">
+                <div class="botoes">
+                    <div class="btn-group btn-group-lg btn-group-justified botoes-int" role="group">
+                        <a href="" class="btn btn-info "> <i class="fa fa-eye">
+                            </i> <small>Visualizar</small></a>
 
-                    <a href="" class="btn btn-primary btn-block"> <i class="fa fa-user">
-                        </i> Visualizar Aluno </a>
+
+                        <a href="{!! route('alunos.editar',[$aluno->id]) !!}" class="btn btn-warning"> <i class="fa fa-pencil">
+                            </i>  <small>Editar</small></a>
+                    </div>
+
+
+
 
 
                 </div>

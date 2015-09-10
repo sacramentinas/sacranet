@@ -23,53 +23,22 @@
         <div class="col-md-12">
             <div class="box box-info ">
                 <div class="box-header">
-                    <i class="fa fa-upload"></i>
-                    <h3 class="box-title">Enviar Arquivo texto gerado pelo SEI</h3>
+                    <p class="text-gray"><i class="fa fa-exclamation-triangle"></i> Selecione a turma para o envio das fotos. Caso as fotos já estejam numeradas pela matricula, deixe a opção todas!</p>
 
                 </div><!-- /.box-header -->
-                <div class="box-footer text-black">
-
-
-
-                    <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-
-                        <div class="row fileupload-buttonbar">
-                            <div class="col-lg-7">
-                                <!-- The fileinput-button span is used to style the file input field as button -->
-                                <span class="btn btn-success fileinput-button">
-                                    <i class="glyphicon glyphicon-plus"></i>
-                                    <span>Selecionar Arquivos...</span>
-                                    <input type="file" name="files[]" multiple="">
-                                </span>
-                                <button type="submit" class="btn btn-primary start">
-                                    <i class="glyphicon glyphicon-upload"></i>
-                                    <span>Iniciar upload</span>
-                                </button>
-                                <button type="reset" class="btn btn-warning cancel">
-                                    <i class="glyphicon glyphicon-ban-circle"></i>
-                                    <span>Cancelar upload</span>
-                                </button>
-
-
-                                <!-- The global file processing state -->
-                                <span class="fileupload-process"></span>
-                            </div>
-                            <!-- The global progress state -->
-                            <div class="col-lg-5 fileupload-progress fade">
-                                <!-- The global progress bar -->
-                                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                                </div>
-                                <!-- The extended global progress state -->
-                                <div class="progress-extended">&nbsp;</div>
-                            </div>
+                <div class="box-footer text-black relative">
+                    <div class="botao-enviar ">
+                        <div class="col-md-8">
+                        {!! Form::select('turmas',$turmas,null,['class' => 'form-control input-lg', 'id' => 'turmas']) !!}
                         </div>
-                        <!-- The table listing the files available for upload/download -->
-                        <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                        <div class="col-md-4">
+                    <a class="btn btn-success btn-lg" id="enviarFotos" href="#"> <i class="fa fa-upload"></i> Enviar</a>
+                        </div>
+                    </div>
+                    <div id="fileuploader">
 
-
-
-
+                        Selecione as fotos...
+                    </div>
 
 
                 </div><!-- /.box-footer -->
@@ -78,73 +47,86 @@
     </div><!-- /.row -->
 
 
-
 @endsection
 
 
 @section('script')
 
-    {!! Html::script('plugins/jQuery-File-Upload/js/vendor/jquery.ui.widget.js') !!}
-    {!! Html::script('plugins/jQuery-File-Upload/js/jquery.fileupload.js') !!}
+
+    {!! Html::script('js/jquery.uploadfile.js') !!}
 
         <script>
             $(document).ready(function(){
-                $('#form').submit(function(e){
-                    e.preventDefault();
-                    var dados = new FormData();
-                    dados.append('alunos',$('#alunos')[0].files[0]);
+                var uploadObj = $("#fileuploader").uploadFile({
+                    url: "{!! route('alunos.uploadfotos') !!}",
+                    fileName:"fotos",
+                    autoSubmit:false,
+                    multiple:true,
+                    sequential:true,
+                    sequentialCount:1,
+                    dragDrop:true,
+                    acceptFiles:"image/*",
+                    uploadStr:"Selecione as fotos...",
+                    dragDropStr: "<span><b>Arraste e solte as imagens</b></span>",
+                    abortStr:"Cancelar",
+                    cancelStr:"Cancelar",
+                    doneStr:"Pronto!",
+                    multiDragErrorStr: "Plusieurs Drag &amp; Drop de fichiers ne sont pas autorisés.",
+                    extErrorStr:"Extensão não autorizada:",
+                    sizeErrorStr:"Tamanho do arquivo inválido:",
+                    uploadErrorStr:"Upload não está autorizado",
+                    showDone:true,
+                    statusBarWidth:'90%',
+                    dragdropWidth:'500px',
+                    showStatusAfterSuccess:true,
+                    showFileCounter:false,
+                    dynamicFormData: function()
+                    {
+                        var $turma = $('#turmas').val();
+                        var data ={ 'turma': $turma};
+                        return data;
+                    },
+                    onSuccess:function(files,data,xhr,pd)
+                    {
+                        //files: list of files
+                        //data: response from server
+                        console.log(data);
+                        //xhr : jquer xhr object
+                    },
+                    afterUploadAll:function(obj)
+                    {
+                        $quantidade = obj.getFileCount();
 
-                    var url = $(this).attr('action');
-                    $('#salvar').html('<i class="fa fa-spinner faa-spin animated"></i> Carregando...').attr('disabled','disabled');
 
 
-                    $.ajax({
-                        type     :   'POST',
-                        url      :   url,
-                        processData: false,
-                        dataType: 'json',
-                        encode   :   true,
-                        cache: false,
-                        contentType: false,
-                        data     :  dados,
-                        success  :   function(msg){
 
+                        $('.sucesso').html("<i class='icon fa fa-check'></i> "+$quantidade+" Foto(s) Enviadas");
+                        $('.alert-success').fadeIn('fast');
+                        $('#mensagem').animate({top:"0"}, 500);
+                        obj.container.fadeOut(1000);
 
-                             if(msg.sucesso){
+                        setTimeout(function(){
+                            $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);
+                            $(".alert-success").fadeOut(3000);
+                            $('#enviarFotos').html(' <i class="fa fa-upload"></i> Enviar').removeAttr('disabled');                    },4000);
 
-                                $('.sucesso').html("<i class='icon fa fa-check'></i> "+msg.sucesso)
-                                $('.alert-success').fadeIn('fast');
-                                $('#mensagem').animate({top:"0"}, 500);
+                        setTimeout(function(){
+                            uploadObj.reset();
+                            obj.container.fadeIn();
+                        }, 5000);
 
-                                setTimeout(function(){
-                                    $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);
-                                    $(".alert-success").fadeOut(3000);
-
-                                },4000);
-
-                                $('#form').trigger("reset");
-
-
-                             }else{
-
-                                 $('.alert-danger').fadeIn('fast');
-                                 $('#mensagem').animate({top:"0"}, 500);
-                                 $('.erro-msg').html("<i class='icon fa  fa-exclamation-triangle'></i>Erro no arquivo de importação");
-
-                                 setTimeout(function(){
-                                     $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);
-                                     $(".alert-danger").fadeOut(3000);
-                                 },4000);
-
-                             }
-                            $('#salvar').html('<i class="fa fa-upload"></i> Enviar').removeAttr('disabled');
-
-                        }
-
-                    });
-
+                    }
 
                 });
+
+                $('#enviarFotos').click(function(event){
+                    event.preventDefault();
+                    $(this).html('<i class="fa fa-spinner faa-spin animated"></i> Carregando...').attr('disabled','disabled');
+                    uploadObj.startUpload();
+
+                });
+
+
             });
 
         </script>
