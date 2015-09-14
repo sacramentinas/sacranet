@@ -130,14 +130,7 @@
     padding:10px 10px 0px 10px;
 
 }
-.relative{
-    position:relative;
-}
-.botao-enviar{
-    position:absolute;
-    left:550px;
-    top:20px;
-}
+
 .state-hover
 {
     border:2px solid #A5A5C7;

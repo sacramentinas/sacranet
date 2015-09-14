@@ -22,6 +22,10 @@ class AlunoController extends Controller
         $busca = $request->get('p');
         $turma = $request->get('t');
 
+        Session::put('url',\URL::full());
+
+
+
         if($busca && $turma) {
             $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->where('turma_id',$turma)->orderBy('id')->paginate(12);
         }
@@ -115,8 +119,11 @@ class AlunoController extends Controller
     {
         if($request->hasFile('fotos')) {
             $turma =  $request->input('turma');
+            $mat = $request->input('matricula');
             $arquivo = $request->file('fotos');
             $local = public_path() . "/fotoaluno";
+
+
 
             if(Session::has('turma')){
                 if($turma != Session::get('turma')){
@@ -130,6 +137,10 @@ class AlunoController extends Controller
             }else{
                 Session::put('turma',$turma);
                 Session::forget('alunos');
+            }
+
+            if($mat){
+                Session::put('alunos',[ 0 => ['matricula' => $mat]]);
             }
 
 
@@ -159,7 +170,14 @@ class AlunoController extends Controller
     }
 
 
+    public function removerfoto(Request $request)
+    {
+        $matricula = $request->input('matricula');
+        \File::delete('fotoaluno/'.$matricula.'.jpg');
+        return ['sucesso' => "Foto Excluída com Sucesso"];
 
+
+    }
 
     public function importar()
     {

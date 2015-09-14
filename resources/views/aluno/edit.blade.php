@@ -3,8 +3,11 @@
 @section('breadcrumb')
     <section class="content-header">
         <h1>
+            <?php
+
+            ?>
             <i class="fa fa-user"></i> Alunos
-            <a href="javascript:history.back()"  class="btn btn-default">&larr; Voltar</a>
+            <a href="{!! Session::get('url',route('alunos.index')) !!}"  class="btn btn-default">&larr; Voltar</a>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Inicial</a></li>
@@ -24,7 +27,32 @@
                     <h3 class="box-title">Editar Alunos</h3>
 
                 </div><!-- /.box-header -->
-                <div class="box-footer text-black">
+                <div class="box-footer text-black relative">
+                    <?php
+
+                    if( file_exists( public_path().'/fotoaluno/'.intval($aluno->matricula).'.jpg')){
+                        $foto = asset('fotoaluno/'.intval($aluno->matricula).'.jpg');
+                        $ex = "";
+                    }else{
+                        $foto = asset('fotoaluno/foto-indisponivel.png');
+                        $ex = "invisivel";
+                    }
+
+                    ?>
+                    <a class="badge bg-red excluirfoto {!! $ex !!}" title="Clique para Excluir a Foto">X</a>
+
+                    <div class="user-image-edit">
+                       <img  class="foto-edit" src=" {!! $foto !!}" >
+                   </div>
+
+                    <div id="carregandoupload">
+                          <i class="fa fa-spinner faa-spin animated"></i> Enviando ...
+                    </div>
+
+                    <div id="fileuploader">
+                        Selecione a foto
+                    </div>
+
                     {!! Form::model($aluno->toArray(),['route' => ['alunos.update',$aluno->id],'id' => 'form','method' => 'PUT'] ) !!}
                     <div class="row">
                         <div class="col-md-8">
@@ -155,18 +183,137 @@
 @endsection
 
 @section('script')
-    {!! Html::script('plugins/input-mask/jquery.mask.min.js') !!}
+    {!! Html::script('js/jquery.uploadfile.min.js') !!}
     <script>
         $(document).ready(function(){
-             /*
-            $('#telefone').mask('(00) 0000-00009');
-            $('#telefone').blur(function(event) {
-                if($(this).val().length == 15){ // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
-                    $('#telefone').mask('(00) 00000-0009');
-                } else {
-                    $('#telefone').mask('(00) 0000-00009');
+
+
+            $('.excluirfoto').click(function(){
+
+
+                $.ajax({
+                    type     :   'GET',
+                    url      :   "{!! route('alunos.removerfoto') !!}",
+                    data     :   {'matricula' : $('#matricula').val() },
+                    dataType :   'json',
+                    encode   :   true,
+                    success  :   function(msg){
+
+                        $('.sucesso').html("<i class='icon fa fa-check'></i> "+msg.sucesso)
+                        $('.alert-success').fadeIn('fast');
+                        $('#mensagem').animate({top:"0"}, 500);
+
+                        setTimeout(function(){
+                            $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);
+                            $(".alert-success").fadeOut(3000);
+
+                        },4000);
+
+
+
+                        $enderecoatual =  $(".foto-edit").attr('src').split('/');
+                        $enderecoatual = $enderecoatual.filter(function(e){return e});
+                        if($enderecoatual[0] == " http:" || $enderecoatual[0] == "http:"){
+                            $enderecoatual.shift();
+                        }
+                        $enderecoatual.pop();
+                        $enderecoatual = "http://"+$enderecoatual.join("/")+"/foto-indisponivel.png";
+
+                        $(".foto-edit").attr('src',$enderecoatual);
+                        $('.excluirfoto').addClass("invisivel");
+
+
+                    }
+
+                });
+
+            });
+
+            var uploadObj = $("#fileuploader").uploadFile({
+                url: "{!! route('alunos.uploadfotos') !!}",
+                fileName:"fotos",
+                autoSubmit:true,
+                multiple:false,
+                sequential:true,
+                sequentialCount:1,
+                dragDrop:false,
+                acceptFiles:"image/*",
+                uploadStr:"Selecione a foto",
+                dragDropStr: "<span><b>Arraste e solte as imagens</b></span>",
+                abortStr:"Cancelar",
+                cancelStr:"Cancelar",
+                doneStr:"Pronto!",
+                multiDragErrorStr: "Plusieurs Drag &amp; Drop de fichiers ne sont pas autorisés.",
+                extErrorStr:"Extensão não autorizada:",
+                sizeErrorStr:"Tamanho do arquivo inválido:",
+                uploadErrorStr:"Upload não está autorizado",
+                showDone:true,
+                showCancel:false,
+                showProgress:false,
+                statusBarWidth:'90%',
+                dragdropWidth:'500px',
+                showStatusAfterSuccess:false,
+                showFileCounter:false,
+                showQueueDiv: "output",
+                onSubmit:function(files)
+                {
+
+                    $('#carregandoupload').fadeIn();
+
+                },
+                dynamicFormData: function()
+                {
+                    var $matricula = $('#matricula').val();
+                    var data ={ 'matricula': $matricula};
+                    return data;
+                },
+                onSuccess:function(files,data,xhr,pd)
+                {
+
+
+                    $imagem = data.split('/').pop();
+                    $enderecoatual =  $(".foto-edit").attr('src').split('/');
+                    $enderecoatual = $enderecoatual.filter(function(e){return e});
+                    if($enderecoatual[0] == " http:" || $enderecoatual[0] == "http:"){
+                        $enderecoatual.shift();
+                    }
+                    $enderecoatual.pop();
+                    $enderecoatual = "http://"+$enderecoatual.join("/")+"/"+$imagem+"?lastmod="+Date.now();
+                    $(".foto-edit").attr('src',$enderecoatual);
+                    $('.excluirfoto').removeClass("invisivel");
+
+                },
+                afterUploadAll:function(obj)
+                {
+                    $quantidade = obj.getFileCount();
+
+                  // console.log(obj);
+
+                    $('#carregandoupload').fadeOut(3000);
+                    $('.sucesso').html("<i class='icon fa fa-check'></i> "+$quantidade+" Foto(s) Enviadas");
+                    $('.alert-success').fadeIn('fast');
+                    $('#mensagem').animate({top:"0"}, 500);
+                    obj.container.fadeOut(1000);
+
+                    setTimeout(function(){
+                        $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);
+                        $(".alert-success").fadeOut(3000);
+                        $('#enviarFotos').html(' <i class="fa fa-upload"></i> Enviar').removeAttr('disabled');
+
+                    },4000);
+
+                    setTimeout(function(){
+                        uploadObj.reset();
+                        obj.container.fadeIn();
+                    }, 5000);
+
                 }
-            });*/
+
+            });
+
+
+
+
 
 
             $('#form').submit(function(event){

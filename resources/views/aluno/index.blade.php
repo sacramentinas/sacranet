@@ -23,7 +23,7 @@
 @section('conteudo')
 
 <div class="row">
-    {!! Form::open(['route' => 'alunos.index','method' => 'GET'] ) !!}
+    {!! Form::open(['route' => 'alunos.index','method' => 'GET','id' => 'form' ] ) !!}
     <div class="col-md-6">
         <div class="box box-success">
             <div class="box-header">
@@ -34,7 +34,7 @@
             </div><!-- /.box-header -->
             <div class="box-footer text-black">
                  <div class="input-group">
-                        <select class="form-control input-lg" name="t">
+                        <select class="form-control input-lg" name="t" id="campot">
                             <option value="">Selecione a Turma</option>
                             @foreach($turmas as $turma)
                             <option value="{!! $turma->id !!}" {!! (Request::input('t') == $turma->id ) ? "SELECTED" : ""  !!}>{!! $turma->serie->nome." - ".$turma->letra !!}</option>
@@ -43,7 +43,7 @@
                         </select>
               <span class="input-group-btn">
                 <button type="submit"  id="search-btn" class="btn btn-flat btn-success btn-lg"><i class="fa fa-search"></i></button>
-                 <a href="{!! route('alunos.index') !!}" title="Limpar Pesquisa" class="btn btn-default btn-lg btn-flat"><i class="fa fa-close"></i></a>
+                 <a href="{!! route('alunos.index') !!}" title="Limpar Pesquisa" class="btn btn-default btn-lg btn-flat" id="limpart"><i class="fa fa-close"></i></a>
               </span>
                     </div>
 
@@ -62,10 +62,10 @@
                 <div class="box-footer text-black">
 
                     <div class="input-group">
-                        {!! Form::text('p', Request::input('p') ? Request::input('p') : '' ,['class' => 'form-control input-lg','placeholder' => 'Buscar Aluno...']) !!}
+                        {!! Form::text('p', Request::input('p') ? Request::input('p') : '' ,['class' => 'form-control input-lg','placeholder' => 'Buscar Aluno...','id' => 'campop']) !!}
                   <span class="input-group-btn">
                          <button type="submit"  id="search-btn" class="btn btn-flat btn-info btn-lg"><i class="fa fa-search"></i></button>
-                         <a href="{!! route('alunos.index') !!}" title="Limpar Pesquisa" class="btn btn-default btn-lg btn-flat"><i class="fa fa-close"></i></a>
+                         <a href="{!! route('alunos.index') !!}" title="Limpar Pesquisa" class="btn btn-default btn-lg btn-flat"  id="limparp"><i class="fa fa-close"></i></a>
                   </span>
                 </div>
 
@@ -87,12 +87,13 @@
                   if( file_exists( public_path().'/fotoaluno/'.intval($aluno->matricula).'.jpg')){
                       $foto = asset('fotoaluno/'.intval($aluno->matricula).'.jpg');
                   }else{
-                      $foto = asset('img/foto-indisponivel.png');
+                      $foto = asset('fotoaluno/foto-indisponivel.png');
                   }
 
                 ?>
 
                 <img  src=" {!! $foto !!}" >
+
             </div>
             <div class="col-sm-12 dados-aluno">
                 <h4 class="text-center text-aqua">{{ str_limit($aluno->nomealuno, 32) }}</h4>
@@ -134,6 +135,23 @@
 @endsection
 
 @section('script')
+        <script>
+            $(document).ready(function (){
+                var form = $('#form');
+                $("#limparp").click(function(e){
+                        e.preventDefault();
+                        $('#campop').val("");
+                        form.submit();
 
+                });
+                $("#limpart").click(function(e){
+                    e.preventDefault();
+                    $('#campot').val("");
+                    form.submit();
+
+                });
+            });
+
+        </script>
 
 @endsection

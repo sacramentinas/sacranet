@@ -32,7 +32,7 @@
                     <li><a href="{!! route('alunos.index') !!}"><i class="fa fa-circle-o"></i> Gerenciar Alunos</a></li>
                     <li><a href="{!! route('alunos.cadastrar') !!}"><i class="fa fa-circle-o"></i> Cadastrar Alunos</a></li>
                     <li><a href="{!! route('alunos.importar') !!}"><i class="fa fa-circle-o"></i> Importar Alunos</a></li>
-                    <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+                    <li><a href="{!! route('alunos.fotos') !!}"><i class="fa fa-circle-o"></i> Enviar Fotos</a></li>
                 </ul>
             </li>
             <li class="treeview">

@@ -60,7 +60,7 @@ body{
     overflow: hidden;
     border-radius: 50%;
     border:2px solid #a3d0ef;
-    clear: both; margin: auto; position: relative;
+    clear: both; margin: auto;
 
 }
 .user-image img  {
@@ -72,6 +72,37 @@ body{
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+}
+.user-image-edit {
+    position: absolute;
+    width: 100px;
+    height: 110px;
+    overflow: hidden;
+    border-radius: 50%;
+    border:2px solid #a3d0ef;
+    clear: both; margin: auto;
+    top:-30px;
+    right:20px;
+
+}
+.user-image-edit img  {
+    position: absolute;
+    left: 50%;
+    top: 57%;
+    width: 100%;
+    height: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+a.excluirfoto{
+    position: absolute;
+    z-index: 9000;
+    right:20px;
+    top:-30px;
+}
+.invisivel{
+    display:none;
 }
 .dados-aluno{
     padding-bottom:10px;
@@ -86,6 +117,25 @@ body{
 .botoes-int{
     width:95%;
     margin:0 auto;
+}
+.relative{
+    position:relative;
+}
+.botao-enviar{
+    position:absolute;
+    left:550px;
+    top:20px;
+}
+#carregandoupload{
+    position:absolute;
+    left:170px;
+    top:10px;
+    background:#FFF;
+    border:1px solid #DDD;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border-radius: 5px;
+    padding:11px;
+    display:none;
 }
 #custom-search-input{
     padding: 3px;

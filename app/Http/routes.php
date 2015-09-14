@@ -23,6 +23,7 @@ Route::get('/alunos/{id}/editar',['as' => 'alunos.editar', 'uses' => 'AlunoContr
 Route::put('/alunos/{id}/editar',['as' => 'alunos.update', 'uses' => 'AlunoController@update'] );
 Route::post('/alunos/cadastrar', ['as' => 'alunos.store','uses' => 'AlunoController@store']);
 Route::get('/alunos/fotos', ['as' => 'alunos.fotos','uses' => 'AlunoController@fotos']);
+Route::get('/alunos/removerfoto', ['as' => 'alunos.removerfoto','uses' => 'AlunoController@removerfoto']);
 Route::post('/alunos/uploadfotos',['as' => 'alunos.uploadfotos', 'uses' => 'AlunoController@uploadFotos']);
 
 
