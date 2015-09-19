@@ -23,7 +23,7 @@
 
             <div class="box-footer text-black">
 
-                <table class="table table-bordered table-hover" id="dados-tabela">
+                <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="dados-tabela">
                     <thead>
                     <tr>
                         <th>Codigo Sei</th>
@@ -57,11 +57,11 @@
 
 
               $('#dados-tabela').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    lengthChange: false,
-                    pageLength: 5,
-                    stateSave: true,
+                      processing: true,
+                      serverSide: true,
+                      lengthChange: false,
+                      pageLength: 5,
+                      stateSave: true,
                   'fnDrawCallback': function (oSettings) {
                       $('.add').each(function () {
                           $(this).html(' <a href="{{ route('turmas.cadastrar') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Cadastrar</a>');
@@ -73,7 +73,9 @@
                     columns: [
                     { data: 'cod_sei', name: 'cod_sei' },
                     { data: 'nome', name: 'nome' },
-                    {width:'100px', data: 'acoes', name: 'acoes', orderable: false, searchable: false},
+                    { width:'10%', data: 'acoes', name: 'acoes', orderable: false, searchable: false},
+
+
 
                 ],
                 "language": {

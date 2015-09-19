@@ -14,7 +14,10 @@
     <!-- Ionicons 2.0.0 -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    {!! Html::style('plugins/datatables/dataTables.bootstrap.css') !!}
+   {!! Html::style('plugins/datatables/dataTables.bootstrap.css') !!}
+   {!! Html::style('plugins/datatables/dataTables.responsive.css') !!}
+
+
     {!! Html::style('css/AdminLTE.min.css') !!}
     {!! Html::style('css/skins/_all-skins.min.css') !!}
     {!! Html::style('css/estilo.css') !!}
@@ -85,10 +88,17 @@
 
 {!! Html::script('js/sweet-alert.min.js') !!}
 {!! Html::script('js/app.min.js') !!}
+
 {!! Html::script('plugins/datatables/jquery.dataTables.min.js') !!}
 {!! Html::script('plugins/datatables/dataTables.bootstrap.min.js') !!}
+{!! Html::script('plugins/datatables/dataTables.responsive.min.js') !!}
 
-
+<script type="text/javascript">
+    $(document).ready(function () {
+        var contentHeigh = $("#wrapper").height() - 100;
+        $("#wrapper").css("height", contentHeigh + "px");
+    });
+</script>
 <script type="text/javascript">
     $.ajaxSetup({
         headers:{

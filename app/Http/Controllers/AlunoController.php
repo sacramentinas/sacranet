@@ -35,7 +35,7 @@ class AlunoController extends Controller
         elseif($busca){
             $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->orderBy('id')->paginate(12);
         }else{
-            $alunos = Aluno::orderBy('id','desc')->paginate(12);
+            $alunos = Aluno::orderBy('nomealuno')->orderBy('id','desc')->paginate(12);
         }
 
 

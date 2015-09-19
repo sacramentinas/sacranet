@@ -97,13 +97,13 @@
             </div>
             <div class="col-sm-12 dados-aluno">
                 <h4 class="text-center text-aqua">{{ str_limit($aluno->nomealuno, 32) }}</h4>
+                <?php if($aluno->turma_id) {   ?>
                 <p class="text-center">
-                <span class="badge bg-aqua-active ">
-                   {{ $aluno->turma->serie->nome . " - " . $aluno->turma->letra  }}
-
-                <span>
-                </p>
-
+                  <span class="badge bg-aqua-active ">
+                       {!! $aluno->turma->serie->nome . " - " . $aluno->turma->letra  !!}
+                  <span>
+               </p>
+                <?php } ?>
 
             </div>
 

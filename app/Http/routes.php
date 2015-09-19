@@ -27,6 +27,15 @@ Route::get('/alunos/removerfoto', ['as' => 'alunos.removerfoto','uses' => 'Aluno
 Route::post('/alunos/uploadfotos',['as' => 'alunos.uploadfotos', 'uses' => 'AlunoController@uploadFotos']);
 
 
+
+Route::get('/tipos',['as' => 'tipos.index', 'uses' => 'TipoOcorrenciaController@index']);
+Route::get('/tipos/dados',['as' => 'tipos.dados', 'uses' => 'TipoOcorrenciaController@dados']);
+Route::get('/tipos/cadastrar',['as' => 'tipos.cadastrar', 'uses' => 'TipoOcorrenciaController@create']);
+Route::post('/tipos/cadastrar',['as' => 'tipos.store', 'uses' => 'TipoOcorrenciaController@store']);
+Route::get('/tipos/{id}/editar',['as' => 'tipos.editar', 'uses' => 'TipoOcorrenciaController@editar']);
+Route::delete('/tipos/{id}/excluir',['as' => 'tipos.excluir', 'uses' => 'TipoOcorrenciaController@destroy']);
+
+
 Route::get('/turmas',['as' => 'turmas.index', 'uses' => 'TurmaController@index']);
 Route::get('/turmas/dados',['as' => 'turmas.dados', 'uses' => 'TurmaController@dados']);
 Route::get('/turmas/cadastrar',['as' => 'turmas.cadastrar', 'uses' => 'TurmaController@create']);

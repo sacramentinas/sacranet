@@ -147,6 +147,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         GeneaLabs\LaravelCaffeine\LaravelCaffeineServiceProvider::class,
         yajra\Datatables\DatatablesServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
 
 
     ),
@@ -199,6 +200,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Datatables' => yajra\Datatables\Datatables::class,
+
 
     ],
 
