@@ -64,7 +64,7 @@
 
 
 
-<div class="main">
+
         <!-- Content Header (Page header) -->
         @yield('breadcrumb')
         <!-- Main content -->
@@ -77,7 +77,6 @@
 
          </section>
 
-    </div><!-- /.content-wrapper -->
 
 
 </div><!-- ./wrapper -->
