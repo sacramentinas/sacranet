@@ -4,7 +4,7 @@ namespace Sacranet\Http\Requests;
 
 use Sacranet\Http\Requests\Request;
 
-class TipoOcorrenciaRequest extends Request
+class DisciplinaRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class TipoOcorrenciaRequest extends Request
     public function rules()
     {
         return [
-           'descricao' => 'required|unique:tipo_ocorrencias,descricao,'.$this->id,
-            'tipo'     => 'required'
+            'descricao' => 'required|unique:disciplinas,descricao,'.$this->id,
+            'nome_sei' => 'required|unique:disciplinas,nome_sei,'.$this->id,
+
         ];
     }
 }

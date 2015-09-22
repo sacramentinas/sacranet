@@ -4,9 +4,11 @@ namespace Sacranet\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Sacranet\Http\Requests;
 use Sacranet\Aluno;
+use Sacranet\Nota;
 use Sacranet\Turma;
 use Sacranet\Http\Requests\AlunoRequest;
 use Illuminate\Support\Facades\Session;
@@ -75,6 +77,14 @@ class AlunoController extends Controller
 
     }
 
+    public function perfil($id)
+    {
+        $aluno = Aluno::find($id);
+
+        return view('aluno.perfil',compact('aluno'));
+
+    }
+
 
     public function edit($id)
     {
@@ -91,6 +101,11 @@ class AlunoController extends Controller
         return view('aluno.edit',compact('turmas','aluno'));
 
     }
+
+
+
+
+
 
     public function update($id,AlunoRequest $request)
     {
@@ -190,6 +205,7 @@ class AlunoController extends Controller
 
         if($request->hasFile('alunos')){
 
+            set_time_limit(36000000);
             $arquivo = $request->file('alunos');
             $arquivo->move('upload','alunos.txt');
 
@@ -197,14 +213,22 @@ class AlunoController extends Controller
             \File::delete('upload/alunos.txt');
 
             Turma::getTurma();
-            Aluno::truncate();
+           DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+           // DB::table('notas')->delete();
+            DB::table('alunos')->delete();
+            DB::statement('ALTER TABLE alunos AUTO_INCREMENT = 0 ');
+
+           DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             $cont = 0;
 
             foreach($arraydados as $aluno){
                 $turma = Turma::checkTurma( $aluno['turma'],$aluno['codcurso']);
                 unset($aluno['turma']);
                 unset($aluno['codcurso']);
-                Aluno::create($aluno)->turma()->associate($turma)->save();
+                $alunoc = Aluno::create($aluno);
+                $alunoc->turma()->associate($turma)->save();
+                Nota::regenerarNotas($alunoc->matricula,$alunoc->id);
                 $cont++;
             }
 

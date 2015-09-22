@@ -12,11 +12,16 @@ class Aluno extends Model
                            'bairro','cep','municipio','nomemae','nomepai','senha','senhatexto','telefone','telefonemae','telefonepai',
                            'emailmae','emailpai','emailcontratante' ];
 
-
+    protected $dates = ['datanascimento'];
 
     public function turma()
     {
         return $this->belongsTo('Sacranet\Turma');
+    }
+
+    public function notas()
+    {
+        return $this->hasMany('Sacranet\Nota');
     }
 
 
@@ -30,6 +35,7 @@ class Aluno extends Model
     {
         $this->attributes['matricula'] = intval($value);
     }
+
      public static function geradados($arquivo)
      {
 
@@ -47,6 +53,7 @@ class Aluno extends Model
          }
 
          if(isset($quant) and $quant > 0){
+
 
          $cont = 0;
          while($cont < count($quant)){

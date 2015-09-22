@@ -2,6 +2,7 @@
 
 namespace Sacranet\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 use Sacranet\Http\Requests;
@@ -73,7 +74,14 @@ class TipoOcorrenciaController extends Controller
      */
     public function edit($id)
     {
-        //
+        try{
+           $tipo =  TipoOcorrencia::findOrFail($id);
+        }catch(ModelNotFoundException $e){
+            return redirect()->route('tipos.cadastrar');
+        }
+
+        return view('tipos.edit',compact('tipo'));
+
     }
 
     /**
@@ -83,9 +91,14 @@ class TipoOcorrenciaController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(TipoOcorrenciaRequest $request, $id)
     {
-        //
+       if($request->ajax()){
+           $tipo = TipoOcorrencia::find($id);
+           $tipo->update($request->all());
+
+           return response()->json(['sucesso' => 'Tipo de Ocorrência Editado com Sucesso!']);
+       }
     }
 
     /**
@@ -96,6 +109,7 @@ class TipoOcorrenciaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TipoOcorrencia::find($id)->delete();
+        return response()->json(['sucesso' => 'Tipo de Ocorrência Excluida com Sucesso']);
     }
 }

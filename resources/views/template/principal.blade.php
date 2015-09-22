@@ -92,12 +92,7 @@
 {!! Html::script('plugins/datatables/dataTables.bootstrap.min.js') !!}
 {!! Html::script('plugins/datatables/dataTables.responsive.min.js') !!}
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var contentHeigh = $("#wrapper").height() - 100;
-        $("#wrapper").css("height", contentHeigh + "px");
-    });
-</script>
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers:{

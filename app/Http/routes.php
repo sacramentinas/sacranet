@@ -25,16 +25,29 @@ Route::post('/alunos/cadastrar', ['as' => 'alunos.store','uses' => 'AlunoControl
 Route::get('/alunos/fotos', ['as' => 'alunos.fotos','uses' => 'AlunoController@fotos']);
 Route::get('/alunos/removerfoto', ['as' => 'alunos.removerfoto','uses' => 'AlunoController@removerfoto']);
 Route::post('/alunos/uploadfotos',['as' => 'alunos.uploadfotos', 'uses' => 'AlunoController@uploadFotos']);
+Route::get('/alunos/{id}/perfil', ['as' => 'alunos.perfil','uses' => 'AlunoController@perfil']);
 
+
+
+Route::get('/notas', ['as' => 'notas.importar', 'uses' => 'NotaController@importar'] );
+Route::post('/notas/upload',['as' => 'notas.upload', 'uses' => 'NotaController@upload'] );
 
 
 Route::get('/tipos',['as' => 'tipos.index', 'uses' => 'TipoOcorrenciaController@index']);
 Route::get('/tipos/dados',['as' => 'tipos.dados', 'uses' => 'TipoOcorrenciaController@dados']);
 Route::get('/tipos/cadastrar',['as' => 'tipos.cadastrar', 'uses' => 'TipoOcorrenciaController@create']);
 Route::post('/tipos/cadastrar',['as' => 'tipos.store', 'uses' => 'TipoOcorrenciaController@store']);
-Route::get('/tipos/{id}/editar',['as' => 'tipos.editar', 'uses' => 'TipoOcorrenciaController@editar']);
+Route::get('/tipos/{id}/editar',['as' => 'tipos.editar', 'uses' => 'TipoOcorrenciaController@edit']);
+Route::put('/tipos/{id}/editar',['as' => 'tipos.update', 'uses' => 'TipoOcorrenciaController@update']);
 Route::delete('/tipos/{id}/excluir',['as' => 'tipos.excluir', 'uses' => 'TipoOcorrenciaController@destroy']);
 
+Route::get('/disciplinas',['as' => 'disciplinas.index', 'uses' => 'DisciplinaController@index']);
+Route::get('/disciplinas/dados',['as' => 'disciplinas.dados', 'uses' => 'DisciplinaController@dados']);
+Route::get('/disciplinas/cadastrar',['as' => 'disciplinas.cadastrar', 'uses' => 'DisciplinaController@create']);
+Route::post('/disciplinas/cadastrar',['as' => 'disciplinas.store', 'uses' => 'DisciplinaController@store']);
+Route::get('/disciplinas/{id}/editar',['as' => 'disciplinas.editar', 'uses' => 'DisciplinaController@edit']);
+Route::put('/disciplinas/{id}/editar',['as' => 'disciplinas.update', 'uses' => 'DisciplinaController@update']);
+Route::delete('/disciplinas/{id}/excluir',['as' => 'disciplinas.excluir', 'uses' => 'DisciplinaController@destroy']);
 
 Route::get('/turmas',['as' => 'turmas.index', 'uses' => 'TurmaController@index']);
 Route::get('/turmas/dados',['as' => 'turmas.dados', 'uses' => 'TurmaController@dados']);

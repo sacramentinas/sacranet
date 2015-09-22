@@ -93,8 +93,8 @@ class TurmaController extends Controller
             foreach($turmas as $turma){
                 $serie->turmas()->save(Turma::create(['letra' => $turma ]));
             }
-
             return response()->json(['sucesso' => 'Turma Editada com Sucesso!']);
+
         }
 
     }

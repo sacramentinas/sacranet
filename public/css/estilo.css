@@ -74,19 +74,18 @@ body{
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
 }
-.user-image-edit {
-    position: absolute;
+
+.user-image-perfil {
+    position: relative;
     width: 100px;
     height: 110px;
     overflow: hidden;
     border-radius: 50%;
     border:2px solid #a3d0ef;
     clear: both; margin: auto;
-    top:-30px;
-    right:20px;
 
 }
-.user-image-edit img  {
+.user-image-perfil img  {
     position: absolute;
     left: 50%;
     top: 57%;
@@ -95,6 +94,11 @@ body{
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+}
+#dados p{
+
+    font-size:16px;
+
 }
 a.excluirfoto{
     position: absolute;
@@ -174,3 +178,5 @@ a.excluirfoto{
     width:100%;
 
 }
+
+

@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         Model::reguard();
     	$this->call('SeriesTableSeeder');
 		$this->call('TurmasTableSeeder');
+		$this->call('TipoOcorrenciasTableSeeder');
+		$this->call('DisciplinasTableSeeder');
 	}
 }

@@ -101,7 +101,7 @@
                 <p class="text-center">
                   <span class="badge bg-aqua-active ">
                        {!! $aluno->turma->serie->nome . " - " . $aluno->turma->letra  !!}
-                  <span>
+                  </span>
                </p>
                 <?php } ?>
 
@@ -109,7 +109,7 @@
 
                 <div class="botoes">
                     <div class="btn-group btn-group-lg btn-group-justified botoes-int" role="group">
-                        <a href="" class="btn btn-info "> <i class="fa fa-eye">
+                        <a href="{!! route('alunos.perfil',[$aluno->id]) !!}" class="btn btn-info "> <i class="fa fa-eye">
                             </i> <small>Visualizar</small></a>
 
 
