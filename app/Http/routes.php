@@ -28,6 +28,9 @@ Route::post('/alunos/uploadfotos',['as' => 'alunos.uploadfotos', 'uses' => 'Alun
 Route::get('/alunos/{id}/perfil', ['as' => 'alunos.perfil','uses' => 'AlunoController@perfil']);
 
 
+Route::get('/ocorrencias/turma/{turma}',['as' => 'ocorrencias.turma', 'uses' => 'OcorrenciaController@turma']);
+
+
 
 Route::get('/notas', ['as' => 'notas.importar', 'uses' => 'NotaController@importar'] );
 Route::post('/notas/upload',['as' => 'notas.upload', 'uses' => 'NotaController@upload'] );

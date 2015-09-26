@@ -41,10 +41,11 @@ class AlunoController extends Controller
         }
 
 
+        $btnOcorrencias = ($turma) ? true : false;
 
 
 
-        return view('aluno.index',compact('alunos','turmas'));
+        return view('aluno.index',compact('alunos','turmas','btnOcorrencias'));
     }
 
 

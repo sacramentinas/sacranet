@@ -7,6 +7,9 @@
             Alunos
 
             <span class="badge bg-teal">{!! $alunos->total() !!} alunos cadastrados</span>
+            @if($btnOcorrencias)
+            <a href="{!! route('ocorrencias.turma',[Request::input('t')]) !!}" class="btn btn-primary"><i class="fa fa-plus"></i> Adicionar Ocorrências</a>
+            @endif
         </h1>
 
 
