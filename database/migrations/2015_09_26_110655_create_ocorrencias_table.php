@@ -14,13 +14,11 @@ class CreateOcorrenciasTable extends Migration
     {
         Schema::create('ocorrencias', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('aluno_id')->nullable();
-            $table->unsignedInteger('tipo_ocorrencia_id')->nullable();
             $table->unsignedInteger('disciplina_id')->nullable();
+            $table->unsignedInteger('turma_id')->nullable();
             $table->integer('unidade');
-            $table->integer('matricula');
             $table->text('descricao');
-            $table->timestamp('publicado_em');
+            $table->timestamp('data');
             $table->timestamps();
         });
     }

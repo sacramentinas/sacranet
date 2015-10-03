@@ -25,6 +25,12 @@ class Aluno extends Model
     }
 
 
+    public function ocorrencias()
+    {
+        return $this->belongsToMany('Sacranet\Ocorrencia','aluno_ocorrencias');
+    }
+
+
     public function setSenhatextoAttribute($value)
     {
         $this->attributes['senhatexto'] = $value;

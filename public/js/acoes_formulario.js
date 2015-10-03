@@ -49,7 +49,7 @@
             },
             error   :   function(msg){
 
-
+                console.log(msg);
                 $.each(msg.responseJSON, function(i,item){
                     $('#'+i).parent().addClass('erro');
                     $('#'+i).parent().append("<small class='text-danger texto-erro'>"+item+"<small>");

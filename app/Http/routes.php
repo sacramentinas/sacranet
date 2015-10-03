@@ -29,6 +29,7 @@ Route::get('/alunos/{id}/perfil', ['as' => 'alunos.perfil','uses' => 'AlunoContr
 
 
 Route::get('/ocorrencias/turma/{turma}',['as' => 'ocorrencias.turma', 'uses' => 'OcorrenciaController@turma']);
+Route::post('/ocorrencias/turma/{turma}',['as' => 'ocorrencias.turma.salvar', 'uses' => 'OcorrenciaController@turmaSalvar']);
 
 
 
