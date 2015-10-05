@@ -2,12 +2,20 @@
 
 namespace Sacranet;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Ocorrencia extends Model
 {
     protected $fillable = ['disciplina_id','turma_id','unidade','descricao','data'];
     protected $dates = ['data'];
+
+    public function getDataAttribute($data)
+    {
+        $dt = new Carbon($data);
+        return $dt->format('Y-m-d');
+
+    }
 
     public function turma()
     {
@@ -21,7 +29,12 @@ class Ocorrencia extends Model
 
     public function alunos()
     {
-        return $this->belongsToMany('Sacranet\Aluno','aluno_ocorrencias');
+        return $this->belongsToMany('Sacranet\Aluno','aluno_ocorrencias')->withTimestamps();
+    }
+
+    public function tipoocorrencias()
+    {
+        return $this->belongsToMany('Sacranet\TipoOcorrencia','ocorrencia_tipo_ocorrencias')->withTimestamps();
     }
 
 

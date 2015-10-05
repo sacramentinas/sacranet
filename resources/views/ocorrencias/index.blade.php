@@ -4,12 +4,12 @@
     <section class="content-header">
         <h1>
             <i class="fa fa-users"></i>
-           Gerenciar Turmas
+           Gerenciar Ocorrências
 
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Inicial</a></li>
-            <li class="active">Turmas</li>
+            <li class="active">Ocorrências</li>
        </ol>
     </section>
 
@@ -26,8 +26,10 @@
                 <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="dados-tabela">
                     <thead>
                     <tr>
-                        <th>Codigo Sei</th>
-                        <th>Nome</th>
+                        <th>Data</th>
+                        <th>Unidade</th>
+                        <th>Turma</th>
+                        <th>Disciplina</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -63,16 +65,18 @@
                       pageLength: 5,
                       stateSave: true,
                   'fnDrawCallback': function (oSettings) {
-                      $('.add').each(function () {
+                     /* $('.add').each(function () {
                           $(this).html(' <a href="{{ route('turmas.cadastrar') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Cadastrar</a>');
-                      });
+                      });*/
                   },
                     ajax: {
-                        'url' : '{!! route("turmas.dados") !!}'
+                        'url' : '{!! route("ocorrencias.dados") !!}'
                          },
                     columns: [
-                    { data: 'cod_sei', name: 'cod_sei' },
-                    { data: 'nome', name: 'nome' },
+                    { data: 'data', name: 'data' },
+                    { data: 'unidade', name: 'unidade' },
+                    { data: 'turma', name: 'turma' },
+                    { data: 'disciplina', name: 'disciplina' },
                     { width:'10%', data: 'acoes', name: 'acoes', orderable: false, searchable: false},
 
 

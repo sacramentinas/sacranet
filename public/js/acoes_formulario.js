@@ -42,6 +42,7 @@
 
                 if(metodo != 'PUT'){
                     $('#form').trigger("reset");
+                    $('#alunos').multiSelect('refresh');
                 }
                 $('#salvar').html('<i class="fa fa-save"></i> Salvar').removeAttr('disabled');
 

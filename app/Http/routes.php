@@ -30,6 +30,10 @@ Route::get('/alunos/{id}/perfil', ['as' => 'alunos.perfil','uses' => 'AlunoContr
 
 Route::get('/ocorrencias/turma/{turma}',['as' => 'ocorrencias.turma', 'uses' => 'OcorrenciaController@turma']);
 Route::post('/ocorrencias/turma/{turma}',['as' => 'ocorrencias.turma.salvar', 'uses' => 'OcorrenciaController@turmaSalvar']);
+Route::get('/ocorrencias/turma/{turma}/editar/{id}',['as' => 'ocorrencias.turma.editar', 'uses' => 'OcorrenciaController@turmaeditar']);
+Route::put('/ocorrencias/turma/{turma}/editar/{id}',['as' => 'ocorrencias.turma.editar', 'uses' => 'OcorrenciaController@turmaupdate']);
+Route::get('/ocorrencias/',['as' => 'ocorrencias.index', 'uses' => 'OcorrenciaController@index']);
+Route::get('/ocorrencias/dados',['as' => 'ocorrencias.dados', 'uses' => 'OcorrenciaController@dados']);
 
 
 

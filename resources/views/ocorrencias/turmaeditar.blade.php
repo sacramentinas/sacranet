@@ -5,13 +5,13 @@
         <h1>
             <i class="fa fa-users"></i>
              Ocorrências em Massa
-            <a href="{!! Session::get('url',route('alunos.index')) !!}"  class="btn btn-default">&larr; Voltar</a>
+            <a href="{!! route('ocorrencias.index') !!}"  class="btn btn-default">&larr; Voltar</a>
         </h1>
 
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Inicial</a></li>
             <li>Ocorrências</li>
-            <li class="active">Cadastrar</li>
+            <li class="active">Editar</li>
         </ol>
 
     </section>
@@ -27,11 +27,11 @@
                     <h2  class="box-title text-success">  {!! $alunos[0]->turma->serie->nome." - ".$alunos[0]->turma->letra  !!}</h2>
                 </div><!-- /.box-header -->
                 <div class="box-footer text-black">
-                    {!! Form::open( ['route' => ['ocorrencias.turma.salvar', $alunos[0]->turma->id ],'id' => 'form','method' => 'POST'] ) !!}
+                    {!! Form::model($ocorrencia, ['route' => ['ocorrencias.turma.editar', $alunos[0]->turma->id, $ocorrencia->id  ],'id' => 'form','method' => 'PUT'] ) !!}
                    <div class="row extra-margin-footer">
                        <div class="col-md-3 ">
                            {!! Form::label('data','Data:') !!}
-                           {!! Form::date('data',Carbon\Carbon::now(),['class' => 'form-control','id' => 'data']) !!}
+                           {!! Form::date('data',null,['class' => 'form-control','id' => 'data']) !!}
                        </div>
                        <div class="col-md-3">
                            {!! Form::label('unidade','Unidade:') !!}
@@ -53,7 +53,7 @@
                         <div class="col-md-12">
                             <select multiple="multiple" id="alunos" name="alunos[]">
                                 @foreach($alunos as $aluno)
-                                <option value='{{$aluno->id}}'>{{$aluno->numero}} - {{$aluno->nomealuno}}</option>
+                                <option value='{{$aluno->id}}' @if($ocorrencia->alunos->contains($aluno->id)) {{'selected'}} @endif >{{$aluno->numero}} - {{$aluno->nomealuno}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -77,7 +77,7 @@
                                 <?php $cont++ ?>
                               <div class="checkbox">
                                    <label>
-                                        {!! Form::checkbox('ocorrencia[]',$tipo->id, null) !!} {{$cont." - ".$tipo->descricao}}
+                                        {!! Form::checkbox('ocorrencia[]',$tipo->id, ($ocorrencia->tipoocorrencias->contains($tipo->id)) ? 1 : 0 ) !!} {{$cont." - ".$tipo->descricao}}
                                    </label>
                               </div>
 

@@ -14,6 +14,15 @@ class Aluno extends Model
 
     protected $dates = ['datanascimento'];
 
+
+    public function getDatanascimentoAttribute($valor)
+    {
+        return $this->attributes['datanascimento'];
+        //return $valor->format('Y-m-d');
+           // Carbon::createFromFormat('Y-m-d',$valor);
+    }
+
+
     public function turma()
     {
         return $this->belongsTo('Sacranet\Turma');
@@ -27,7 +36,7 @@ class Aluno extends Model
 
     public function ocorrencias()
     {
-        return $this->belongsToMany('Sacranet\Ocorrencia','aluno_ocorrencias');
+        return $this->belongsToMany('Sacranet\Ocorrencia','aluno_ocorrencias')->withTimestamps();
     }
 
 
