@@ -90,7 +90,7 @@
                         <ul class="nav nav-tabs responsive no-print" id="myTabs">
                             <li class="active"><a href="#dados">Dados</a></li>
                             <li><a href="#boletim">Boletim</a></li>
-                            <li><a href="#messages">Ocorrências</a></li>
+                            <li><a href="#ocorrencias">Ocorrências</a></li>
                             <li><a href="#settings">Observações</a></li>
                             <li><a href="#senha">Senha</a></li>
                         </ul>
@@ -105,7 +105,7 @@
                                         <td>
                                         <p>
                                           <small><strong>Data de Nascimento:</strong></small>
-                                          {{$aluno->datanascimento->format('d/m/Y')}}
+                                          {{$aluno->datanascimento}}
                                         </p>
                                         </td>
                                         <td>
@@ -199,6 +199,7 @@
 
 
                             </div>
+
                             <div role="tabpanel" class="tab-pane" id="boletim">
                                 <table class="table table-bordered table-striped table-condensed">
                                     <thead>
@@ -210,33 +211,109 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                               @foreach($aluno->notas as $nota)
-                                 <tr>
-                                     <td>{{$nota->disciplina->descricao }}</td>
-                                     @if($nota->nota1unidade < 6)
-                                        <?php $classe = "text-danger" ?>
-                                     @else
-                                         <?php $classe = "text-primary" ?>
-                                     @endif
-                                     <td><span class="{{$classe}}">{{$nota->nota1unidade }}</span></td>
-                                     @if($nota->nota2unidade < 6)
-                                         <?php $classe = "text-danger" ?>
-                                     @else
-                                         <?php $classe = "text-primary" ?>
-                                     @endif
-                                     <td><span class="{{$classe}}">{{$nota->nota2unidade }}</span></td>
-                                     @if($nota->nota1unidade < 6)
-                                         <?php $classe = "text-danger" ?>
-                                     @else
-                                         <?php $classe = "text-primary" ?>
-                                     @endif
-                                     <td><span class="{{$classe}}">{{$nota->nota3unidade }}</span></td>
-                                 </tr>
-                               @endforeach
+                                       @foreach($aluno->notas as $nota)
+                                        <tr>
+                                            <td>{{$nota->disciplina->descricao }}</td>
+                                            @if($nota->nota1unidade < 6)
+                                                <?php $classe = "text-danger" ?>
+                                            @else
+                                                <?php $classe = "text-primary" ?>
+                                            @endif
+                                            <td><span class="{{$classe}}">{{$nota->nota1unidade }}</span></td>
+                                            @if($nota->nota2unidade < 6)
+                                                <?php $classe = "text-danger" ?>
+                                            @else
+                                                <?php $classe = "text-primary" ?>
+                                            @endif
+                                            <td><span class="{{$classe}}">{{$nota->nota2unidade }}</span></td>
+                                            @if($nota->nota1unidade < 6)
+                                                <?php $classe = "text-danger" ?>
+                                            @else
+                                                <?php $classe = "text-primary" ?>
+                                            @endif
+                                            <td><span class="{{$classe}}">{{$nota->nota3unidade }}</span></td>
+                                        </tr>
+
+                                    @endforeach
+
                                     </tbody>
                                 </table>
+
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="messages">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                            <div role="tabpanel" class="tab-pane" id="ocorrencias">
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <!-- The time line -->
+                                        <ul class="timeline bg-gray-light">
+
+                                            @foreach($ocorrencias as $data => $o)
+
+
+
+
+
+
+
+
+                                            <!-- timeline time label -->
+                                            <li class="time-label">
+
+                                              <span class="bg-blue">
+                                               {{ \Carbon\Carbon::parse($data)->format('d/m/Y') }}
+                                              </span>
+                                            </li>
+                                            <!-- /.timeline-label -->
+                                            <!-- timeline item -->
+
+                                          @foreach($o as $ocorrencia)
+
+                                            <li>
+                                                @if($ocorrencia->tipoocorrencias[0]->tipo)
+                                                    @if($ocorrencia->tipoocorrencias[0]->tipo == 'Negativa' )
+                                                        <i class="fa fa-thumbs-o-down bg-red"></i>
+                                                    @elseif($ocorrencia->tipoocorrencias[0]->tipo == 'Positiva')
+                                                        <i class="fa fa-thumbs-o-up bg-green"></i>
+                                                    @else
+                                                        <i class="fa fa-envelope bg-blue"></i>
+                                                    @endif
+                                                @endif
+
+                                                <div class="timeline-item">
+
+
+                                                  <h3 class="timeline-header"> <span class="text-blue">{{$ocorrencia->disciplina->descricao }}</span> <span class="badge bg-teal"> {{ $ocorrencia->unidadeConverte() }}</span></h3>
+                                                    <div class="timeline-body">
+                                                      @if(count($ocorrencia->tipoocorrencias))
+                                                       <h4 class="text-teal">Ocorrências:</h4>
+                                                        <ul>
+                                                        @foreach($ocorrencia->tipoocorrencias as $tipo)
+                                                            <li>{{$tipo->descricao }}</li>
+                                                        @endforeach
+                                                        </ul>
+                                                      @endif
+                                                      @if($ocorrencia->descricao)
+                                                      <h4 class="text-aqua">Descrição:</h4>
+                                                          {{ $ocorrencia->descricao }}
+                                                      @endif
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                             <!-- END timeline item -->
+                                           @endforeach
+
+                                        @endforeach
+                                                <li>
+                                                    <i class="glyphicon glyphicon-minus bg-gray"></i>
+                                                </li>
+                                         </ul>
+                                    </div><!-- /.col -->
+                                </div>
+
+
+
+
+                            </div>
                             <div role="tabpanel" class="tab-pane" id="settings">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div>
                             <div role="tabpanel" class="tab-pane" id="senha">
                                 <ul class="list-group">

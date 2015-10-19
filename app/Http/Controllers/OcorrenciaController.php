@@ -9,6 +9,7 @@ use Sacranet\Disciplina;
 use Sacranet\Http\Requests;
 use Sacranet\Http\Controllers\Controller;
 use Sacranet\Aluno;
+use Sacranet\Http\Requests\OcorrenciaRequest;
 use Sacranet\Ocorrencia;
 use Sacranet\TipoOcorrencia;
 use yajra\Datatables\Datatables;
@@ -62,8 +63,9 @@ class OcorrenciaController extends Controller
     public function turma($turma){
 
         $alunos = Aluno::where('turma_id',$turma)->with('turma')->orderBy('numero')->get();
-        $disciplinas = Disciplina::lists('descricao','id');
-        $disciplinas->prepend('');
+        $disciplinas[''] = '';
+        $disciplinas = array_merge( $disciplinas, Disciplina::lists('descricao','id')->toArray() );
+
         $tipoOcorrencias = TipoOcorrencia::all();
 
 
@@ -74,15 +76,16 @@ class OcorrenciaController extends Controller
     public function turmaeditar($turma,$id)
     {
         $alunos = Aluno::where('turma_id',$turma)->with('turma')->orderBy('numero')->get();
-        $disciplinas = Disciplina::lists('descricao','id');
-        $disciplinas->prepend('');
+        $disciplinas[''] = '';
+        $disciplinas = array_merge( $disciplinas, Disciplina::lists('descricao','id')->toArray() );
+
         $tipoOcorrencias = TipoOcorrencia::all();
         $ocorrencia = Ocorrencia::find($id);
 
         return view('ocorrencias.turmaeditar',compact('ocorrencia','alunos','tipoOcorrencias','disciplinas'));
     }
 
-    public function turmaupdate(Request $request,$turma,$id)
+    public function turmaupdate(OcorrenciaRequest $request,$turma,$id)
     {
         $ocorrencia = Ocorrencia::find($id);
 
@@ -111,8 +114,14 @@ class OcorrenciaController extends Controller
 
     }
 
-    public function turmaSalvar(Request $request,$turma )
+    /**
+     * @param OcorrenciaRequest $request
+     * @param $turma
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function turmaSalvar(OcorrenciaRequest $request,$turma)
     {
+
        $ocorrencia =  Ocorrencia::create([
             'disciplina_id'     => $request->input('disciplina_id'),
             'turma_id'          => $turma,

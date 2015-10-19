@@ -65,12 +65,17 @@ class NotaController extends Controller
                             break;
                         }
                     }
+
+
+
                     $nota['matricula'] = $dados[0];
                     $nota['nota1unidade'] = floatval($dados[5]);
                     $nota['nota2unidade'] = (floatval($dados[6]) > 0 ? floatval($dados[6]) : NULL);
                     $nota['nota3unidade'] = (floatval($dados[7]) > 0 ? floatval($dados[7]) : NULL);
 
+                    if(isset($nota['aluno_id']) && isset($nota['disciplina_id'])){
                     Nota::create($nota);
+                    }
 
                     array_push($arraydados, $nota);
                     $nota = [];

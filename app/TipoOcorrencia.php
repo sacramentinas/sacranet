@@ -15,4 +15,5 @@ class TipoOcorrencia extends Model
     }
 
 
+
 }

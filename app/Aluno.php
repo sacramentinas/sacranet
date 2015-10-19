@@ -8,6 +8,7 @@ use Carbon\Carbon;
 class Aluno extends Model
 {
 
+
     protected $fillable = ['matricula','nomealuno','datanascimento','sexo','turma_id','numero','endereco',
                            'bairro','cep','municipio','nomemae','nomepai','senha','senhatexto','telefone','telefonemae','telefonepai',
                            'emailmae','emailpai','emailcontratante' ];
@@ -17,9 +18,8 @@ class Aluno extends Model
 
     public function getDatanascimentoAttribute($valor)
     {
-        return $this->attributes['datanascimento'];
-        //return $valor->format('Y-m-d');
-           // Carbon::createFromFormat('Y-m-d',$valor);
+        return Carbon::parse($this->attributes['datanascimento'])->format("d/m/Y");
+
     }
 
 
@@ -30,7 +30,7 @@ class Aluno extends Model
 
     public function notas()
     {
-        return $this->hasMany('Sacranet\Nota');
+        return $this->hasMany(Nota::class);
     }
 
 
@@ -50,6 +50,7 @@ class Aluno extends Model
     {
         $this->attributes['matricula'] = intval($value);
     }
+
 
      public static function geradados($arquivo)
      {

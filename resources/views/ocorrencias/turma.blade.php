@@ -35,12 +35,12 @@
                        </div>
                        <div class="col-md-3">
                            {!! Form::label('unidade','Unidade:') !!}
-                           {!! Form::select('unidade',['' => '',1 => 'I Unidade', 2 => 'II Unidade', 3 => 'III Unidade'],null,['class' => 'form-control','id' => 'disciplina']) !!}
+                           {!! Form::select('unidade',['' => '',1 => 'I Unidade', 2 => 'II Unidade', 3 => 'III Unidade'],null,['class' => 'form-control','id' => 'unidade']) !!}
                        </div>
 
                        <div class="col-md-6 ">
                            {!! Form::label('disciplina_id','Disciplina:') !!}
-                           {!! Form::select('disciplina_id',$disciplinas,null,['class' => 'form-control','id' => 'disciplina']) !!}
+                           {!! Form::select('disciplina_id',$disciplinas,null,['class' => 'form-control','id' => 'disciplina_id']) !!}
                        </div>
 
 
@@ -62,7 +62,7 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-12 margintop">
-
+                          <div id="turmacontainer">
 
                             {!! Form::label('ocorrencia','Ocorrência:',['id' => 'ocorrencia']) !!}
 
@@ -71,8 +71,11 @@
                                     $quant = count($tipoOcorrencias);
 
                                 ?>
+                          <div class="checkboxmsg">
                             <div class="row ">
+
                           <div class="col-md-6">
+
                                 @foreach($tipoOcorrencias as $tipo)
                                 <?php $cont++ ?>
                               <div class="checkbox">
@@ -86,8 +89,12 @@
                                         <div class="col-md-6">
                                    @endif
                                     @endforeach
+
                             </div>
+                                </div>
+
                            </div>
+                          </div>
                         <div class="row">
                             <div class="col-md-12">
                                 {!! Form::label('descricao','Descrição:') !!}

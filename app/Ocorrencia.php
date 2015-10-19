@@ -16,6 +16,16 @@ class Ocorrencia extends Model
         return $dt->format('Y-m-d');
 
     }
+    public function unidadeConverte()
+    {
+        if($this->attributes['unidade'] == 1){
+            return "I Unidade";
+        }else if($this->attributes['unidade'] == 2){
+            return "II Unidade";
+        }else{
+            return "III Unidade";
+        }
+    }
 
     public function turma()
     {

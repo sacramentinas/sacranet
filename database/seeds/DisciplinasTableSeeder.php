@@ -158,6 +158,17 @@ class DisciplinasTableSeeder extends Seeder {
 				'created_at' => '2015-09-21 08:18:35',
 				'updated_at' => '2015-09-21 08:18:35',
 			),
+            18 =>
+                array (
+                    'id' => 18,
+                    'descricao' => 'Espanhol/Inglês',
+                    'nome_sei' => 'ESPANHOL/INGLES',
+                    'created_at' => '2015-09-21 08:18:35',
+                    'updated_at' => '2015-09-21 08:18:35',
+                ),
+
+
+
 		));
 	}
 

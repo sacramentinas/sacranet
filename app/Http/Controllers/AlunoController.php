@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Sacranet\Http\Requests;
 use Sacranet\Aluno;
 use Sacranet\Nota;
+use Sacranet\Ocorrencia;
 use Sacranet\Turma;
 use Sacranet\Http\Requests\AlunoRequest;
 use Illuminate\Support\Facades\Session;
@@ -81,8 +82,9 @@ class AlunoController extends Controller
     public function perfil($id)
     {
         $aluno = Aluno::find($id);
+        $ocorrencias = $aluno->ocorrencias->groupBy('data')->sortByDesc('data');
 
-        return view('aluno.perfil',compact('aluno'));
+        return view('aluno.perfil',compact('aluno','ocorrencias'));
 
     }
 
