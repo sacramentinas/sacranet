@@ -26,10 +26,12 @@ Route::get('/alunos/fotos', ['as' => 'alunos.fotos','uses' => 'AlunoController@f
 Route::get('/alunos/removerfoto', ['as' => 'alunos.removerfoto','uses' => 'AlunoController@removerfoto']);
 Route::post('/alunos/uploadfotos',['as' => 'alunos.uploadfotos', 'uses' => 'AlunoController@uploadFotos']);
 Route::get('/alunos/{id}/perfil', ['as' => 'alunos.perfil','uses' => 'AlunoController@perfil']);
+Route::get('/alunos/{id}/ocorrencia', ['as' => 'alunos.ocorrencia','uses' => 'AlunoController@ocorrencia']);
 
 
 Route::get('/ocorrencias/turma/{turma}',['as' => 'ocorrencias.turma', 'uses' => 'OcorrenciaController@turma']);
 Route::post('/ocorrencias/turma/{turma}',['as' => 'ocorrencias.turma.salvar', 'uses' => 'OcorrenciaController@turmaSalvar']);
+Route::post('/ocorrencias/individual/{turma}',['as' => 'ocorrencias.individual.salvar', 'uses' => 'OcorrenciaController@individualSalvar']);
 Route::get('/ocorrencias/turma/{turma}/editar/{id}',['as' => 'ocorrencias.turma.editar', 'uses' => 'OcorrenciaController@turmaeditar']);
 Route::put('/ocorrencias/turma/{turma}/editar/{id}',['as' => 'ocorrencias.turma.editar', 'uses' => 'OcorrenciaController@turmaupdate']);
 Route::get('/ocorrencias/',['as' => 'ocorrencias.index', 'uses' => 'OcorrenciaController@index']);

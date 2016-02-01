@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Sacranet\Http\Requests;
 use Sacranet\Aluno;
+use Sacranet\Disciplina;
+use Sacranet\TipoOcorrencia;
 use Sacranet\Nota;
 use Sacranet\Ocorrencia;
 use Sacranet\Turma;
@@ -86,6 +88,21 @@ class AlunoController extends Controller
 
         return view('aluno.perfil',compact('aluno','ocorrencias'));
 
+    }
+
+    public function ocorrencia($id)
+    {
+        $aluno = Aluno::find($id);
+        $disciplinas[""] = "";
+        foreach(Disciplina::lists('descricao','id')->toArray() as $i =>  $d){
+            $disciplinas[$i] = $d;
+        }
+
+       $tipoOcorrencias = TipoOcorrencia::all();
+
+
+
+        return view('aluno.ocorrencia',compact('aluno','tipoOcorrencias','disciplinas'));
     }
 
 

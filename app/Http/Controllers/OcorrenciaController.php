@@ -63,8 +63,10 @@ class OcorrenciaController extends Controller
     public function turma($turma){
 
         $alunos = Aluno::where('turma_id',$turma)->with('turma')->orderBy('numero')->get();
-        $disciplinas[''] = '';
-        $disciplinas = array_merge( $disciplinas, Disciplina::lists('descricao','id')->toArray() );
+        $disciplinas[""] = "";
+        foreach(Disciplina::lists('descricao','id')->toArray() as $i =>  $d){
+            $disciplinas[$i] = $d;
+        }
 
         $tipoOcorrencias = TipoOcorrencia::all();
 
@@ -76,8 +78,10 @@ class OcorrenciaController extends Controller
     public function turmaeditar($turma,$id)
     {
         $alunos = Aluno::where('turma_id',$turma)->with('turma')->orderBy('numero')->get();
-        $disciplinas[''] = '';
-        $disciplinas = array_merge( $disciplinas, Disciplina::lists('descricao','id')->toArray() );
+        $disciplinas[""] = "";
+        foreach(Disciplina::lists('descricao','id')->toArray() as $i =>  $d){
+            $disciplinas[$i] = $d;
+        }
 
         $tipoOcorrencias = TipoOcorrencia::all();
         $ocorrencia = Ocorrencia::find($id);
@@ -139,6 +143,30 @@ class OcorrenciaController extends Controller
 
 
         }
+
+
+        return response()->json(['sucesso' => 'Ocorrência Cadastrada com Sucesso!']);
+
+    }
+
+    public function individualSalvar(OcorrenciaRequest $request,$turma)
+    {
+
+        $ocorrencia =  Ocorrencia::create([
+            'disciplina_id'     => $request->input('disciplina_id'),
+            'turma_id'          => $turma,
+            'unidade'           => $request->input('unidade'),
+            'data'              => $request->input('data'),
+            'descricao'         => $request->input('descricao')
+        ]);
+
+        $ocorrencia->tipoocorrencias()->attach($request->input('ocorrencia'));
+        $aluno = $request->input('alunos');
+
+            $a = Aluno::find($aluno);
+            $ocorrencia->alunos()->attach($aluno,['matricula' => $a->matricula] );
+
+
 
 
         return response()->json(['sucesso' => 'Ocorrência Cadastrada com Sucesso!']);

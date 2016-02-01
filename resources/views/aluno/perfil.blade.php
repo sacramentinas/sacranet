@@ -71,7 +71,11 @@
                         </li>
                     </ul>
 
-                    <a href="#" class="btn btn-primary btn-block"><b>Criar Ocorrência</b></a>
+                    <a href="{!! route('alunos.ocorrencia',[$aluno->id]) !!}" class="btn btn-primary btn-block"> <i class="fa fa-plus">
+                        </i> Criar Ocorrencia</a>
+                    <a href="{!! route('alunos.editar',[$aluno->id]) !!}" class="btn btn-warning btn-block"> <i class="fa fa-pencil">
+                        </i>  Editar</a>
+
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
 

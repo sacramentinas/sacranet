@@ -84,7 +84,10 @@
     <div class="col-md-3 col-sm-3 col-xs-12">
 
         <div class="well profile_view">
+            <div class="box-profile">
+            <span class="badge bg-teal">{{ $aluno->numero }}</span>
             <div class="user-image">
+
                 <?php
 
                   if( file_exists( public_path().'/fotoaluno/'.intval($aluno->matricula).'.jpg')){
@@ -123,7 +126,7 @@
 
 
 
-
+                </div>
                 </div>
             </div>
      </div>
