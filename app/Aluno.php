@@ -18,7 +18,8 @@ class Aluno extends Model
 
     public function getDatanascimentoAttribute($valor)
     {
-        return Carbon::parse($this->attributes['datanascimento'])->format("d/m/Y");
+       // return Carbon::parse($this->attributes['datanascimento'])->format("d/m/Y");
+       return $this->attributes['datanascimento'];
 
     }
 

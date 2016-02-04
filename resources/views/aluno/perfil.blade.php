@@ -109,7 +109,7 @@
                                         <td>
                                         <p>
                                           <small><strong>Data de Nascimento:</strong></small>
-                                          {{$aluno->datanascimento}}
+                                           {{ Carbon\Carbon::parse($aluno->datanascimento)->format("d/m/Y") }}
                                         </p>
                                         </td>
                                         <td>

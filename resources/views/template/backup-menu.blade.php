@@ -16,7 +16,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{!! route('ocorrencias.index') !!}"><i class="fa fa-circle-o"></i>Gerenciar Ocorrências</a></li>
-                    <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i>Adicionar Ocorrências</a></li>
+                    <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -37,15 +37,34 @@
                 </a>
             </li>
             <li>
+                <a href="pages/mailbox/mailbox.html">
+                    <i class="fa fa-envelope"></i> <span>Mensagens</span>
+                    <small class="label pull-right bg-yellow">12</small>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('turmas.index') }}">
                     <i class="fa fa-users"></i> <span>Turmas</span>
                 </a>
             </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-pie-chart"></i>
+                    <span>Relatórios</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+                    <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
+                    <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
+                    <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                </ul>
+            </li>
 
             <li>
-                <a href="#">
+                <a href="pages/calendar.html">
                     <i class="fa fa-calendar"></i> <span>Aniversariantes</span>
-                   <!-- <small class="label pull-right bg-red">3</small>-->
+                    <small class="label pull-right bg-red">3</small>
                 </a>
             </li>
 

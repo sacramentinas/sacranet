@@ -5,6 +5,11 @@
         <h1>
             <i class="fa fa-user"></i>
             Alunos
+
+            <span class="badge bg-teal">{!! $alunos->total() !!} alunos cadastrados</span>
+            @if($btnOcorrencias)
+            <a href="{!! route('ocorrencias.turma',[Request::input('t')]) !!}" class="btn btn-primary"><i class="fa fa-plus"></i> Adicionar Ocorrências</a>
+            @endif
         </h1>
 
 
@@ -74,7 +79,62 @@
     {!! Form::close() !!}
 </div>
 
+    @foreach($alunos as $aluno)
 
+    <div class="col-md-3 col-sm-3 col-xs-12">
+
+        <div class="well profile_view">
+            <div class="box-profile">
+            <span class="badge bg-teal">{{ $aluno->numero }}</span>
+            <div class="user-image">
+
+                <?php
+
+                  if( file_exists( public_path().'/fotoaluno/'.intval($aluno->matricula).'.jpg')){
+                      $foto = asset('fotoaluno/'.intval($aluno->matricula).'.jpg');
+                  }else{
+                      $foto = asset('fotoaluno/foto-indisponivel.png');
+                  }
+
+                ?>
+
+                <img  src=" {!! $foto !!}" >
+
+            </div>
+            <div class="col-sm-12 dados-aluno">
+                <h4 class="text-center text-aqua">{{ str_limit($aluno->nomealuno, 32) }}</h4>
+                <?php if($aluno->turma_id) {   ?>
+                <p class="text-center">
+                  <span class="badge bg-aqua-active ">
+                       {!! $aluno->turma->serie->nome . " - " . $aluno->turma->letra  !!}
+                  </span>
+               </p>
+                <?php } ?>
+
+            </div>
+
+                <div class="botoes">
+                    <div class="btn-group btn-group-lg btn-group-justified botoes-int" role="group">
+                        <a href="{!! route('alunos.perfil',[$aluno->id]) !!}" class="btn btn-info "> <i class="fa fa-eye">
+                            </i> <small>Visualizar</small></a>
+
+
+                        <a href="{!! route('alunos.editar',[$aluno->id]) !!}" class="btn btn-warning"> <i class="fa fa-pencil">
+                            </i>  <small>Editar</small></a>
+                    </div>
+
+
+
+
+                </div>
+                </div>
+            </div>
+     </div>
+
+
+    @endforeach
+
+  {!! $alunos->appends(Request::except('page'))->render() !!}
 
   <div class="clearfix"></div>
 

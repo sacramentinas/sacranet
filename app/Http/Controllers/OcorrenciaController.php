@@ -29,7 +29,8 @@ class OcorrenciaController extends Controller
         $ocorrencias = Ocorrencia::join('turmas','ocorrencias.turma_id','=','turmas.id')
                                     ->join('disciplinas','ocorrencias.disciplina_id','=','disciplinas.id')
                                     ->join('series','series.id','=','turmas.serie_id')
-                                    ->select('ocorrencias.id as id','ocorrencias.turma_id','ocorrencias.data','ocorrencias.unidade','turmas.letra as turma','disciplinas.descricao as disciplina','series.nome as serie');
+                                    ->select('ocorrencias.id as id','ocorrencias.turma_id','ocorrencias.data','ocorrencias.unidade','turmas.letra as turma','disciplinas.descricao as disciplina','series.nome as serie')
+                                    ->orderBy('ocorrencias.data', 'desc');
 
 
         return Datatables::of($ocorrencias)->addColumn('acoes', function ($ocorrencias) {
