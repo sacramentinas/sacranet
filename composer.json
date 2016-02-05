@@ -10,7 +10,8 @@
         "laravelcollective/html": "^5.1",
         "genealabs/laravel-caffeine": "~0.2",
         "yajra/laravel-datatables-oracle": "~5.0",
-        "orangehill/iseed": "^2.0"
+        "orangehill/iseed": "^2.0",
+        "sboo/multiauth": "^4.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -1,20 +1,6 @@
-@extends('template.principal')
+@extends('template.secundario')
 
 @section('breadcrumb')
-    <section class="content-header">
-        <h1>
-            <?php
-
-            ?>
-            <i class="fa fa-user"></i> Alunos
-            <a href="{!! Session::get('url',route('alunos.index')) !!}"  class="btn btn-default">&larr; Voltar</a>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Inicial</a></li>
-            <li>Alunos</li>
-            <li class="active">Perfil</li>
-        </ol>
-    </section>
 
 @endsection
 
@@ -52,7 +38,7 @@
                     <h3 class="profile-username text-center text-info">{{ str_limit($aluno->nomealuno, 32) }}</h3>
                     <p class="text-center">
                           <span class="badge bg-aqua-active ">
-                               {!! $aluno->turma->serie->nome . " - " . $aluno->turma->letra  !!}
+                                {!! $aluno->turma->serie->nome . " - " . $aluno->turma->letra  !!}
                           </span>
                     </p>
 
@@ -71,10 +57,7 @@
                         </li>
                     </ul>
 
-                    <a href="{!! route('alunos.ocorrencia',[$aluno->id]) !!}" class="btn btn-primary btn-block"> <i class="fa fa-plus">
-                        </i> Criar Ocorrencia</a>
-                    <a href="{!! route('alunos.editar',[$aluno->id]) !!}" class="btn btn-warning btn-block"> <i class="fa fa-pencil">
-                        </i>  Editar</a>
+
 
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
@@ -320,24 +303,7 @@
                             </div>
                             <div role="tabpanel" class="tab-pane" id="settings">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div>
                             <div role="tabpanel" class="tab-pane" id="senha">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h3>{{$aluno->nomealuno}}</h3>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Série</b> <span class="text-info">  {!! $aluno->turma->serie->nome . " - " . $aluno->turma->letra  !!} </span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Matrícula</b> <span class="text-info">{{$aluno->matricula}}</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Senha</b> <span class="text-info">{{$aluno->senhatexto}}</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <p class="text-center"><b>wwww.colegiosacramentinas.com.br</b></p>
-                                    </li>
 
-                                </ul>
                             </div>
                         </div>
 

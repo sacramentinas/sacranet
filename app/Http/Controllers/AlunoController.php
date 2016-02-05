@@ -15,6 +15,7 @@ use Sacranet\Ocorrencia;
 use Sacranet\Turma;
 use Sacranet\Http\Requests\AlunoRequest;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class AlunoController extends Controller
 {
@@ -23,24 +24,32 @@ class AlunoController extends Controller
     public function index(Request $request)
     {
 
-        $turmas = Turma::with('serie')->get();
+       // $turmas = Turma::with('serie')->get();
+        $turmas = Auth::admin()->user()->turmas;
         $busca = $request->get('p');
         $turma = $request->get('t');
 
         Session::put('url',\URL::full());
 
+        $turmas_id = [];
+
+        foreach($turmas as $t){
+            $turmas_id[] = $t['id'];
+        }
+
 
 
         if($busca && $turma) {
-            $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->where('turma_id',$turma)->orderBy('id')->paginate(12);
+            $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->where('turma_id',$turma)->wherein('turma_id',$turmas_id)->orderBy('id')->paginate(12);
         }
         elseif($turma){
-            $alunos = Aluno::where('turma_id',$turma)->orderBy('numero')->paginate(70);
+            $alunos = Aluno::where('turma_id',$turma)->wherein('turma_id',$turmas_id)->orderBy('numero')->paginate(70);
         }
         elseif($busca){
-            $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->orderBy('id')->paginate(12);
+            $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->wherein('turma_id',$turmas_id)->orderBy('id')->paginate(12);
+
         }else{
-          $alunos = Aluno::orderBy('nomealuno')->orderBy('id','desc')->paginate(12);
+          $alunos = Aluno::orderBy('nomealuno')->wherein('turma_id',$turmas_id)->orderBy('id','desc')->paginate(12);
 
         }
 
@@ -89,8 +98,21 @@ class AlunoController extends Controller
     {
         $aluno = Aluno::find($id);
         $ocorrencias = $aluno->ocorrencias->groupBy('data')->sortByDesc('data');
+        $quantidade['negativa'] = 0;
+        $quantidade['positiva'] = 0;
 
-        return view('aluno.perfil',compact('aluno','ocorrencias'));
+      foreach($ocorrencias as $ocorrencia) {
+          foreach ($ocorrencia as $o) {
+              if ($o->tipoocorrencias[0]->tipo == 'Negativa') {
+                  $quantidade['negativa']++;
+              } else {
+                  $quantidade['positiva']++;
+              }
+          }
+      }
+
+
+        return view('aluno.perfil',compact('aluno','ocorrencias','quantidade'));
 
     }
 

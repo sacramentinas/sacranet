@@ -1,4 +1,7 @@
-@extends('template.principal')
+
+  @extends('template.principal')
+
+
 
 @section('breadcrumb')
     <section class="content-header">
@@ -17,52 +20,61 @@
 
 
 @section('conteudo')
-<div class="row">
-    <div class="col-md-12">
-        <div class="box box-info ">
-            <div class="box-header">
-                <i class="fa fa-user"></i>
-                <h3 class="box-title">Busca</h3>
+    <div class="row">
+        {!! Form::open(['route' => 'alunos.index','method' => 'GET','id' => 'form' ] ) !!}
+        <div class="col-md-6">
+            <div class="box box-success">
+                <div class="box-header">
+                    <i class="fa fa-users"></i>
+                    <h3 class="box-title">Turmas</h3>
 
-            </div><!-- /.box-header -->
-            <div class="box-footer text-black">
-                <form action="#" method="get">
+
+                </div><!-- /.box-header -->
+                <div class="box-footer text-black">
                     <div class="input-group">
-                        <input type="text" name="q" class="form-control input-lg" placeholder="Buscar Aluno...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat btn-info btn-lg"><i class="fa fa-search"></i></button>
-              </span>
-                    </div>
-                </form>
-            </div><!-- /.box-footer -->
-        </div><!-- /.box -->
-    </div><!-- /.col -->
-</div><!-- /.row -->
+                        <select class="form-control input-lg" name="t" id="campot">
+                            <option value="">Selecione a Turma</option>
+                            @foreach($turmas as $turma)
+                                <option value="{!! $turma->id !!}" {!! (Request::input('t') == $turma->id ) ? "SELECTED" : ""  !!}>{!! $turma->serie->nome." - ".$turma->letra !!}</option>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="box box-success">
-            <div class="box-header">
-                <i class="fa fa-users"></i>
-                <h3 class="box-title">Turmas</h3>
-
-            </div><!-- /.box-header -->
-            <div class="box-footer text-black">
-                <form action="#" method="get">
-                    <div class="input-group">
-                        <select class="form-control input-lg">
-                            <option>Selecione a Turma</option>
-                            <option value="">1ª Série A</option>
+                            @endforeach
                         </select>
               <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat btn-success btn-lg "><i class="fa fa-search"></i></button>
+                <button type="submit"  id="search-btn" class="btn btn-flat btn-success btn-lg"><i class="fa fa-search"></i></button>
               </span>
                     </div>
-                </form>
-            </div><!-- /.box-footer -->
-        </div><!-- /.box -->
-    </div><!-- /.col -->
-</div><!-- /.row -->
+
+                </div><!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+
+
+        <div class="col-md-6">
+            <div class="box box-info ">
+                <div class="box-header">
+                    <i class="fa fa-user"></i>
+                    <h3 class="box-title">Busca</h3>
+
+                </div><!-- /.box-header -->
+                <div class="box-footer text-black">
+
+                    <div class="input-group">
+                        {!! Form::text('p', Request::input('p') ? Request::input('p') : '' ,['class' => 'form-control input-lg','placeholder' => 'Buscar Aluno...','id' => 'campop']) !!}
+                  <span class="input-group-btn">
+                         <button type="submit"  id="search-btn" class="btn btn-flat btn-info btn-lg"><i class="fa fa-search"></i></button>
+                  </span>
+                    </div>
+
+
+                </div><!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+        {!! Form::close() !!}
+    </div>
+
+
+
+    <div class="clearfix"></div>
 
 <div class="row">
     <div class="col-md-6">

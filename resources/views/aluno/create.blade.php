@@ -155,6 +155,8 @@
 @endsection
 
 @section('script')
+    {!! Html::script('plugins/select2/select2.min.js') !!}
+    {!! Html::script('plugins/multiselect/js/jquery.multi-select.js') !!}
     {!! Html::script('js/acoes_formulario.js') !!}
 @endsection
 

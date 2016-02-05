@@ -4100,6 +4100,7 @@ S2.define('select2/dropdown/attachBody',[
 
     var css = {
       width: this.$container.outerWidth(false) + 'px'
+
     };
 
     if (this.options.get('dropdownAutoWidth')) {

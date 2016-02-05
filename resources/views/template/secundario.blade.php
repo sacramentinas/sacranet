@@ -16,7 +16,7 @@
     <!-- Theme style -->
    {!! Html::style('plugins/datatables/dataTables.bootstrap.css') !!}
    {!! Html::style('plugins/datatables/dataTables.responsive.css') !!}
-    {!! Html::style('plugins/select2/select2.min.css') !!}
+
 
     {!! Html::style('css/AdminLTE.min.css') !!}
     {!! Html::style('css/skins/_all-skins.min.css') !!}
@@ -24,7 +24,6 @@
     {!! Html::style('css/font-awesome-animation.min.css') !!}
     {!! Html::style('css/uploadfile.css') !!}
     {!! Html::style('plugins/multiselect/css/multi-select.css') !!}
-
     {!! Html::style('css/estilo.css') !!}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,39 +33,9 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="skin-blue sidebar-mini">
+<body class="hold-transition login-page">
 <div class="wrapper">
-    <div id="mensagem">
-
-        <div class="alert alert-success alert-dismissable" >
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4 class="sucesso">
-
-                        </h4>
-        </div>
-
-        <div class="alert alert-danger alert-dismissable" >
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4 class="erro-msg">
-
-            </h4>
-        </div>
-
-    </div>
-
-    @include('template.header')
-    @include('template.menu')
-
-
-
-
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-
-
-
-
+    
 
         <!-- Content Header (Page header) -->
         @yield('breadcrumb')
@@ -82,7 +51,7 @@
 
 
 
-</div><!-- ./wrapper -->
+
 </div>
 <!-- jQuery 2.1.4 -->
 {!! Html::script('plugins/jQuery/jQuery-2.1.4.min.js') !!}

@@ -18,10 +18,10 @@ body{
 
 
 }
-.alert-danger, .alert-success{
+#mensagem .alert-danger, #mensagem .alert-success{
     display:none;
 }
-.alert{
+#mensagem .alert{
     padding-bottom:5px;
     text-align:center;
     box-shadow: rgba(0,0,0,.3) 1px 1px 10px;
@@ -203,4 +203,9 @@ a.excluirfoto{
 .extra-margin-footer{
     margin-bottom:20px;
 }
-
+.select2-container--default .select2-search--inline .select2-search__field {
+    width: 100% !important;
+}
+.select2{
+    width: 100% !important;
+}

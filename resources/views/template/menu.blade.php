@@ -7,7 +7,6 @@
         <ul class="sidebar-menu">
             <li class="header"><i class="fa fa-th"></i>  MENU</li>
 
-
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa fa-edit"></i>
@@ -15,10 +14,14 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
+                    @if(Auth::admin()->user()->tipo == 'admin' )
                     <li><a href="{!! route('ocorrencias.index') !!}"><i class="fa fa-circle-o"></i>Gerenciar Ocorrências</a></li>
-                    <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i>Adicionar Ocorrências</a></li>
+                    @endif
+                    <li><a href="{!! route('alunos.index') !!}"><i class="fa fa-circle-o"></i>Adicionar Ocorrências</a></li>
+
                 </ul>
             </li>
+            @if(Auth::admin()->user()->tipo == 'admin' )
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-graduation-cap  "></i> <span>Alunos</span>
@@ -41,6 +44,18 @@
                     <i class="fa fa-users"></i> <span>Turmas</span>
                 </a>
             </li>
+             <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-graduation-cap  "></i> <span>Usuários</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{!! route('usuarios.index') !!}"><i class="fa fa-circle-o"></i> Gerenciar Usuários</a></li>
+                        <li><a href="{!! route('usuarios.cadastrar') !!}"><i class="fa fa-circle-o"></i> Cadastrar Usuários</a></li>
+
+                    </ul>
+                </li>
+           @endif
 
             <li>
                 <a href="#">

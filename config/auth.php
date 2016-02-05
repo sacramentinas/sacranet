@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => 'eloquent',
+    //'driver' => 'eloquent',
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => Sacranet\User::class,
+   // 'model' => Sacranet\User::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'table' => 'users',
+    //'table' => 'users',
 
     /*
     |--------------------------------------------------------------------------
@@ -57,6 +57,18 @@ return [
     | they have less time to be guessed. You may change this as needed.
     |
     */
+    'multi' => [
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => Sacranet\Usuario::class,
+
+        ],
+        'aluno' => [
+            'driver' => 'eloquent',
+            'model' => Sacranet\Aluno::class,
+            //'email' => 'client.emails.password',
+        ]
+    ],
 
     'password' => [
         'email' => 'emails.password',

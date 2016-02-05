@@ -4,9 +4,13 @@ namespace Sacranet;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class Aluno extends Model
+class Aluno extends Model implements AuthenticatableContract
 {
+    use Authenticatable;
+
 
 
     protected $fillable = ['matricula','nomealuno','datanascimento','sexo','turma_id','numero','endereco',
@@ -21,6 +25,10 @@ class Aluno extends Model
        // return Carbon::parse($this->attributes['datanascimento'])->format("d/m/Y");
        return $this->attributes['datanascimento'];
 
+
+    }
+    public function getAuthPassword() {
+        return $this->senha;
     }
 
 

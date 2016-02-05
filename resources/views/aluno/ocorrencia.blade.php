@@ -121,9 +121,12 @@
 @endsection
 
 @section('script')
-    {!! Html::script('js/acoes_formulario.js') !!}
+
     {!! Html::script('plugins/multiselect/js/jquery.multi-select.js') !!}
     {!! Html::script('js/jquery.quicksearch.js') !!}
+    {!! Html::script('plugins/select2/select2.min.js') !!}
+    {!! Html::script('js/acoes_formulario.js') !!}
+
 
 @endsection
 
