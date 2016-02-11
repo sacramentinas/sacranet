@@ -1,5 +1,6 @@
 /vendor
 /public/fotoaluno
+/public/.htaccess
 /node_modules
 Homestead.yaml
 Homestead.json

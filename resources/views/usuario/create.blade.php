@@ -47,11 +47,14 @@
                                 {!! Form::label('tipo','Tipo') !!}
                                 {!! Form::select('tipo',['' => 'Selecione o Tipo de Usuário','admin' => 'Admin', 'mestre' => 'Mestre de Sala'],null,['class' => 'form-control input-lg','id' => 'tipo']) !!}
                             </div>
+
                          </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             {!! Form::label('turmas','Turmas') !!}
+                             <input type="checkbox" id="checkbox" > Selecionar Todas
 
                             <select class="form-control input-lg select2"  id="turmas" name="turmas[]" multiple="multiple">
 
@@ -61,11 +64,16 @@
                                 @endforeach
                             </select>
                         </div>
+
                     </div>
-                    </div>
+
+
+
+
 
                     <div class="row">
                         <div class="col-md-12">
+
 
                         <button type="submit" id="salvar" class="botao pull-right btn btn-info btn-lg"><i class="fa fa-save"></i> Salvar</button>
 
@@ -88,7 +96,15 @@
     <script>
         $(document).ready(function(){
             $("#turmas").select2();
-
+            $("#checkbox").click(function(){
+                if($("#checkbox").is(':checked') ){
+                    $("#turmas > option").prop("selected","selected");
+                    $("#turmas").trigger("change");
+                }else{
+                    $("#turmas > option").removeAttr("selected");
+                    $("#turmas").trigger("change");
+                }
+            });
 
         });
     </script>

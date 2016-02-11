@@ -54,6 +54,7 @@
                         <div class="col-md-12">
 
                             {!! Form::label('turmas','Turmas') !!}
+                            <input type="checkbox" id="checkbox" > Selecionar Todas
 
                             <select class="form-control select2"  id="turmas" name="turmas[]" multiple="multiple">
 
@@ -96,7 +97,15 @@
     <script>
         $(document).ready(function(){
             $("#turmas").select2();
-
+            $("#checkbox").click(function(){
+                if($("#checkbox").is(':checked') ){
+                    $("#turmas > option").prop("selected","selected");
+                    $("#turmas").trigger("change");
+                }else{
+                    $("#turmas > option").removeAttr("selected");
+                    $("#turmas").trigger("change");
+                }
+            });
 
         });
     </script>
