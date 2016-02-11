@@ -62,5 +62,11 @@ class ResponsavelController extends Controller
 
     }
 
+    public function sair()
+    {
+        Auth::aluno()->logout();
+        return redirect()->route('responsavel.login');
+    }
+
 
 }

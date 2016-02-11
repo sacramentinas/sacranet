@@ -30,5 +30,6 @@ class Kernel extends HttpKernel
         'auth' => \Sacranet\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \Sacranet\Http\Middleware\RedirectIfAuthenticated::class,
+        'responsavel' => \Sacranet\Http\Middleware\AuthResponsavel::class,
     ];
 }
