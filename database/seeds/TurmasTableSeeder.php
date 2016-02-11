@@ -73,7 +73,7 @@ class TurmasTableSeeder extends Seeder {
 			7 => 
 			array (
 				'id' => 64,
-				'serie_id' => 6,
+				'serie_id' => 2,
 				'letra' => 'A',
 				'created_at' => '2015-09-03 11:08:47',
 				'updated_at' => '2015-09-03 11:08:47',
@@ -81,7 +81,7 @@ class TurmasTableSeeder extends Seeder {
 			8 => 
 			array (
 				'id' => 65,
-				'serie_id' => 6,
+				'serie_id' => 2,
 				'letra' => 'B',
 				'created_at' => '2015-09-03 11:08:47',
 				'updated_at' => '2015-09-03 11:08:47',
@@ -89,7 +89,7 @@ class TurmasTableSeeder extends Seeder {
 			9 => 
 			array (
 				'id' => 66,
-				'serie_id' => 6,
+				'serie_id' => 2,
 				'letra' => 'C',
 				'created_at' => '2015-09-03 11:08:47',
 				'updated_at' => '2015-09-03 11:08:47',
@@ -97,7 +97,7 @@ class TurmasTableSeeder extends Seeder {
 			10 => 
 			array (
 				'id' => 67,
-				'serie_id' => 7,
+				'serie_id' => 1,
 				'letra' => 'A',
 				'created_at' => '2015-09-03 11:09:00',
 				'updated_at' => '2015-09-03 11:09:00',
@@ -105,7 +105,7 @@ class TurmasTableSeeder extends Seeder {
 			11 => 
 			array (
 				'id' => 68,
-				'serie_id' => 7,
+				'serie_id' => 1,
 				'letra' => 'B',
 				'created_at' => '2015-09-03 11:09:00',
 				'updated_at' => '2015-09-03 11:09:00',

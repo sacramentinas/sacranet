@@ -33,7 +33,7 @@ class SeriesTableSeeder extends Seeder {
 			),
 			2 => 
 			array (
-				'id' => 6,
+				'id' => 2,
 				'cod_sei' => 'EM',
 				'nome' => 'Grupo 3',
 				'created_at' => '2015-09-03 11:08:47',
@@ -41,7 +41,7 @@ class SeriesTableSeeder extends Seeder {
 			),
 			3 => 
 			array (
-				'id' => 7,
+				'id' => 1,
 				'cod_sei' => 'MM',
 				'nome' => 'Grupo 2',
 				'created_at' => '2015-09-03 11:09:00',
