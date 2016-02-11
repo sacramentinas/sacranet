@@ -24,40 +24,34 @@
 
 
 
-        <div class="col-md-3 ">
+        <div class="col-md-12">
 
             <!-- Profile Image -->
             <div class="box box-info hidden-print">
                 <div class="box-body box-profile">
-                    <span class="badge bg-teal">{{ $aluno->numero }}</span>
-                    <div class="user-image">
+                    <div class="col-md-2">
+                       <div class="user-image">
 
                         <img  src=" {!! $foto !!}" >
 
+                       </div>
                     </div>
-                    <h3 class="profile-username text-center text-info">{{ str_limit($aluno->nomealuno, 32) }}</h3>
-                    <p class="text-center">
-                          <span class="badge bg-aqua-active ">
-                                {!! $aluno->turma->serie->nome . " - " . $aluno->turma->letra  !!}
-                          </span>
-                    </p>
+                    <div class="col-md-10">
+                        <h3 class="profile-username text-info">{{ str_limit($aluno->nomealuno, 32) }}</h3>
+                        <p>
+                            <small><strong>SÉRIE:</strong></small>
+                            {!! $aluno->turma->serie->nome . " - " . $aluno->turma->letra  !!}
+                        </p>
 
-
-
-
-
-
-                    <h5>Ocorrências</h5>
-                    <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>Positivas</b> <a class="pull-right">{{ $quantidade['positiva'] }}</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Negativas</b> <a class="pull-right">{{ $quantidade['negativa'] }}</a>
-                        </li>
-                    </ul>
-
-
+                        <p>
+                            <small><strong>PAI:</strong></small>
+                            {{ $aluno->nomepai }}
+                        </p>
+                        <p>
+                            <small><strong>MÃE:</strong></small>
+                            {{ $aluno->nomemae }}
+                        </p>
+                    </div>
 
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
@@ -70,118 +64,93 @@
 
 
 
-        <div class="col-md-9">
+        <div class="col-md-12">
 
              <div class="nav-tabs-custom">
 
                         <ul class="nav nav-tabs responsive no-print" id="myTabs">
-                            <li class="active"><a href="#dados">Dados</a></li>
+                            <li class="active"><a href="#ocorrencias">Ocorrências</a></li>
                             <li><a href="#boletim">Boletim</a></li>
-                            <li><a href="#ocorrencias">Ocorrências</a></li>
-                            <li><a href="#settings">Observações</a></li>
-                            <li><a href="#senha">Senha</a></li>
                         </ul>
 
 
                         <div class="tab-content ">
-                            <div role="tabpanel" class="tab-pane active" id="dados">
+                            <div role="tabpanel" class="tab-pane active" id="ocorrencias">
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <!-- The time line -->
+                                        @if( count($ocorrencias) )
+                                        <ul class="timeline bg-gray-light">
 
-
-                                <table class="table table-bordered table-striped">
-                                    <tr>
-                                        <td>
-                                        <p>
-                                          <small><strong>Data de Nascimento:</strong></small>
-                                           {{ Carbon\Carbon::parse($aluno->datanascimento)->format("d/m/Y") }}
-                                        </p>
-                                        </td>
-                                        <td>
-                                        <p>
-                                            <small><strong>Sexo:</strong></small>
-                                            {{ ($aluno->sexo == 'M' ? 'Masculino' : 'Feminino' ) }}
-                                        </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                        <p>
-                                            <small><strong>Endereço:</strong></small>
-                                            {{ $aluno->endereco }} - {{ $aluno->bairro }}
-                                        </p>
-                                        </td>
-                                    </tr>
-                                    <tr >
-                                        <td >
-                                        <p>
-                                            <small><strong>Telefone:</strong></small>
-                                            {{ $aluno->telefone }}
-                                        </p>
-                                        </td>
-                                        <td>
-                                        <p>
-                                            <small><strong>Email:</strong></small>
-                                            {{ $aluno->emailcontratante }}
-                                        </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-
-                                                       <p>
-                                                           <small><strong>Pai:</strong></small>
-                                                           {{ $aluno->nomepai }}
-                                                       </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                         <td>
-
-                                            <p>
-                                                <small><strong>Email:</strong></small>
-                                                {{ $aluno->emailpai }}
-                                            </p>
-                                          </td>
-                                          <td>
-
-                                            <p>
-                                                <small><strong>Telefone:</strong></small>
-                                                {{ $aluno->telefonepai }}
-                                            </p>
-                                          </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td colspan="2">
-
-                                            <p>
-                                                <small><strong>Mãe:</strong></small>
-                                                {{ $aluno->nomemae }}
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-
-                                            <p>
-                                                <small><strong>Email:</strong></small>
-                                                {{ $aluno->emailmae }}
-                                            </p>
-                                        </td>
-                                        <td>
-
-                                            <p>
-                                                <small><strong>Telefone:</strong></small>
-                                                {{ $aluno->telefonemae }}
-                                            </p>
-                                        </td>
-                                    </tr>
+                                            @foreach($ocorrencias as $data => $o)
 
 
 
 
-                                </table>
+
+
+
+
+                                                <!-- timeline time label -->
+                                                <li class="time-label">
+
+                                              <span class="bg-blue">
+                                               {{ \Carbon\Carbon::parse($data)->format('d/m/Y') }}
+                                              </span>
+                                                </li>
+                                                <!-- /.timeline-label -->
+                                                <!-- timeline item -->
+
+                                                @foreach($o as $ocorrencia)
+
+                                                    <li>
+                                                        @if($ocorrencia->tipoocorrencias[0]->tipo)
+                                                            @if($ocorrencia->tipoocorrencias[0]->tipo == 'Negativa' )
+                                                                <i class="fa fa-thumbs-o-down bg-red"></i>
+                                                            @elseif($ocorrencia->tipoocorrencias[0]->tipo == 'Positiva')
+                                                                <i class="fa fa-thumbs-o-up bg-green"></i>
+                                                            @else
+                                                                <i class="fa fa-envelope bg-blue"></i>
+                                                            @endif
+                                                        @endif
+
+                                                        <div class="timeline-item">
+
+
+                                                            <h3 class="timeline-header"> <span class="text-blue">{{$ocorrencia->disciplina->descricao }}</span> <span class="badge bg-teal"> {{ $ocorrencia->unidadeConverte() }}</span></h3>
+                                                            <div class="timeline-body">
+                                                                @if(count($ocorrencia->tipoocorrencias))
+                                                                    <h4 class="text-teal">Ocorrências:</h4>
+                                                                    <ul>
+                                                                        @foreach($ocorrencia->tipoocorrencias as $tipo)
+                                                                            <li>{{$tipo->descricao }}</li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
+                                                                @if($ocorrencia->descricao)
+                                                                    <h4 class="text-aqua">Descrição:</h4>
+                                                                    {{ $ocorrencia->descricao }}
+                                                                @endif
+                                                            </div>
+
+                                                        </div>
+                                                    </li>
+                                                    <!-- END timeline item -->
+                                                @endforeach
+
+                                            @endforeach
+                                                <li>
+                                                    <i class="glyphicon glyphicon-minus bg-gray"></i>
+                                                </li>
+
+
+                                        </ul>
+                                        @else
+                                            <h3>Nenhuma Ocorrência Cadastrada no Sistema</h3>
+                                        @endif
+                                    </div><!-- /.col -->
+                                </div>
+
 
 
 
@@ -227,82 +196,8 @@
                                 </table>
 
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="ocorrencias">
-                                <div class="row">
-                                    <div class="col-md-12 ">
-                                        <!-- The time line -->
-                                        <ul class="timeline bg-gray-light">
-
-                                            @foreach($ocorrencias as $data => $o)
 
 
-
-
-
-
-
-
-                                            <!-- timeline time label -->
-                                            <li class="time-label">
-
-                                              <span class="bg-blue">
-                                               {{ \Carbon\Carbon::parse($data)->format('d/m/Y') }}
-                                              </span>
-                                            </li>
-                                            <!-- /.timeline-label -->
-                                            <!-- timeline item -->
-
-                                          @foreach($o as $ocorrencia)
-
-                                            <li>
-                                                @if($ocorrencia->tipoocorrencias[0]->tipo)
-                                                    @if($ocorrencia->tipoocorrencias[0]->tipo == 'Negativa' )
-                                                        <i class="fa fa-thumbs-o-down bg-red"></i>
-                                                    @elseif($ocorrencia->tipoocorrencias[0]->tipo == 'Positiva')
-                                                        <i class="fa fa-thumbs-o-up bg-green"></i>
-                                                    @else
-                                                        <i class="fa fa-envelope bg-blue"></i>
-                                                    @endif
-                                                @endif
-
-                                                <div class="timeline-item">
-
-
-                                                  <h3 class="timeline-header"> <span class="text-blue">{{$ocorrencia->disciplina->descricao }}</span> <span class="badge bg-teal"> {{ $ocorrencia->unidadeConverte() }}</span></h3>
-                                                    <div class="timeline-body">
-                                                      @if(count($ocorrencia->tipoocorrencias))
-                                                       <h4 class="text-teal">Ocorrências:</h4>
-                                                        <ul>
-                                                        @foreach($ocorrencia->tipoocorrencias as $tipo)
-                                                            <li>{{$tipo->descricao }}</li>
-                                                        @endforeach
-                                                        </ul>
-                                                      @endif
-                                                      @if($ocorrencia->descricao)
-                                                      <h4 class="text-aqua">Descrição:</h4>
-                                                          {{ $ocorrencia->descricao }}
-                                                      @endif
-                                                    </div>
-
-                                                </div>
-                                            </li>
-                                             <!-- END timeline item -->
-                                           @endforeach
-
-                                        @endforeach
-                                                <li>
-                                                    <i class="glyphicon glyphicon-minus bg-gray"></i>
-                                                </li>
-                                         </ul>
-                                    </div><!-- /.col -->
-                                </div>
-
-
-
-
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="settings">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div>
-                            <div role="tabpanel" class="tab-pane" id="senha">
 
                             </div>
                         </div>
