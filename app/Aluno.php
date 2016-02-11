@@ -70,14 +70,14 @@ class Aluno extends Model implements AuthenticatableContract
 
 
          foreach($arquivogravado as $a){
-             if(substr($a,0,4) == "----"){
+             if(substr($a,0,7) == "------ "){
                  $quant = explode(" ",$a);
                  break;
              }
 
          }
 
-         if(isset($quant) and $quant > 0){
+         if(isset($quant) and count($quant) > 0){
 
 
          $cont = 0;
@@ -91,8 +91,11 @@ class Aluno extends Model implements AuthenticatableContract
 
          foreach($arquivogravado as $a){
 
-             if(!(substr($a,0,15) == "MATRIC ALUNO(A)" || substr($a,0,4) == "----" || substr($a,0,15) == "Quantidade de a" || substr($a,0,6) == "ATIVOS" ))
+
+             if(!(substr($a,0,15) == "MATRIC ALUNO(A)" || substr($a,0,4) == "----" || substr($a,0,15) == "Quantidade de a" || substr($a,0,6) == "ATIVOS" || substr($a,0,7) == "COLEGIO" || substr($a,0,4) == "(Mod" || substr($a,0,73) == "                                                                      PAG"))
              {
+
+
                  $ini = 0;
                  $dados['matricula'] = trim(substr($a,$ini,strlen($quant[0]) ) );
                  $dados['nomealuno'] = trim(substr($a,$ini += strlen($quant[0]) ,strlen($quant[1])));

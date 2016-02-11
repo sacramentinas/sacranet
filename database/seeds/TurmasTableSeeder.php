@@ -70,47 +70,47 @@ class TurmasTableSeeder extends Seeder {
 				'created_at' => '2015-09-03 11:08:29',
 				'updated_at' => '2015-09-03 11:08:29',
 			),
-			7 => 
-			array (
-				'id' => 64,
-				'serie_id' => 2,
-				'letra' => 'A',
-				'created_at' => '2015-09-03 11:08:47',
-				'updated_at' => '2015-09-03 11:08:47',
-			),
-			8 => 
-			array (
-				'id' => 65,
-				'serie_id' => 2,
-				'letra' => 'B',
-				'created_at' => '2015-09-03 11:08:47',
-				'updated_at' => '2015-09-03 11:08:47',
-			),
-			9 => 
-			array (
-				'id' => 66,
-				'serie_id' => 2,
-				'letra' => 'C',
-				'created_at' => '2015-09-03 11:08:47',
-				'updated_at' => '2015-09-03 11:08:47',
-			),
-			10 => 
-			array (
-				'id' => 67,
-				'serie_id' => 1,
-				'letra' => 'A',
-				'created_at' => '2015-09-03 11:09:00',
-				'updated_at' => '2015-09-03 11:09:00',
-			),
-			11 => 
-			array (
-				'id' => 68,
-				'serie_id' => 1,
-				'letra' => 'B',
-				'created_at' => '2015-09-03 11:09:00',
-				'updated_at' => '2015-09-03 11:09:00',
-			),
-			12 => 
+			7 =>
+                array (
+                    'id' => 64,
+                    'serie_id' => 2,
+                    'letra' => 'A',
+                    'created_at' => '2015-09-03 11:08:47',
+                    'updated_at' => '2015-09-03 11:08:47',
+                ),
+            8 =>
+                array (
+                    'id' => 65,
+                    'serie_id' => 2,
+                    'letra' => 'B',
+                    'created_at' => '2015-09-03 11:08:47',
+                    'updated_at' => '2015-09-03 11:08:47',
+                ),
+            9 =>
+                array (
+                    'id' => 66,
+                    'serie_id' => 2,
+                    'letra' => 'C',
+                    'created_at' => '2015-09-03 11:08:47',
+                    'updated_at' => '2015-09-03 11:08:47',
+                ),
+            10 =>
+                array (
+                    'id' => 67,
+                    'serie_id' => 1,
+                    'letra' => 'A',
+                    'created_at' => '2015-09-03 11:09:00',
+                    'updated_at' => '2015-09-03 11:09:00',
+                ),
+            11 =>
+                array (
+                    'id' => 68,
+                    'serie_id' => 1,
+                    'letra' => 'B',
+                    'created_at' => '2015-09-03 11:09:00',
+                    'updated_at' => '2015-09-03 11:09:00',
+                ),
+			12 =>
 			array (
 				'id' => 69,
 				'serie_id' => 8,

@@ -251,7 +251,7 @@ class AlunoController extends Controller
 
         if($request->hasFile('alunos')){
 
-            set_time_limit(36000000);
+            set_time_limit(78000000);
             $arquivo = $request->file('alunos');
             $arquivo->move('upload','alunos.txt');
 
@@ -269,6 +269,7 @@ class AlunoController extends Controller
             $cont = 0;
 
             foreach($arraydados as $aluno){
+               //print_r($aluno);
                 $turma = Turma::checkTurma( $aluno['turma'],$aluno['codcurso']);
                 unset($aluno['turma']);
                 unset($aluno['codcurso']);
@@ -276,6 +277,7 @@ class AlunoController extends Controller
                 $alunoc->turma()->associate($turma)->save();
                 Nota::regenerarNotas($alunoc->matricula,$alunoc->id);
                 $cont++;
+
             }
 
             if($cont){
