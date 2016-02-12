@@ -39,7 +39,7 @@ class ResponsavelController extends Controller
     }
 
     public function perfil(){
-            $id = Auth::aluno()->user()->id;
+        $id = Auth::aluno()->user()->id;
         $aluno = Aluno::find($id);
 
         $ocorrencias = $aluno->ocorrencias->groupBy('data')->sortByDesc('data');
@@ -48,10 +48,12 @@ class ResponsavelController extends Controller
 
         foreach($ocorrencias as $ocorrencia) {
             foreach ($ocorrencia as $o) {
-                if ($o->tipoocorrencias[0]->tipo == 'Negativa') {
-                    $quantidade['negativa']++;
-                } else {
-                    $quantidade['positiva']++;
+                if(isset($o->tipoocorrencias[0])) {
+                    if ($o->tipoocorrencias[0]->tipo == 'Negativa') {
+                        $quantidade['negativa']++;
+                    } else {
+                        $quantidade['positiva']++;
+                    }
                 }
             }
         }

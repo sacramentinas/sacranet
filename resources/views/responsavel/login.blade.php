@@ -1,4 +1,4 @@
-@extends('template.secundario')
+@extends('template.responsavel')
 
 @section('breadcrumb')
 

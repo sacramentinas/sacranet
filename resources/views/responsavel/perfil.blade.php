@@ -1,4 +1,4 @@
-@extends('template.secundario')
+@extends('template.responsavel')
 
 @section('breadcrumb')
 
@@ -24,19 +24,19 @@
 
 
 
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12">
 
             <!-- Profile Image -->
-            <div class="box box-info hidden-print">
+            <div class="box box-info">
                 <div class="box-body box-profile">
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-sm-2 col-xs-2">
                        <div class="user-image">
 
                         <img  src=" {!! $foto !!}" >
 
                        </div>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-10 col-sm-10 col-xs-10">
                         <h3 class="profile-username text-info">{{ str_limit($aluno->nomealuno, 32) }}</h3>
                         <p>
                             <small><strong>SÉRIE:</strong></small>
@@ -79,7 +79,6 @@
                                 <div class="row">
                                     <div class="col-md-12 ">
                                         <!-- The time line -->
-                                        @if( count($ocorrencias) )
                                         <ul class="timeline bg-gray-light">
 
                                             @foreach($ocorrencias as $data => $o)
@@ -104,7 +103,8 @@
                                                 @foreach($o as $ocorrencia)
 
                                                     <li>
-                                                        @if($ocorrencia->tipoocorrencias[0]->tipo)
+
+                                                        @if(isset($ocorrencia->tipoocorrencias[0]))
                                                             @if($ocorrencia->tipoocorrencias[0]->tipo == 'Negativa' )
                                                                 <i class="fa fa-thumbs-o-down bg-red"></i>
                                                             @elseif($ocorrencia->tipoocorrencias[0]->tipo == 'Positiva')
@@ -112,8 +112,9 @@
                                                             @else
                                                                 <i class="fa fa-envelope bg-blue"></i>
                                                             @endif
+                                                        @else
+                                                            <i class="fa fa-envelope bg-blue"></i>
                                                         @endif
-
                                                         <div class="timeline-item">
 
 
@@ -139,15 +140,10 @@
                                                 @endforeach
 
                                             @endforeach
-                                                <li>
-                                                    <i class="glyphicon glyphicon-minus bg-gray"></i>
-                                                </li>
-
-
+                                            <li>
+                                                <i class="glyphicon glyphicon-minus bg-gray"></i>
+                                            </li>
                                         </ul>
-                                        @else
-                                            <h3>Nenhuma Ocorrência Cadastrada no Sistema</h3>
-                                        @endif
                                     </div><!-- /.col -->
                                 </div>
 
