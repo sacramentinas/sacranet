@@ -17,6 +17,7 @@ Route::post('/login',['as' => 'admin.login', 'uses' => 'AdminLoginController@log
 
 Route::get('/responsavel/login',['as' => 'responsavel.login', 'uses' => 'ResponsavelController@index']);
 Route::post('/responsavel/login',['as' => 'responsavel.login', 'uses' => 'ResponsavelController@login']);
+Route::post('/responsavel/loginsite',['as' => 'responsavel.loginsite', 'uses' => 'ResponsavelController@loginsite']);
 
 Route::get('/responsavel/',['as' => 'responsavel.perfil', 'middleware' => 'responsavel', 'uses' => 'ResponsavelController@perfil']);
 Route::get('/responsavel/sair',['as' => 'responsavel.sair', 'uses' => 'ResponsavelController@sair']);
