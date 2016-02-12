@@ -79,6 +79,7 @@
                                 <div class="row">
                                     <div class="col-md-12 ">
                                         <!-- The time line -->
+                                     @if(count($ocorrencias))
                                         <ul class="timeline bg-gray-light">
 
                                             @foreach($ocorrencias as $data => $o)
@@ -144,6 +145,9 @@
                                                 <i class="glyphicon glyphicon-minus bg-gray"></i>
                                             </li>
                                         </ul>
+                                         @else
+                                        <h4>Nenhuma Ocorrência Cadastrada no Sistema</h4>
+                                        @endif
                                     </div><!-- /.col -->
                                 </div>
 
