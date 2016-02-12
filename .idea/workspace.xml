@@ -52,8 +52,8 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.5384617" vertical-offset="153" max-vertical-offset="1666">
-              <caret line="19" column="35" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="35" />
+            <state vertical-scroll-proportion="-8.5" vertical-offset="153" max-vertical-offset="1666">
+              <caret line="22" column="57" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="57" />
               <folding>
                 <element signature="e#7#392#0#PHP" expanded="true" />
               </folding>
@@ -61,21 +61,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VerifyCsrfToken.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php">
+      <file leaf-file-name="perfil.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/responsavel/perfil.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="442">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.79640716" vertical-offset="128" max-vertical-offset="4063">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="perfil.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/responsavel/perfil.blade.php">
+      <file leaf-file-name="menu.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/template/menu.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6447106" vertical-offset="2193" max-vertical-offset="3995">
-              <caret line="148" column="84" selection-start-line="148" selection-start-column="84" selection-end-line="148" selection-end-column="84" />
+            <state vertical-scroll-proportion="-9.153846" vertical-offset="969" max-vertical-offset="1496">
+              <caret line="71" column="79" selection-start-line="71" selection-start-column="79" selection-end-line="71" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -945,14 +945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/template/menu.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4231537" vertical-offset="995" max-vertical-offset="1496">
-          <caret line="71" column="79" selection-start-line="71" selection-start-column="79" selection-end-line="71" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminLoginController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.55888224" vertical-offset="859" max-vertical-offset="1411">
@@ -1045,16 +1037,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5384617" vertical-offset="153" max-vertical-offset="1666">
-          <caret line="19" column="35" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="35" />
-          <folding>
-            <element signature="e#7#392#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="442">
@@ -1063,10 +1045,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.5" vertical-offset="153" max-vertical-offset="1666">
+          <caret line="22" column="57" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="57" />
+          <folding>
+            <element signature="e#7#392#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/template/menu.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.153846" vertical-offset="969" max-vertical-offset="1496">
+          <caret line="71" column="79" selection-start-line="71" selection-start-column="79" selection-end-line="71" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/responsavel/perfil.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6447106" vertical-offset="2193" max-vertical-offset="3995">
-          <caret line="148" column="84" selection-start-line="148" selection-start-column="84" selection-end-line="148" selection-end-column="84" />
+        <state vertical-scroll-proportion="0.79640716" vertical-offset="128" max-vertical-offset="4063">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
