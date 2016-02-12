@@ -26,7 +26,7 @@ class ResponsavelController extends Controller
     {
         Auth::aluno()->attempt([
             'matricula' => $dados->get('matricula'),
-            'password' => $dados->get('senha')
+            'password' => strtoupper($dados->get('senha'))
         ]);
 
         if(Auth::aluno()->check()){
