@@ -15,5 +15,6 @@ class VerifyCsrfToken extends BaseVerifier
         "alunos/uploadfotos",
         "responsavel/login",
         "/responsavel/",
+        "/responsavel/loginsite",
     ];
 }
