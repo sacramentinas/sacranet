@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TipoOcorrencia extends Model
 {
     protected $fillable = ['descricao','tipo'];
-
+    protected $softDelete = true;
 
     public function ocorrencias()
     {

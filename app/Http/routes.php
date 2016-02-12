@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/sair',['as' => 'admin.sair', 'uses' => 'AdminLoginController@sair']);
     Route::get('/',['as' => 'admin.index', 'uses' => 'AdminLoginController@painel']);
+    Route::get('/aniversariantes',['as' => 'aniversariantes.index', 'uses' => 'AdminLoginController@aniversariantes']);
 
     Route::get('/alunos', ['as' => 'alunos.index', 'uses' => 'AlunoController@index']);
     Route::get('/alunos/importar', ['as' => 'alunos.importar', 'uses' => 'AlunoController@importar']);
@@ -49,7 +50,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/ocorrencias/turma/{turma}/editar/{id}', ['as' => 'ocorrencias.turma.editar', 'uses' => 'OcorrenciaController@turmaupdate']);
     Route::get('/ocorrencias/', ['as' => 'ocorrencias.index', 'uses' => 'OcorrenciaController@index']);
     Route::get('/ocorrencias/dados', ['as' => 'ocorrencias.dados', 'uses' => 'OcorrenciaController@dados']);
-
+    Route::delete('/ocorrencias/{id}/excluir', ['as' => 'ocorrencias.excluir', 'uses' => 'OcorrenciaController@destroy']);
 
     Route::get('/notas', ['as' => 'notas.importar', 'uses' => 'NotaController@importar']);
     Route::post('/notas/upload', ['as' => 'notas.upload', 'uses' => 'NotaController@upload']);

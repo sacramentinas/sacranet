@@ -78,6 +78,27 @@
 
 <div class="row">
     <div class="col-md-6">
+        <div class="box box-warning">
+            <div class="box-header">
+                <i class="fa fa-graduation-cap"></i>
+                <h3 class="box-title">O Sacranet</h3>
+
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <p>O Sacranet tem como proposta educacional auxiliar coordenações, direção, professores e pais e/ou responsáveis pelos alunos no monitoramento e controle da situação escolar do aluno através da Internet.</p>
+
+                <p>O Sacra-Net funciona como uma extensão do controle disciplinar realizado em sala de aula e no Colégio, fornecendo aos responsáveis pelos alunos, um acompanhamento do dia-a-dia do aluno de uma forma rápida e a qualquer momento do dia.</p>
+
+                <h5>Recomendações</h5>
+                <li>Não forneça os seus dados de acesso ao sistema a ninguém;</li>
+                <li>Para sair do sistema clique sempre no botão SAIR no menu acima, ao lado do nome do usuário;</li>
+                <li>Cuidado ao excluir algum dado pois não será possível recuperá-lo;</li>
+                <li>As informações inseridas no sistema são de responsabilidade dos seus usuários, neste caso, você.</li>
+            </div><!-- /.box-body -->
+
+        </div>
+    </div>
+    <div class="col-md-6">
         <div class="box box-danger">
             <div class="box-header">
                 <i class="fa fa-calendar-o"></i>
@@ -85,40 +106,38 @@
 
             </div><!-- /.box-header -->
             <div class="box-body no-padding">
-                <table class="table table-striped table-bordered ">
-                    <tr>
-                        <td> <img class="direct-chat-img" src="http://lorempixel.com/output/people-q-c-640-480-4.jpg" alt="message user image"></td>
-                        <td><h5>LIVIA MIRANDA BERLINK SANTOS</h5></td>
-                        <td> <span class="label label-danger">1ª Série A - Ensino Médio</span></td>
+                @if( $aniversariantes->count() )
+                    <table class="table table-striped table-bordered ">
 
-                    </tr>
-                    <tr>
-                        <td> <img class="direct-chat-img" src="http://lorempixel.com/output/people-q-c-640-480-4.jpg" alt="message user image"></td>
-                        <td><h5>LIVIA MIRANDA BERLINK SANTOS</h5></td>
-                        <td> <span class="label label-danger">1ª Série A - Ensino Médio</span></td>
+                        @foreach($aniversariantes as $aluno)
+                            <?php
 
-                    </tr>
-                    <tr>
-                        <td> <img class="direct-chat-img" src="http://lorempixel.com/output/people-q-c-640-480-4.jpg" alt="message user image"></td>
-                        <td><h5>LIVIA MIRANDA BERLINK SANTOS</h5></td>
-                        <td> <span class="label label-danger">1ª Série A - Ensino Médio</span></td>
+                            if( file_exists( public_path().'/fotoaluno/'.intval($aluno->matricula).'.jpg')){
+                                $foto = asset('fotoaluno/'.intval($aluno->matricula).'.jpg');
 
-                    </tr>
-                    <tr>
-                        <td> <img class="direct-chat-img" src="http://lorempixel.com/output/people-q-c-640-480-4.jpg" alt="message user image"></td>
-                        <td><h5>LIVIA MIRANDA BERLINK SANTOS</h5></td>
-                        <td> <span class="label label-danger">1ª Série A - Ensino Médio</span></td>
+                            }else{
+                                $foto = asset('fotoaluno/foto-indisponivel.png');
 
-                    </tr>
+                            }
+
+                            ?>
+                            <tr>
+                                <td> <img class="direct-chat-img" src="{!! $foto !!}"></td>
+                                <td><h5>{{ $aluno->nomealuno }}</h5></td>
+                                <td> <span class="label label-danger"> {!! $aluno->turma->serie->nome . " - " . $aluno->turma->letra  !!}</span></td>
+
+                            </tr>
+                        @endforeach
 
 
-                </table>
+
+                    </table>
+                @else
+                    <h4>Nenhum aniversário na data de Hoje</h4>
+                @endif
             </div><!-- /.box-body -->
 
         </div>
-    </div>
-    <div class="col-md-6">
-
     </div>
 </div>
 

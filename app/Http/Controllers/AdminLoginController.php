@@ -4,10 +4,13 @@ namespace Sacranet\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+use Sacranet\Aluno;
 use Sacranet\Http\Requests;
 use Sacranet\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Sacranet\Turma;
+use Carbon\Carbon;
 
 class AdminLoginController extends Controller
 {
@@ -42,9 +45,12 @@ class AdminLoginController extends Controller
         $turmas = Auth::admin()->user()->turmas;
 
 
+        $aniversariantes = Aluno::whereDay('datanascimento', '=',date('d'))->whereMonth('datanascimento', '=',date('m'))->get();
 
-        return view('painel.inicial',compact('turmas'));
+        return view('painel.inicial',compact('turmas','aniversariantes'));
     }
+
+
 
 
     public function sair(){
@@ -52,5 +58,20 @@ class AdminLoginController extends Controller
         Auth::admin()->logout();
         return redirect()->route('admin.login');
     }
+
+
+    public function aniversariantes(Request $request)
+    {
+        $mes = $request->get('m');
+        $aniversariantes = [];
+        if($mes){
+            $aniversariantes = Aluno::whereMonth('datanascimento', '=',$mes)->orderby('nomealuno')->get()
+                ->sortBy(function($date) { return Carbon::parse($date->datanascimento)->format('d');  })
+                ->groupBy(function($date) { return Carbon::parse($date->datanascimento)->format('d');  });
+
+        }
+        return view('painel.aniversariantes',compact('aniversariantes'));
+    }
+
 
 }

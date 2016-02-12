@@ -22,6 +22,10 @@ class Usuario extends Model implements AuthenticatableContract
         return $this->belongsToMany(Turma::class,'usuario_turmas');
     }
 
+    public function ocorrencias()
+    {
+        return $this->hasMany(Ocorrencia::class);
+    }
     public function setSenhaAttribute($value)
     {
 

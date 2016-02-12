@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ocorrencia extends Model
 {
-    protected $fillable = ['disciplina_id','turma_id','unidade','descricao','data'];
+    protected $fillable = ['disciplina_id','turma_id','unidade','descricao','data','usuario_id'];
     protected $dates = ['data'];
+    protected $softDelete = true;
 
     public function getDataAttribute($data)
     {
@@ -30,6 +31,11 @@ class Ocorrencia extends Model
     public function turma()
     {
         return $this->belongsTo('Sacranet\Turma');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo('Sacranet\Usuario');
     }
 
     public function disciplina()

@@ -16,6 +16,7 @@ class CreateTipoOcorrenciasTable extends Migration
             $table->increments('id');
             $table->string('descricao');
             $table->enum('tipo',['Positiva','Negativa','Mensagens']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

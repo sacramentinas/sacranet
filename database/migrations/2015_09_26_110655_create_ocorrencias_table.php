@@ -19,7 +19,10 @@ class CreateOcorrenciasTable extends Migration
             $table->integer('unidade');
             $table->text('descricao');
             $table->timestamp('data');
+            $table->integer('usuario_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('set null');
         });
     }
 

@@ -103,11 +103,13 @@ class AlunoController extends Controller
 
       foreach($ocorrencias as $ocorrencia) {
           foreach ($ocorrencia as $o) {
-              if ($o->tipoocorrencias[0]->tipo == 'Negativa') {
-                  $quantidade['negativa']++;
-              } else {
-                  $quantidade['positiva']++;
-              }
+            if(isset($o->tipoocorrencias[0])) {
+                if ($o->tipoocorrencias[0]->tipo == 'Negativa') {
+                    $quantidade['negativa']++;
+                } else {
+                    $quantidade['positiva']++;
+                }
+            }
           }
       }
 

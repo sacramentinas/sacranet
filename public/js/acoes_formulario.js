@@ -43,10 +43,12 @@
                 if(metodo != 'PUT'){
                     $('#form').trigger("reset");
 
-
+                    if ( $("#turmas").length ){
                         $("#turmas").select2('val', '');
+                    }
+                    if($("#alunos").length ) {
                         $('#alunos').multiSelect('refresh');
-
+                    }
 
                 }
                 $('#salvar').html('<i class="fa fa-save"></i> Salvar').removeAttr('disabled');

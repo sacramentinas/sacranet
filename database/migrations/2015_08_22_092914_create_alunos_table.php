@@ -35,6 +35,7 @@ class CreateAlunosTable extends Migration
             $table->string('emailmae',150)->nullable();
             $table->string('emailpai',150)->nullable();
             $table->string('emailcontratante',150)->nullable();
+            $table->string('remember_token',100)->nullable();
             $table->timestamps();
         });
     }

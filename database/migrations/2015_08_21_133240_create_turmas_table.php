@@ -21,7 +21,7 @@ class CreateTurmasTable extends Migration
         });
 
         Schema::table('turmas', function(Blueprint $table){
-            $table->foreign('serie_id')->references('id')->on('series');
+            $table->foreign('serie_id')->references('id')->on('series')->ondelete('cascade');
         });
 
     }

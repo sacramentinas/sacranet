@@ -30,7 +30,8 @@ class ResponsavelController extends Controller
         ]);
 
         if(Auth::aluno()->check()){
-            return redirect()->route('responsavel.perfil');
+           // return redirect()->route('responsavel.perfil');
+            return redirect()->to('http://www.colegiosacramentinas.com.br/sacranet');
         }else{
             return back()->withInput()->with('erro','Matrícula e/ou Senha Inválidos');
         }

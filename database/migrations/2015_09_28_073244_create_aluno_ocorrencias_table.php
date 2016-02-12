@@ -23,6 +23,7 @@ class CreateAlunoOcorrenciasTable extends Migration
 
 
 
+
         });
     }
 

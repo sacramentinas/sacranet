@@ -16,10 +16,13 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UserTableSeeder::class);
 
-        Model::reguard();
-    	$this->call('SeriesTableSeeder');
-		$this->call('TurmasTableSeeder');
-		$this->call('TipoOcorrenciasTableSeeder');
+    	$this->call('TipoOcorrenciasTableSeeder');
 		$this->call('DisciplinasTableSeeder');
+        $this->call('SeriesTableSeeder');
+		$this->call('TurmasTableSeeder');
+        $this->call('AlunosTableSeeder');
+       	$this->call('UsuariosTableSeeder');
+		$this->call('UsuarioTurmasTableSeeder');
+        Model::reguard();
 	}
 }

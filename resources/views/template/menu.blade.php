@@ -6,7 +6,18 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header"><i class="fa fa-th"></i>  MENU</li>
-
+            <li>
+                <a href="{{ route('admin.index') }}">
+                    <i class="fa fa-users"></i> <span>Painel de Controle</span>
+                </a>
+            </li>
+            @if(Auth::admin()->user()->tipo == 'mestre' )
+                <li>
+                    <a href="{{ route('alunos.index') }}">
+                        <i class="fa fa-graduation-cap "></i> <span>Alunos</span>
+                    </a>
+                </li>
+            @endif
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa fa-edit"></i>
@@ -14,13 +25,12 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    @if(Auth::admin()->user()->tipo == 'admin' )
                     <li><a href="{!! route('ocorrencias.index') !!}"><i class="fa fa-circle-o"></i>Gerenciar Ocorrências</a></li>
-                    @endif
                     <li><a href="{!! route('alunos.index') !!}"><i class="fa fa-circle-o"></i>Adicionar Ocorrências</a></li>
 
                 </ul>
             </li>
+
             @if(Auth::admin()->user()->tipo == 'admin' )
             <li class="treeview">
                 <a href="#">
@@ -58,7 +68,7 @@
            @endif
 
             <li>
-                <a href="#">
+                <a href="{!! route('aniversariantes.index') !!}">
                     <i class="fa fa-calendar"></i> <span>Aniversariantes</span>
                    <!-- <small class="label pull-right bg-red">3</small>-->
                 </a>

@@ -17,6 +17,7 @@ class CreateOcorrenciaTipoOcorrenciasTable extends Migration
             $table->unsignedInteger('ocorrencia_id')->nullable();
             $table->unsignedInteger('tipo_ocorrencia_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('tipo_ocorrencia_id')->references('id')->on('tipo_ocorrencias')->onDelete('set null');
             $table->foreign('ocorrencia_id')->references('id')->on('ocorrencias')->onDelete('cascade');
         });

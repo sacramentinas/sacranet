@@ -73,8 +73,10 @@
 
                     <a href="{!! route('alunos.ocorrencia',[$aluno->id]) !!}" class="btn btn-primary btn-block"> <i class="fa fa-plus">
                         </i> Criar Ocorrencia</a>
+                    @if(Auth::admin()->user()->tipo == 'admin' )
                     <a href="{!! route('alunos.editar',[$aluno->id]) !!}" class="btn btn-warning btn-block"> <i class="fa fa-pencil">
                         </i>  Editar</a>
+                    @endif
 
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
@@ -95,7 +97,6 @@
                             <li class="active"><a href="#dados">Dados</a></li>
                             <li><a href="#boletim">Boletim</a></li>
                             <li><a href="#ocorrencias">Ocorrências</a></li>
-                            <li><a href="#settings">Observações</a></li>
                             <li><a href="#senha">Senha</a></li>
                         </ul>
 
@@ -272,7 +273,7 @@
                                           @foreach($o as $ocorrencia)
 
                                             <li>
-                                                @if($ocorrencia->tipoocorrencias[0]->tipo)
+                                                @if(isset($ocorrencia->tipoocorrencias[0]))
                                                     @if($ocorrencia->tipoocorrencias[0]->tipo == 'Negativa' )
                                                         <i class="fa fa-thumbs-o-down bg-red"></i>
                                                     @elseif($ocorrencia->tipoocorrencias[0]->tipo == 'Positiva')
@@ -280,6 +281,8 @@
                                                     @else
                                                         <i class="fa fa-envelope bg-blue"></i>
                                                     @endif
+                                                @else
+                                                        <i class="fa fa-envelope bg-blue"></i>
                                                 @endif
 
                                                 <div class="timeline-item">
@@ -318,7 +321,6 @@
 
 
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="settings">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div>
                             <div role="tabpanel" class="tab-pane" id="senha">
                                 <ul class="list-group">
                                     <li class="list-group-item">

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ocorrencia_tipo_ocorrencia extends Model
 {
+    protected $softDelete = true;
+
     public function tipo()
     {
         return $this->hasOne(TipoOcorrencia::class);

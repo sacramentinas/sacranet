@@ -118,9 +118,10 @@
                         <a href="{!! route('alunos.perfil',[$aluno->id]) !!}" class="btn btn-info "> <i class="fa fa-eye">
                             </i> <small>Visualizar</small></a>
 
-
+                        @if(Auth::admin()->user()->tipo == 'admin' )
                         <a href="{!! route('alunos.editar',[$aluno->id]) !!}" class="btn btn-warning"> <i class="fa fa-pencil">
                             </i>  <small>Editar</small></a>
+                        @endif
                     </div>
 
 
