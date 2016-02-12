@@ -14,7 +14,7 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         "alunos/uploadfotos",
         "responsavel/login",
-        "/responsavel/",
-        "/responsavel/loginsite",
+        "responsavel",
+        "responsavel/loginsite",
     ];
 }
