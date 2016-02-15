@@ -43,6 +43,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/alunos/{id}/perfil', ['as' => 'alunos.perfil', 'uses' => 'AlunoController@perfil']);
     Route::get('/alunos/{id}/ocorrencia', ['as' => 'alunos.ocorrencia', 'uses' => 'AlunoController@ocorrencia']);
 
+    Route::get('/alunos/{turma}/listar', ['as' => 'aluno.listagem', 'uses' => 'AlunoController@turmalistagem']);
+
 
     Route::get('/ocorrencias/turma/{turma}', ['as' => 'ocorrencias.turma', 'uses' => 'OcorrenciaController@turma']);
     Route::post('/ocorrencias/turma/{turma}', ['as' => 'ocorrencias.turma.salvar', 'uses' => 'OcorrenciaController@turmaSalvar']);

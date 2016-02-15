@@ -58,12 +58,19 @@ class AlunoController extends Controller
 
 
         if($busca || $turma) {
-           return view('aluno.busca',compact('alunos','turmas','btnOcorrencias'));
+            return view('aluno.busca',compact('alunos','turmas','btnOcorrencias'));
         }else{
             return view('aluno.index',compact('alunos','turmas','btnOcorrencias'));
         }
     }
 
+    public function turmalistagem($turma){
+
+        $alunos = Aluno::where('turma_id',$turma)->orderBy('numero')->get();
+
+        return view('aluno.listagem',compact('alunos'));
+
+    }
 
 
     public function create()

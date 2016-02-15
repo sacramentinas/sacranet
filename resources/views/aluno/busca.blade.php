@@ -9,6 +9,7 @@
             <span class="badge bg-teal">{!! $alunos->total() !!} alunos cadastrados</span>
             @if($btnOcorrencias)
             <a href="{!! route('ocorrencias.turma',[Request::input('t')]) !!}" class="btn btn-primary"><i class="fa fa-plus"></i> Adicionar Ocorrências</a>
+            <a href="{!! route('aluno.listagem',[Request::input('t')]) !!}" class="btn btn-success"><i class="fa fa-list"></i> Listar Alunos</a>
             @endif
         </h1>
 
