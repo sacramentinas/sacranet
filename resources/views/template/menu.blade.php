@@ -54,6 +54,11 @@
                     <i class="fa fa-users"></i> <span>Turmas</span>
                 </a>
             </li>
+                <li>
+                    <a href="{{ route('disciplinas.index') }}">
+                        <i class="fa fa-users"></i> <span>Disciplinas</span>
+                    </a>
+                </li>
              <li class="treeview">
                     <a href="#">
                         <i class="fa fa-graduation-cap  "></i> <span>Usuários</span>

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Sacranet\Aluno_ocorrencia;
 use Sacranet\Http\Requests;
 use Sacranet\Aluno;
 use Sacranet\Disciplina;
@@ -285,6 +286,7 @@ class AlunoController extends Controller
                 $alunoc = Aluno::create($aluno);
                 $alunoc->turma()->associate($turma)->save();
                 Nota::regenerarNotas($alunoc->matricula,$alunoc->id);
+                Aluno_ocorrencia::regenerarOcorrencias($alunoc->matricula,$alunoc->id);
                 $cont++;
 
             }

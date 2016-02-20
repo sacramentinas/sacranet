@@ -28,6 +28,7 @@ class Ocorrencia extends Model
         }
     }
 
+
     public function turma()
     {
         return $this->belongsTo('Sacranet\Turma');
