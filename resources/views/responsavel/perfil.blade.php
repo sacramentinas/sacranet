@@ -223,6 +223,7 @@
 
 @section('script')
     <script>
+        document.domain = "colegiosacramentinas.com.br";
         $('#myTabs a').click(function (e) {
             e.preventDefault()
             $(this).tab('show')

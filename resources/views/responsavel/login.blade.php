@@ -70,3 +70,11 @@
     <!-- /.login-box -->
 
 @endsection
+
+@section('script')
+    <script>
+        document.domain = "colegiosacramentinas.com.br";
+        
+    </script>
+
+@endsection

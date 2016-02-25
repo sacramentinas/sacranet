@@ -31,7 +31,7 @@ class AuthResponsavel
                 return redirect()->guest('auth/login');
             }
         }*/
-        
+
 
         if(Auth::aluno()->guest())
         {
