@@ -59,6 +59,11 @@
                         <i class="fa fa-users"></i> <span>Disciplinas</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('tipos.index') }}">
+                        <i class="fa fa-users"></i> <span>Tipo de Ocorrência</span>
+                    </a>
+                </li>
              <li class="treeview">
                     <a href="#">
                         <i class="fa fa-graduation-cap  "></i> <span>Usuários</span>

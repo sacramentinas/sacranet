@@ -64,6 +64,7 @@
                       lengthChange: false,
                       pageLength: 5,
                       stateSave: true,
+                      bFilter: false,
                   'fnDrawCallback': function (oSettings) {
                      /* $('.add').each(function () {
                           $(this).html(' <a href="{{ route('turmas.cadastrar') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Cadastrar</a>');
@@ -75,7 +76,7 @@
                     columns: [
                     { data: 'data', name: 'data' },
                     { data: 'unidade', name: 'unidade' },
-                    { data: 'turma', name: 'turma' },
+                    { data: 'turma', name: 'turmas.nome' },
                     { data: 'disciplina', name: 'disciplina' },
                     { width:'10%', data: 'acoes', name: 'acoes', orderable: false, searchable: false},
 
