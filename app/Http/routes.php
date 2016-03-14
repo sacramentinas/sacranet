@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/ocorrencias/', ['as' => 'ocorrencias.index', 'uses' => 'OcorrenciaController@index']);
     Route::get('/ocorrencias/dados', ['as' => 'ocorrencias.dados', 'uses' => 'OcorrenciaController@dados']);
     Route::delete('/ocorrencias/{id}/excluir', ['as' => 'ocorrencias.excluir', 'uses' => 'OcorrenciaController@destroy']);
+    Route::delete('/ocorrencias/{id}/excluir/{aluno}', ['as' => 'ocorrencias.excluir.aluno', 'uses' => 'OcorrenciaController@excluirAluno']);
 
     Route::get('/notas', ['as' => 'notas.importar', 'uses' => 'NotaController@importar']);
     Route::post('/notas/upload', ['as' => 'notas.upload', 'uses' => 'NotaController@upload']);

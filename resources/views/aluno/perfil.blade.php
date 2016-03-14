@@ -94,15 +94,15 @@
              <div class="nav-tabs-custom">
 
                         <ul class="nav nav-tabs responsive no-print" id="myTabs">
-                            <li class="active"><a href="#dados">Dados</a></li>
-                            <li><a href="#boletim">Boletim</a></li>
-                            <li><a href="#ocorrencias">Ocorrências</a></li>
-                            <li><a href="#senha">Senha</a></li>
+                            <li  class="active"><a aria-controls="dados" href="#dados">Dados</a></li>
+                            <li><a aria-controls="boletim" href="#boletim">Boletim</a></li>
+                            <li><a aria-controls="ocorrencias" href="#ocorrencias">Ocorrências</a></li>
+                            <li><a aria-controls="senha" href="#senha">Senha</a></li>
                         </ul>
 
 
                         <div class="tab-content ">
-                            <div role="tabpanel" class="tab-pane active" id="dados">
+                            <div role="tabpanel" class="tab-pane active" id="dados" aria-live="dados">
 
 
                                 <table class="table table-bordered table-striped">
@@ -205,7 +205,7 @@
 
                             </div>
 
-                            <div role="tabpanel" class="tab-pane" id="boletim">
+                            <div role="tabpanel" class="tab-pane" id="boletim" aria-live="boletim">
                                 <table class="table table-bordered table-striped table-condensed">
                                     <thead>
                                     <tr>
@@ -245,7 +245,7 @@
                                 </table>
 
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="ocorrencias">
+                            <div role="tabpanel" class="tab-pane" id="ocorrencias" aria-live="ocorrencias">
                                 <div class="row">
                                     <div class="col-md-12 ">
                                         <!-- The time line -->
@@ -272,7 +272,8 @@
 
                                           @foreach($o as $ocorrencia)
 
-                                            <li>
+                                            <li id="">
+
                                                 @if(isset($ocorrencia->tipoocorrencias[0]))
                                                     @if($ocorrencia->tipoocorrencias[0]->tipo == 'Negativa' )
                                                         <i class="fa fa-thumbs-o-down bg-red"></i>
@@ -281,14 +282,21 @@
                                                     @else
                                                         <i class="fa fa-envelope bg-blue"></i>
                                                     @endif
-                                                @else
-                                                        <i class="fa fa-envelope bg-blue"></i>
-                                                @endif
+                                                    @else
+                                                            <i class="fa fa-envelope bg-blue"></i>
+                                                    @endif
 
                                                 <div class="timeline-item">
 
 
-                                                  <h3 class="timeline-header"> <span class="text-blue">{{$ocorrencia->disciplina->descricao }}</span> <span class="badge bg-teal"> {{ $ocorrencia->unidadeConverte() }}</span></h3>
+                                                  <h3 class="timeline-header"> <span class="text-blue">{{$ocorrencia->disciplina->descricao }}</span> <span class="badge bg-teal"> {{ $ocorrencia->unidadeConverte() }}</span>
+                                                      <div class="btn-group pull-right">
+                                                      <a href="{!! route('ocorrencias.turma.editar',[$aluno->turma->id,$ocorrencia->id]) !!}" class="btn btn-info btn-xs"> <i class="fa fa-edit"></i> Editar</a>
+                                                      <a href="{!! route('ocorrencias.excluir.aluno',[$ocorrencia->id,$aluno->id]) !!}" class="btn btn-danger btn-xs" id="excluir"> <i class="fa fa-remove"></i> Excluir Aluno da Ocorrência</a>
+
+                                                      </div>
+                                                  </h3>
+
                                                     <div class="timeline-body">
                                                       @if(count($ocorrencia->tipoocorrencias))
                                                        <h4 class="text-teal">Ocorrências:</h4>
@@ -302,9 +310,12 @@
                                                       <h4 class="text-aqua">Descrição:</h4>
                                                           {{ $ocorrencia->descricao }}
                                                       @endif
+
+
                                                     </div>
 
                                                 </div>
+
                                             </li>
                                              <!-- END timeline item -->
                                            @endforeach
@@ -360,10 +371,75 @@
 
 @section('script')
     <script>
-        $('#myTabs a').click(function (e) {
+       /* $('#myTabs a').click(function (e) {
             e.preventDefault()
             $(this).tab('show')
-        })
+
+        })*/
+       var hash = window.location.hash;
+       hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+
+
+
+       $('#myTabs a').click(function (e) {
+           e.preventDefault()
+           $(this).tab('show');
+           window.location.hash = this.hash;
+           $('html,body').scrollTop(0);
+
+       });
+
+
+       $(document).on("click","#excluir",function(e) {
+           e.preventDefault();
+           var url = $(this).attr('href');
+           var row = $(this).parent().parent().parent().parent();
+
+
+
+           swal({
+                       title: "Você tem certeza?",
+                       text: "Este aluno será excluído da Ocorrência e em caso de ser o único, a ocorrência será excluída",
+                       type: "warning",
+                       showCancelButton: true,
+                       confirmButtonClass: "btn-danger",
+                       confirmButtonText: "Excluir",
+                       closeOnConfirm: true,
+                       closeOnCancel:true,
+                   },
+                   function(confirmed){
+                       if(confirmed){
+                           $.ajax({
+                               type     :   'DELETE',
+                               url      :   url,
+                               dataType :   'json',
+                               encode   :   true,
+                               success: function(msg){
+
+                                   $('.sucesso').html("<i class='icon fa fa-check'></i> "+msg.sucesso)
+                                   $('.alert-success').fadeIn('fast');
+                                   $('#mensagem').animate({top:"0"}, 500);
+
+                                   setTimeout(function(){
+                                       $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);
+                                       $(".alert-success").fadeOut(3000);
+                                   },4000);
+
+                                   row.hide();
+                               },
+                               error: function(msg){
+                                   console.log(msg);
+                               }
+
+                           });
+
+
+                       }
+                   });
+
+       });
+
     </script>
 
 @endsection

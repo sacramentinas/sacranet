@@ -3,9 +3,15 @@
 @section('breadcrumb')
     <section class="content-header">
         <h1>
+
             <i class="fa fa-users"></i>
              Ocorrências em Massa
+            @if($url)
+                <a href="{!! $url !!}#ocorrencias"  class="btn btn-default">&larr; Voltar Para o Perfil</a>
+            @else
             <a href="{!! route('ocorrencias.index') !!}"  class="btn btn-default">&larr; Voltar</a>
+            @endif
+
         </h1>
 
         <ol class="breadcrumb">

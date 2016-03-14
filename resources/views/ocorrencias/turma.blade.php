@@ -3,6 +3,7 @@
 @section('breadcrumb')
     <section class="content-header">
         <h1>
+            {!! $_SERVER['HTTP_REFERER'] !!}
             <i class="fa fa-users"></i>
              Ocorrências em Massa
             <a href="{!! Session::get('url',route('alunos.index')) !!}"  class="btn btn-default">&larr; Voltar</a>

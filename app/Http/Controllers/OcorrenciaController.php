@@ -74,6 +74,9 @@ class OcorrenciaController extends Controller
         $tipoOcorrencias = TipoOcorrencia::all();
 
 
+
+
+
         return view('ocorrencias.turma',compact('alunos','tipoOcorrencias','disciplinas'));
 
     }
@@ -89,7 +92,16 @@ class OcorrenciaController extends Controller
         $tipoOcorrencias = TipoOcorrencia::all();
         $ocorrencia = Ocorrencia::find($id);
 
-        return view('ocorrencias.turmaeditar',compact('ocorrencia','alunos','tipoOcorrencias','disciplinas'));
+        $url = $_SERVER['HTTP_REFERER'];
+
+        $pedaco = explode('/',$url);
+        $last = array_pop($pedaco);
+
+        if($last != 'perfil'){
+            $url = "";
+        }
+
+        return view('ocorrencias.turmaeditar',compact('ocorrencia','alunos','tipoOcorrencias','disciplinas','url'));
     }
 
     public function turmaupdate(OcorrenciaRequest $request,$turma,$id)
@@ -189,5 +201,21 @@ class OcorrenciaController extends Controller
 
        $ocorrencia->delete();
        return response()->json(['sucesso' => 'Ocorrência Excluída com Sucesso!']);
+    }
+
+    public function excluirAluno($ocorrencia,$aluno){
+        $ocorrencia =  Ocorrencia::find($ocorrencia);
+
+       if(count($ocorrencia->alunos) == 1 ){
+            $ocorrencia->tipoocorrencias()->sync([]);
+            $ocorrencia->alunos()->sync([]);
+            $ocorrencia->delete();
+            return response()->json(['sucesso' => 'Ocorrência Excluída com Sucesso!']);
+        }else{
+            $ocorrencia->alunos()->detach($aluno);
+           return response()->json(['sucesso' => 'Aluno foi Excluído da Ocorrência com Sucesso!']);
+        }
+
+
     }
 }

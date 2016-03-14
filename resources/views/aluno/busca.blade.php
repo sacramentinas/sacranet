@@ -158,6 +158,10 @@
                     form.submit();
 
                 });
+                $("#campot").change(function(e){
+                    e.preventDefault();
+                    form.submit();
+                });
             });
 
         </script>
