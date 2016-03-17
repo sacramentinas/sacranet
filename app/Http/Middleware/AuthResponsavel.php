@@ -35,7 +35,7 @@ class AuthResponsavel
 
         if(Auth::aluno()->guest())
         {
-            return redirect()->guest('responsavel/login')->with('erro','É necessário estar logado!');
+            return redirect()->guest('responsavel/login')->with('erro','Matrícula e/ou Senha Inválidos');
         }
 
         return $next($request);
