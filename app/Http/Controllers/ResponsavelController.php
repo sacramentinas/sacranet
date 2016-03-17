@@ -33,7 +33,7 @@ class ResponsavelController extends Controller
             return redirect()->route('responsavel.perfil');
 
         }else{
-            return back()->withInput()->with('erro','Matrícula e/ou Senha Inválidos');
+            return redirect()->route('responsavel.login')->withInput()->with('erro','Matrícula e/ou Senha Inválidos');
         }
 
     }
