@@ -33,7 +33,7 @@ class ResponsavelController extends Controller
             return redirect()->route('responsavel.perfil');
 
         }else{
-            return redirect()->route('responsavel.login')->withInput()->with('erro','Matrícula e/ou Senha Inválidos');
+            return back()->withInput()->with('erro','Matrícula e/ou Senha Inválidos');
         }
 
     }
@@ -48,7 +48,7 @@ class ResponsavelController extends Controller
             // return redirect()->route('responsavel.perfil');
             return redirect()->to('http://www.colegiosacramentinas.com.br/sacranet');
         }else{
-            return back()->withInput()->with('erro','Matrícula e/ou Senha Inválidos');
+            return redirect()->to('http://www.colegiosacramentinas.com.br/sacranet')->with('erro','Matrícula e/ou Senha Inválidos');
         }
 
     }
