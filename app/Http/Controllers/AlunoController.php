@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Sacranet\Aluno_ocorrencia;
-use Sacranet\Boleto;
+//use Sacranet\Boleto;
 use Sacranet\Http\Requests;
 use Sacranet\Aluno;
 use Sacranet\Disciplina;
@@ -123,10 +123,10 @@ class AlunoController extends Controller
        $ocorrencias = $aluno->ocorrencias->sortByDesc('data')->groupBy('data');
 
 
-        $boletos = Boleto::where('aluno_id',$id)->first();
+      /*  $boletos = Boleto::where('aluno_id',$id)->first();
         $data = explode("/",$boletos->vencimento);
         $mes = $data[1];
-
+      */
 
 
         $quantidade['negativa'] = 0;
@@ -145,7 +145,7 @@ class AlunoController extends Controller
       }
 
 
-        return view('aluno.perfil',compact('aluno','ocorrencias','quantidade','boletos','mes'));
+        return view('aluno.perfil',compact('aluno','ocorrencias','quantidade','mes'));
 
     }
 
