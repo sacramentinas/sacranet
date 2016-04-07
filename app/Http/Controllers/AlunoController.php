@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Sacranet\Aluno_ocorrencia;
+use Sacranet\Boleto;
 use Sacranet\Http\Requests;
 use Sacranet\Aluno;
 use Sacranet\Disciplina;
@@ -17,6 +18,7 @@ use Sacranet\Turma;
 use Sacranet\Http\Requests\AlunoRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+
 
 class AlunoController extends Controller
 {
@@ -39,21 +41,28 @@ class AlunoController extends Controller
         }
 
 
-
+        //DB::enableQueryLog();
         if($busca && $turma) {
-            $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->where('turma_id',$turma)->wherein('turma_id',$turmas_id)->orderBy('id')->paginate(12);
+            $alunos = Aluno::where(function($query) use ($busca){
+                $query->where('nomealuno','LIKE',"%$busca%")
+                    ->orwhere('matricula',$busca);
+            })->where('turma_id',$turma)->wherein('turma_id',$turmas_id)->orderBy('id')->paginate(12);
         }
         elseif($turma){
             $alunos = Aluno::where('turma_id',$turma)->wherein('turma_id',$turmas_id)->orderBy('numero')->paginate(70);
         }
         elseif($busca){
-            $alunos = Aluno::where('nomealuno','LIKE',"%$busca%")->wherein('turma_id',$turmas_id)->orderBy('id')->paginate(12);
+            $alunos = Aluno::where(function($query) use ($busca){
+                $query->where('nomealuno','LIKE',"%$busca%")
+                    ->orwhere('matricula',$busca);
+            })->wherein('turma_id',$turmas_id)->orderBy('id')->paginate(12);
 
         }else{
           $alunos = Aluno::orderBy('nomealuno')->wherein('turma_id',$turmas_id)->orderBy('id','desc')->paginate(12);
 
         }
-
+        //DB::enableQueryLog();
+      //  dd(DB::getQueryLog());
 
         $btnOcorrencias = ($turma) ? true : false;
 
@@ -72,7 +81,13 @@ class AlunoController extends Controller
         return view('aluno.listagem',compact('alunos'));
 
     }
+    public function carteirinha($turma){
 
+        $alunos = Aluno::where('turma_id',$turma)->orderBy('numero')->get();
+
+        return view('aluno.carteirinha',compact('alunos'));
+
+    }
 
     public function create()
     {
@@ -105,7 +120,15 @@ class AlunoController extends Controller
     public function perfil($id)
     {
         $aluno = Aluno::find($id);
-        $ocorrencias = $aluno->ocorrencias->groupBy('data')->sortByDesc('data');
+       $ocorrencias = $aluno->ocorrencias->sortByDesc('data')->groupBy('data');
+
+
+        $boletos = Boleto::where('aluno_id',$id)->first();
+        $data = explode("/",$boletos->vencimento);
+        $mes = $data[1];
+
+
+
         $quantidade['negativa'] = 0;
         $quantidade['positiva'] = 0;
 
@@ -122,7 +145,7 @@ class AlunoController extends Controller
       }
 
 
-        return view('aluno.perfil',compact('aluno','ocorrencias','quantidade'));
+        return view('aluno.perfil',compact('aluno','ocorrencias','quantidade','boletos','mes'));
 
     }
 
