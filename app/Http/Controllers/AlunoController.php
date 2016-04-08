@@ -289,23 +289,26 @@ class AlunoController extends Controller
             $arquivo->move('upload','alunos.txt');
 
             $arraydados = Aluno::geradados('upload/alunos.txt');
+
+
             \File::delete('upload/alunos.txt');
 
-            Turma::getTurma();
+
+           Turma::getTurma();
+
            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
-           // DB::table('notas')->delete();
-            DB::table('alunos')->delete();
-            DB::statement('ALTER TABLE alunos AUTO_INCREMENT = 0 ');
-
+           DB::table('alunos')->delete();
+           DB::statement('ALTER TABLE alunos AUTO_INCREMENT = 0 ');
            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
             $cont = 0;
 
             foreach($arraydados as $aluno){
-               //print_r($aluno);
-                $turma = Turma::checkTurma( $aluno['turma'],$aluno['codcurso']);
+
+                $turma = Turma::checkTurma($aluno['turma'],$aluno['codcurso']);
                 unset($aluno['turma']);
                 unset($aluno['codcurso']);
+                if($turma == false){ $turma = null; }
                 $alunoc = Aluno::create($aluno);
                 $alunoc->turma()->associate($turma)->save();
                 Nota::regenerarNotas($alunoc->matricula,$alunoc->id);

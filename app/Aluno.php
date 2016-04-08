@@ -15,7 +15,7 @@ class Aluno extends Model implements AuthenticatableContract
 
     protected $fillable = ['matricula','nomealuno','datanascimento','sexo','turma_id','numero','endereco',
                            'bairro','cep','municipio','nomemae','nomepai','senha','senhatexto','telefone','telefonemae','telefonepai',
-                           'emailmae','emailpai','emailcontratante' ];
+                           'emailmae','emailpai','emailcontratante','celular','telefonecomercial' ];
 
     protected $dates = ['datanascimento'];
 
@@ -36,6 +36,12 @@ class Aluno extends Model implements AuthenticatableContract
     {
         return $this->belongsTo('Sacranet\Turma');
     }
+
+    public function boleto()
+    {
+        return $this->hasOne(Boleto::class);
+    }
+
 
     public function notas()
     {
@@ -127,7 +133,11 @@ class Aluno extends Model implements AuthenticatableContract
                  $dados['telefonepai'] = trim(substr($a,$ini += strlen($quant[18]) ,strlen($quant[19])));
                  $dados['emailmae'] = trim(substr($a,$ini += strlen($quant[19]) ,strlen($quant[20])));
                  $dados['emailpai'] = trim(substr($a,$ini += strlen($quant[20]) ,strlen($quant[21])));
-                 $dados['emailcontratante'] = trim(substr($a,$ini += strlen($quant[21])));
+                 $dados['emailcontratante'] = trim(substr($a,$ini += strlen($quant[21]),strlen($quant[22])));
+                 $dados['celular'] = trim(substr($a,$ini += strlen($quant[22]),strlen($quant[23])));
+                 $dados['telefonecomercial'] = trim(substr($a,$ini += strlen($quant[23])));
+
+
 
 
                  array_push($arraydados,$dados);

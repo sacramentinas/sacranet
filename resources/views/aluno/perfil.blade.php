@@ -133,6 +133,10 @@
                                         <p>
                                             <small><strong>Telefone:</strong></small>
                                             {{ $aluno->telefone }}
+                                            {{ $aluno->telefonecomercial }}
+                                            <small><strong>Celular:</strong></small>
+                                            {{ $aluno->celular }}
+
                                         </p>
                                         </td>
                                         <td>
@@ -243,6 +247,7 @@
 
                                     </tbody>
                                 </table>
+
 
                             </div>
                             <div role="tabpanel" class="tab-pane" id="ocorrencias" aria-live="ocorrencias">
