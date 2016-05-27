@@ -45,7 +45,7 @@ class NotaController extends Controller
 
             foreach($arquivogravado as $a) {
 
-                $dados = explode(',', $a);
+                $dados = explode(';', $a);
 
                 if (count($dados) < 3) {
                     break;
@@ -69,7 +69,7 @@ class NotaController extends Controller
 
 
                     $nota['matricula'] = $dados[0];
-                    $nota['nota1unidade'] = floatval($dados[5]);
+                    $nota['nota1unidade'] = (floatval($dados[5]) > 0 ? floatval($dados[5]) : NULL);
                     $nota['nota2unidade'] = (floatval($dados[6]) > 0 ? floatval($dados[6]) : NULL);
                     $nota['nota3unidade'] = (floatval($dados[7]) > 0 ? floatval($dados[7]) : NULL);
 
