@@ -23,7 +23,12 @@ class NotaController extends Controller
         if($request->hasFile('notas'))
         {
 
-            set_time_limit(36000000);
+           // set_time_limit(86000000);
+            ini_set("memory_limit","7G");
+            ini_set('max_execution_time', '0');
+            ini_set('max_input_time', '0');
+            set_time_limit(0);
+            ignore_user_abort(true);
             $arraydados = [];
 
 
@@ -31,7 +36,7 @@ class NotaController extends Controller
             $disciplinas = Disciplina::select('id','nome_sei')->get()->toArray();
 
 
-
+            DB::connection()->disableQueryLog();
 
 
 
