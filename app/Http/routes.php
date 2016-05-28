@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/alunos/{id}/ocorrencia', ['as' => 'alunos.ocorrencia', 'uses' => 'AlunoController@ocorrencia']);
 
     Route::get('/alunos/{turma}/listar', ['as' => 'aluno.listagem', 'uses' => 'AlunoController@turmalistagem']);
-
+    Route::get('/alunos/{turma}/carteirinha', ['as' => 'aluno.carteirinha', 'uses' => 'AlunoController@carteirinha']);
 
     Route::get('/ocorrencias/turma/{turma}', ['as' => 'ocorrencias.turma', 'uses' => 'OcorrenciaController@turma']);
     Route::post('/ocorrencias/turma/{turma}', ['as' => 'ocorrencias.turma.salvar', 'uses' => 'OcorrenciaController@turmaSalvar']);
@@ -58,7 +58,10 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/notas', ['as' => 'notas.importar', 'uses' => 'NotaController@importar']);
     Route::post('/notas/upload', ['as' => 'notas.upload', 'uses' => 'NotaController@upload']);
+    Route::get('/notas/upload', ['as' => 'notas.upload', 'uses' => 'NotaController@salvar']);
 
+    Route::get('/boletos', ['as' => 'boletos.importar', 'uses' => 'BoletoController@importar']);
+    Route::post('/boletos/upload', ['as' => 'boletos.upload', 'uses' => 'BoletoController@upload']);
 
     Route::get('/tipos', ['as' => 'tipos.index', 'uses' => 'TipoOcorrenciaController@index']);
     Route::get('/tipos/dados', ['as' => 'tipos.dados', 'uses' => 'TipoOcorrenciaController@dados']);
