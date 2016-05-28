@@ -150,6 +150,7 @@
                                                 <i class="glyphicon glyphicon-minus bg-gray"></i>
                                             </li>
                                         </ul>
+                                            {!! $aluno->ocorrencias()->paginate(6)->fragment('ocorrencias')->render()  !!}
                                          @else
                                         <h4>Nenhuma Ocorrência Cadastrada no Sistema</h4>
                                         @endif
@@ -176,23 +177,45 @@
                                         <tr>
                                             <td>{{$nota->disciplina->descricao }}</td>
                                             @if($nota->nota1unidade < 6)
-                                                <?php $classe = "text-danger" ?>
+                                                <?php $classe1 = "text-danger" ?>
+                                                @if($nota->nota1unidade <= 0 )
+                                                    <?php $nota->nota1unidade = "" ?>
+                                                @else
+                                                    <?php $nota->nota1unidade =  number_format($nota->nota1unidade,1) ?>
+                                                @endif
                                             @else
-                                                <?php $classe = "text-primary" ?>
+                                                <?php $classe1 = "text-primary" ?>
+                                                <?php $nota->nota1unidade =  number_format($nota->nota1unidade,1) ?>
                                             @endif
-                                            <td><span class="{{$classe}}">{{$nota->nota1unidade }}</span></td>
+
                                             @if($nota->nota2unidade < 6)
-                                                <?php $classe = "text-danger" ?>
+                                                <?php $classe2 = "text-danger" ?>
+                                                @if($nota->nota2unidade <= 0 )
+                                                    <?php $nota->nota2unidade = "" ?>
+                                                @else
+                                                    <?php $nota->nota2unidade =  number_format($nota->nota2unidade,1) ?>
+                                                @endif
                                             @else
-                                                <?php $classe = "text-primary" ?>
+                                                <?php $classe2 = "text-primary" ?>
+                                                <?php $nota->nota2unidade =  number_format($nota->nota2unidade,1) ?>
                                             @endif
-                                            <td><span class="{{$classe}}">{{$nota->nota2unidade }}</span></td>
-                                            @if($nota->nota1unidade < 6)
-                                                <?php $classe = "text-danger" ?>
+
+
+                                            @if($nota->nota3unidade < 6)
+                                                <?php $classe3 = "text-danger" ?>
+                                                @if($nota->nota3unidade <= 0 )
+                                                    <?php $nota->nota3unidade = "" ?>
+                                                @else
+                                                    <?php $nota->nota3unidade =  number_format($nota->nota3unidade,1) ?>
+                                                @endif
                                             @else
-                                                <?php $classe = "text-primary" ?>
+                                                <?php $classe3 = "text-primary" ?>
+                                                <?php $nota->nota3unidade =  number_format($nota->nota3unidade,1) ?>
                                             @endif
-                                            <td><span class="{{$classe}}">{{$nota->nota3unidade }}</span></td>
+
+                                            <td><span class="{{$classe1}}">{{$nota->nota1unidade }}</span></td>
+                                            <td><span class="{{$classe2}}">{{$nota->nota2unidade }}</span></td>
+                                            <td><span class="{{$classe3}}">{{$nota->nota3unidade }}</span></td>
                                         </tr>
 
                                     @endforeach

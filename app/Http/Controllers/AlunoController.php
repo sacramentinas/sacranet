@@ -120,9 +120,9 @@ class AlunoController extends Controller
     public function perfil($id)
     {
         $aluno = Aluno::find($id);
-       $ocorrencias = $aluno->ocorrencias->sortByDesc('data')->groupBy('data');
+        $ocorrencias = $aluno->ocorrencias()->paginate(10)->sortByDesc('data')->groupBy('data');
 
-
+       // $ocorrencias = Ocorrencia::where('alunos_id',$id)->orderBy('data','desc')->groupBy('data')->get();
       /*  $boletos = Boleto::where('aluno_id',$id)->first();
         $data = explode("/",$boletos->vencimento);
         $mes = $data[1];
