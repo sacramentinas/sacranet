@@ -51,7 +51,7 @@ class Aluno extends Model implements AuthenticatableContract
 
     public function ocorrencias()
     {
-        return $this->belongsToMany('Sacranet\Ocorrencia','aluno_ocorrencias')->withTimestamps();
+        return $this->belongsToMany('Sacranet\Ocorrencia','aluno_ocorrencias')->withTimestamps()->orderBy('data','desc');
     }
 
 

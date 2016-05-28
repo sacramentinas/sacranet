@@ -150,7 +150,7 @@
                                                 <i class="glyphicon glyphicon-minus bg-gray"></i>
                                             </li>
                                         </ul>
-                                            {!! $aluno->ocorrencias()->paginate(6)->fragment('ocorrencias')->render()  !!}
+                                            {!! $aluno->ocorrencias()->paginate(5)->fragment('ocorrencias')->render()  !!}
                                          @else
                                         <h4>Nenhuma Ocorrência Cadastrada no Sistema</h4>
                                         @endif

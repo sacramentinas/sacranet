@@ -352,6 +352,7 @@
                                                     <i class="glyphicon glyphicon-minus bg-gray"></i>
                                                 </li>
                                          </ul>
+                                        {!! $aluno->ocorrencias()->paginate(10)->fragment('ocorrencias')->render()  !!}
                                     </div><!-- /.col -->
                                 </div>
 

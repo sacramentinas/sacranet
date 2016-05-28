@@ -58,7 +58,7 @@ class ResponsavelController extends Controller
         $aluno = Aluno::find($id);
 
         //$ocorrencias = $aluno->ocorrencias->sortByDesc('data')->groupBy('data');
-        $ocorrencias = $aluno->ocorrencias()->paginate(6)->sortByDesc('data')->groupBy('data');
+        $ocorrencias = $aluno->ocorrencias()->paginate(5)->groupBy('data');
 
         $quantidade['negativa'] = 0;
         $quantidade['positiva'] = 0;
