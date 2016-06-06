@@ -60,19 +60,23 @@ class ResponsavelController extends Controller
         //$ocorrencias = $aluno->ocorrencias->sortByDesc('data')->groupBy('data');
         $ocorrencias = $aluno->ocorrencias()->paginate(4)->groupBy('data');
 
+        $quantoc = $aluno->ocorrencias;
+
+
+
         $quantidade['negativa'] = 0;
         $quantidade['positiva'] = 0;
 
-        foreach($ocorrencias as $ocorrencia) {
-            foreach ($ocorrencia as $o) {
-                if(isset($o->tipoocorrencias[0])) {
-                    if ($o->tipoocorrencias[0]->tipo == 'Negativa') {
-                        $quantidade['negativa']++;
-                    } else {
-                        $quantidade['positiva']++;
-                    }
+        foreach($quantoc as $o) {
+
+            if(isset($o->tipoocorrencias[0])) {
+                if ($o->tipoocorrencias[0]->tipo == 'Negativa') {
+                    $quantidade['negativa']++;
+                } else {
+                    $quantidade['positiva']++;
                 }
             }
+
         }
 
        // dd($aluno->turma->serie->nome);

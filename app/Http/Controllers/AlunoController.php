@@ -129,11 +129,15 @@ class AlunoController extends Controller
       */
 
 
+        $quantoc = $aluno->ocorrencias;
+
+
+
         $quantidade['negativa'] = 0;
         $quantidade['positiva'] = 0;
 
-      foreach($ocorrencias as $ocorrencia) {
-          foreach ($ocorrencia as $o) {
+      foreach($quantoc as $o) {
+
             if(isset($o->tipoocorrencias[0])) {
                 if ($o->tipoocorrencias[0]->tipo == 'Negativa') {
                     $quantidade['negativa']++;
@@ -141,7 +145,7 @@ class AlunoController extends Controller
                     $quantidade['positiva']++;
                 }
             }
-          }
+
       }
 
 
