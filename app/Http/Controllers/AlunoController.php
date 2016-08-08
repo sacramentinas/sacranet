@@ -286,51 +286,141 @@ class AlunoController extends Controller
     public function upload(Request $request)
     {
 
+        ini_set("memory_limit","7G");
+        ini_set('max_execution_time', '0');
+        ini_set('max_input_time', '0');
+        set_time_limit(0);
+        ignore_user_abort(true);
+
+
         if($request->hasFile('alunos')){
 
-            set_time_limit(78000000);
+            //set_time_limit(78000000);
             $arquivo = $request->file('alunos');
             $arquivo->move('upload','alunos.txt');
 
-            $arraydados = Aluno::geradados('upload/alunos.txt');
+            $msg =  ['sucesso' => "Upload Realizado com Sucesso"];
 
 
-            \File::delete('upload/alunos.txt');
+
+        }else{
+            $msg =  ['erro' => "Upload Não foi Realizado"];
+        }
 
 
-           Turma::getTurma();
 
-           DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-           DB::table('alunos')->delete();
-           DB::statement('ALTER TABLE alunos AUTO_INCREMENT = 0 ');
-           DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        return response()->json($msg);
 
-            $cont = 0;
 
-            foreach($arraydados as $aluno){
+    }
 
-                $turma = Turma::checkTurma($aluno['turma'],$aluno['codcurso']);
-                unset($aluno['turma']);
-                unset($aluno['codcurso']);
-                if($turma == false){ $turma = null; }
-                $alunoc = Aluno::create($aluno);
-                $alunoc->turma()->associate($turma)->save();
-                Nota::regenerarNotas($alunoc->matricula,$alunoc->id);
-                Aluno_ocorrencia::regenerarOcorrencias($alunoc->matricula,$alunoc->id);
-                $cont++;
+    public function importacaodados()
+    {
+        ini_set("memory_limit","7G");
+        ini_set('max_execution_time', '0');
+        ini_set('max_input_time', '0');
+        set_time_limit(0);
+        ignore_user_abort(true);
+        DB::connection()->disableQueryLog();
 
-            }
+        $arraydados = Aluno::geradados('upload/alunos.txt');
 
-            if($cont){
-                $msg =  ['sucesso' => "$cont alunos importados com sucesso"];
-            }else{
-                $msg = ['erro' => "Nenhum aluno pode ser importado"];
-            }
 
-           return response()->json($msg);
+        \File::delete('upload/alunos.txt');
+
+
+        Turma::getTurma();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('alunos')->delete();
+        DB::statement('ALTER TABLE alunos AUTO_INCREMENT = 0 ');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        $cont = 0;
+
+        foreach($arraydados as $aluno){
+
+            $turma = Turma::checkTurma($aluno['turma'],$aluno['codcurso']);
+            unset($aluno['turma']);
+            unset($aluno['codcurso']);
+            if($turma == false){ $turma = null; }
+            $alunoc = Aluno::create($aluno);
+            $alunoc->turma()->associate($turma)->save();
+            $cont++;
+            //echo $aluno['matricula']."<br>";
+
+        }
+
+        if($cont){
+            $msg =  ['sucesso' => "$cont alunos importados com sucesso"];
+        }else{
+            $msg = ['erro' => "Nenhum aluno pode ser importado"];
+        }
+
+        return response()->json($msg);
+    }
+
+    public function regenerarnotas()
+    {
+
+        ini_set("memory_limit","7G");
+        ini_set('max_execution_time', '0');
+        ini_set('max_input_time', '0');
+        set_time_limit(0);
+        ignore_user_abort(true);
+        DB::connection()->disableQueryLog();
+
+        $alunos = Aluno::all();
+        $quantidade = 0;
+
+        foreach($alunos as $aluno) {
+
+            Nota::regenerarNotas($aluno->matricula,$aluno->id);
+            $quantidade++;
 
 
         }
 
+        if($quantidade){
+            $msg =  ['sucesso' => "$quantidade alunos tiveram as notas regeneradas"];
+        }else{
+            $msg = ['erro' => "Erro ao regenerar as notas"];
+        }
+
+        return response()->json($msg);
+
     }
+
+
+    public function regenerarocorrencias()
+    {
+
+        ini_set("memory_limit","7G");
+        ini_set('max_execution_time', '0');
+        ini_set('max_input_time', '0');
+        set_time_limit(0);
+        ignore_user_abort(true);
+        DB::connection()->disableQueryLog();
+
+        $alunos = Aluno::all();
+        $quantidade = 0;
+
+        foreach($alunos as $aluno) {
+
+           Aluno_ocorrencia::regenerarOcorrencias($aluno->matricula,$aluno->id);
+            $quantidade++;
+
+
+        }
+
+        if($quantidade){
+            $msg =  ['sucesso' => "$quantidade alunos tiveram as ocorrências regeneradas"];
+        }else{
+            $msg = ['erro' => "Erro ao Regenerar as Ocorrências"];
+        }
+
+        return response()->json($msg);
+    }
+
+
 }

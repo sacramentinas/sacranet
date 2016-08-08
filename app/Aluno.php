@@ -73,7 +73,7 @@ class Aluno extends Model implements AuthenticatableContract
          $arraydados = [];
          $dados = [];
          $arquivogravado = file($arquivo, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
+         $alunos = '';
 
          foreach($arquivogravado as $a){
              if(substr($a,0,7) == "------ "){
@@ -138,8 +138,7 @@ class Aluno extends Model implements AuthenticatableContract
                  $dados['telefonecomercial'] = trim(substr($a,$ini += strlen($quant[23])));
 
 
-
-
+                 //$alunos .= implode(';',$dados).PHP_EOL;
                  array_push($arraydados,$dados);
              }
 
@@ -147,7 +146,8 @@ class Aluno extends Model implements AuthenticatableContract
 
 
          }
-          return $arraydados ;
+
+          return $arraydados;
 
          }else{
           return [];
