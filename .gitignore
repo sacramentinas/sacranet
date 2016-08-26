@@ -1,3 +1,7 @@
+vendor
+public/fotoaluno/
+public/.htaccess
+node_modules
 /vendor
 /public/fotoaluno
 /public/.htaccess
@@ -5,3 +9,4 @@
 Homestead.yaml
 Homestead.json
 .env
+.idea
