@@ -119,15 +119,7 @@ class OcorrenciaController extends Controller
 
 
         $ocorrencia->tipoocorrencias()->sync($request->input('ocorrencia'));
-
-        foreach($request->input('alunos') as $aluno)
-        {
-            $a = Aluno::find($aluno);
-            $al[$aluno] =  ['matricula' => $a->matricula];
-
-        }
-
-        $ocorrencia->alunos()->sync( $al );
+        $ocorrencia->alunos()->sync( $request->input('alunos') );
 
         return response()->json(['sucesso' => 'Ocorrência Editada com Sucesso!']);
 
@@ -152,16 +144,8 @@ class OcorrenciaController extends Controller
         ]);
 
         $ocorrencia->tipoocorrencias()->attach($request->input('ocorrencia'));
-        foreach($request->input('alunos') as $aluno)
-        {
-
-        $a = Aluno::find($aluno);
-        $ocorrencia->alunos()->attach($aluno,['matricula' => $a->matricula] );
-
-
-        }
-
-
+        $ocorrencia->alunos()->attach($request->input('alunos') );
+        
         return response()->json(['sucesso' => 'Ocorrência Cadastrada com Sucesso!']);
 
     }
@@ -179,10 +163,7 @@ class OcorrenciaController extends Controller
         ]);
 
         $ocorrencia->tipoocorrencias()->attach($request->input('ocorrencia'));
-        $aluno = $request->input('alunos');
-
-            $a = Aluno::find($aluno);
-            $ocorrencia->alunos()->attach($aluno,['matricula' => $a->matricula] );
+        $ocorrencia->alunos()->attach($request->input('alunos'));
 
 
 

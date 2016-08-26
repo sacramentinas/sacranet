@@ -15,10 +15,8 @@ class CreateAlunoOcorrenciasTable extends Migration
         Schema::create('aluno_ocorrencias', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('ocorrencia_id')->nullable();
-            $table->unsignedInteger('aluno_id')->nullable();
-            $table->integer('matricula');
+            $table->Integer('aluno_id')->nullable();
             $table->timestamps();
-            $table->foreign('aluno_id')->references('id')->on('alunos')->onDelete('set null');
             $table->foreign('ocorrencia_id')->references('id')->on('ocorrencias')->onDelete('cascade');
 
 

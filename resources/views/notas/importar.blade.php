@@ -84,50 +84,10 @@
                                 },4000);
 
                                  $('#salvar').html('<i class="fa fa-spinner faa-spin animated"></i> Importando...').attr('disabled','disabled');
+                                 $('#form').trigger("reset");
+                                 $('#salvar').html('<i class="fa fa-upload"></i> Enviar').removeAttr('disabled');
 
-                                 $.ajax({
-                                     type: 'GET',
-                                     url: url,
-                                     processData: false,
-                                     dataType: 'json',
-                                     encode: true,
-                                     cache: false,
-                                     contentType: false,
-                                     success: function (msg) {
-
-                                         if(msg.sucesso){
-
-                                             $('.sucesso').html("<i class='icon fa fa-check'></i> "+msg.sucesso)
-                                             $('.alert-success').fadeIn('fast');
-                                             $('#mensagem').animate({top:"0"}, 500);
-
-                                             setTimeout(function(){
-                                                 $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);
-                                                 $(".alert-success").fadeOut(3000);
-
-                                             },4000);
-                                         }else{
-
-                                             $('.alert-danger').fadeIn('fast');
-                                             $('#mensagem').animate({top:"0"}, 500);
-                                             $('.erro-msg').html("<i class='icon fa  fa-exclamation-triangle'></i>"+msg.erro);
-
-                                             setTimeout(function(){
-                                                 $('#mensagem').animate({top: -$('#mensagem').outerHeight()},1500);
-                                                 $(".alert-danger").fadeOut(3000);
-                                             },4000);
-
-                                         }
-
-                                         $('#form').trigger("reset");
-                                         $('#salvar').html('<i class="fa fa-upload"></i> Enviar').removeAttr('disabled');
-
-                                     }
-                                 });
-
-
-
-
+                                 
                              }else{
 
                                  $('.alert-danger').fadeIn('fast');

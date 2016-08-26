@@ -19,246 +19,208 @@ use Sacranet\Http\Requests\AlunoRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
+class AlunoController extends Controller {
 
-class AlunoController extends Controller
-{
+    public function index(Request $request) {
 
-
-    public function index(Request $request)
-    {
-
-       // $turmas = Turma::with('serie')->get();
+       
         $turmas = Auth::admin()->user()->turmas;
         $busca = $request->get('p');
         $turma = $request->get('t');
 
-        Session::put('url',\URL::full());
+        Session::put('url', \URL::full());
 
         $turmas_id = [];
 
-        foreach($turmas as $t){
+        foreach ($turmas as $t) {
             $turmas_id[] = $t['id'];
         }
 
 
         //DB::enableQueryLog();
-        if($busca && $turma) {
-            $alunos = Aluno::where(function($query) use ($busca){
-                $query->where('nomealuno','LIKE',"%$busca%")
-                    ->orwhere('matricula',$busca);
-            })->where('turma_id',$turma)->wherein('turma_id',$turmas_id)->orderBy('id')->paginate(12);
-        }
-        elseif($turma){
-            $alunos = Aluno::where('turma_id',$turma)->wherein('turma_id',$turmas_id)->orderBy('numero')->paginate(70);
-        }
-        elseif($busca){
-            $alunos = Aluno::where(function($query) use ($busca){
-                $query->where('nomealuno','LIKE',"%$busca%")
-                    ->orwhere('matricula',$busca);
-            })->wherein('turma_id',$turmas_id)->orderBy('id')->paginate(12);
-
-        }else{
-          $alunos = Aluno::orderBy('nomealuno')->wherein('turma_id',$turmas_id)->orderBy('id','desc')->paginate(12);
-
+        if ($busca && $turma) {
+            
+            $alunos = Aluno::where(function($query) use ($busca) {
+                        $query->where('nomealuno', 'LIKE', "%$busca%")
+                                ->orwhere('matricula', $busca);
+                    })->where('turma_id', $turma)->wherein('turma_id', $turmas_id)->orderBy('id')->paginate(12);
+                    
+                    
+        } elseif ($turma) {
+            
+            $alunos = Aluno::where('turma_id', $turma)->wherein('turma_id', $turmas_id)->orderBy('numero')->paginate(70);
+       
+        } elseif ($busca) {
+            
+            $alunos = Aluno::where(function($query) use ($busca) {
+                        $query->where('nomealuno', 'LIKE', "%$busca%")
+                                ->orwhere('matricula', $busca);
+                    })->wherein('turma_id', $turmas_id)->orderBy('id')->paginate(12);
+                    
+        } else {
+            $alunos = Aluno::orderBy('nomealuno')->wherein('turma_id', $turmas_id)->orderBy('id', 'desc')->paginate(12);
         }
         //DB::enableQueryLog();
-      //  dd(DB::getQueryLog());
+        //  dd(DB::getQueryLog());
 
         $btnOcorrencias = ($turma) ? true : false;
 
 
-        if($busca || $turma) {
-            return view('aluno.busca',compact('alunos','turmas','btnOcorrencias'));
-        }else{
-            return view('aluno.index',compact('alunos','turmas','btnOcorrencias'));
+        if ($busca || $turma) {
+            return view('aluno.busca', compact('alunos', 'turmas', 'btnOcorrencias'));
+        } else {
+            return view('aluno.index', compact('alunos', 'turmas', 'btnOcorrencias'));
         }
     }
 
-    public function turmalistagem($turma){
+    public function turmalistagem($turma) {
 
-        $alunos = Aluno::where('turma_id',$turma)->orderBy('numero')->get();
+        $alunos = Aluno::where('turma_id', $turma)->orderBy('numero')->get();
 
-        return view('aluno.listagem',compact('alunos'));
-
-    }
-    public function carteirinha($turma){
-
-        $alunos = Aluno::where('turma_id',$turma)->orderBy('numero')->get();
-
-        return view('aluno.carteirinha',compact('alunos'));
-
+        return view('aluno.listagem', compact('alunos'));
     }
 
-    public function create()
-    {
+    public function carteirinha($turma) {
+
+        $alunos = Aluno::where('turma_id', $turma)->orderBy('numero')->get();
+
+        return view('aluno.carteirinha', compact('alunos'));
+    }
+
+    public function create() {
         $tu = Turma::with('serie')->get();
         $turmas = [];
         $turmas[""] = "Selecione uma Turma";
 
-        foreach($tu as $t){
-            $turmas[$t->id] = $t->serie->nome." - ".$t->letra;
+        foreach ($tu as $t) {
+            $turmas[$t->id] = $t->serie->nome . " - " . $t->letra;
         }
 
 
-        return view('aluno.create',compact('turmas'));
+        return view('aluno.create', compact('turmas'));
     }
 
+    public function store(AlunoRequest $request) {
 
-
-    public function store(AlunoRequest $request)
-    {
-
-        if($request->ajax()){
-
-            Aluno::create($request->all());
-             return response()->json(['sucesso' => 'Aluno Cadastrado com Sucesso!']);
-
+        if ($request->ajax()) {
+            $dados = $request->all();
+            $dados['id'] = $dados['matricula'];
+            Aluno::create($dados);
+            return response()->json(['sucesso' => 'Aluno Cadastrado com Sucesso!']);
         }
-
     }
 
-    public function perfil($id)
-    {
+    public function perfil($id) {
         $aluno = Aluno::find($id);
         $ocorrencias = $aluno->ocorrencias()->paginate(10)->groupBy('data');
 
-       // $ocorrencias = Ocorrencia::where('alunos_id',$id)->orderBy('data','desc')->groupBy('data')->get();
-      /*  $boletos = Boleto::where('aluno_id',$id)->first();
-        $data = explode("/",$boletos->vencimento);
-        $mes = $data[1];
-      */
-
-
         $quantoc = $aluno->ocorrencias;
-
-
 
         $quantidade['negativa'] = 0;
         $quantidade['positiva'] = 0;
 
-      foreach($quantoc as $o) {
+        foreach ($quantoc as $o) {
 
-            if(isset($o->tipoocorrencias[0])) {
+            if (isset($o->tipoocorrencias[0])) {
                 if ($o->tipoocorrencias[0]->tipo == 'Negativa') {
-                    $quantidade['negativa']++;
+                    $quantidade['negativa'] ++;
                 } else {
-                    $quantidade['positiva']++;
+                    $quantidade['positiva'] ++;
                 }
             }
+        }
 
-      }
 
-
-        return view('aluno.perfil',compact('aluno','ocorrencias','quantidade','mes'));
-
+        return view('aluno.perfil', compact('aluno', 'ocorrencias', 'quantidade', 'mes'));
     }
 
-    public function ocorrencia($id)
-    {
+    public function ocorrencia($id) {
         $aluno = Aluno::find($id);
         $disciplinas[""] = "";
-        foreach(Disciplina::lists('descricao','id')->toArray() as $i =>  $d){
+        foreach (Disciplina::lists('descricao', 'id')->toArray() as $i => $d) {
             $disciplinas[$i] = $d;
         }
 
-       $tipoOcorrencias = TipoOcorrencia::all();
+        $tipoOcorrencias = TipoOcorrencia::all();
 
-
-
-        return view('aluno.ocorrencia',compact('aluno','tipoOcorrencias','disciplinas'));
+        return view('aluno.ocorrencia', compact('aluno', 'tipoOcorrencias', 'disciplinas'));
     }
 
-
-    public function edit($id)
-    {
+    public function edit($id) {
         $tu = Turma::with('serie')->get();
         $turmas = [];
         $turmas[""] = "Selecione uma Turma";
 
-        foreach($tu as $t){
-            $turmas[$t->id] = $t->serie->nome." - ".$t->letra;
+        foreach ($tu as $t) {
+            $turmas[$t->id] = $t->serie->nome . " - " . $t->letra;
         }
 
         $aluno = Aluno::find($id);
 
-        return view('aluno.edit',compact('turmas','aluno'));
-
+        return view('aluno.edit', compact('turmas', 'aluno'));
     }
 
-
-
-
-
-
-    public function update($id,AlunoRequest $request)
-    {
-       $aluno = Aluno::find($id);
-       $aluno->update($request->all());
+    public function update($id, AlunoRequest $request) {
+        $aluno = Aluno::find($id);
+        $aluno->update($request->all());
         return response()->json(['sucesso' => 'Aluno Editado com Sucesso!']);
-
     }
 
-    public function fotos(){
+    public function fotos() {
 
         $tu = Turma::with('serie')->get();
         $turmas = [];
         $turmas["todas"] = "Todas as Turmas";
 
-        foreach($tu as $t){
-            $turmas[$t->id] = $t->serie->nome." - ".$t->letra;
+        foreach ($tu as $t) {
+            $turmas[$t->id] = $t->serie->nome . " - " . $t->letra;
         }
 
-         return view('aluno.upload',compact('turmas'));
+        return view('aluno.upload', compact('turmas'));
     }
 
-
-
-    public function uploadFotos(Request $request)
-    {
-        if($request->hasFile('fotos')) {
-            $turma =  $request->input('turma');
+    public function uploadFotos(Request $request) {
+        if ($request->hasFile('fotos')) {
+            $turma = $request->input('turma');
             $mat = $request->input('matricula');
             $arquivo = $request->file('fotos');
             $local = public_path() . "/fotoaluno";
 
 
 
-            if(Session::has('turma')){
-                if($turma != Session::get('turma')){
-                    Session::put('turma',$turma);
+            if (Session::has('turma')) {
+                if ($turma != Session::get('turma')) {
+                    Session::put('turma', $turma);
                     Session::forget('alunos');
-                }else{
-                    if( empty( Session::get('alunos',[] ) ) ){
+                } else {
+                    if (empty(Session::get('alunos', []))) {
                         Session::forget('alunos');
                     }
                 }
-            }else{
-                Session::put('turma',$turma);
+            } else {
+                Session::put('turma', $turma);
                 Session::forget('alunos');
             }
 
-            if($mat){
-                Session::put('alunos',[ 0 => ['matricula' => $mat]]);
+            if ($mat) {
+                Session::put('alunos', [ 0 => ['matricula' => $mat]]);
             }
 
 
-            if($turma == 'todas' ){
+            if ($turma == 'todas') {
                 $nomearquivo = $arquivo->getClientOriginalName();
+            } else {
 
-            }  else{
-
-                if (Session::has('alunos'))
-                {
+                if (Session::has('alunos')) {
                     $alunos = Session::get('alunos');
-                }else{
-                    $alunos = Aluno::where('turma_id',$turma)->select('matricula')->orderBy('numero')->get()->toArray();
+                } else {
+                    $alunos = Aluno::where('turma_id', $turma)->select('matricula')->orderBy('numero')->get()->toArray();
                 }
 
                 $matricula = array_shift($alunos);
-                Session::put('alunos',$alunos);
+                Session::put('alunos', $alunos);
 
-                $nomearquivo =  intval($matricula['matricula'] ).".".$arquivo->getClientOriginalExtension();
-
+                $nomearquivo = intval($matricula['matricula']) . "." . $arquivo->getClientOriginalExtension();
             }
 
 
@@ -267,160 +229,81 @@ class AlunoController extends Controller
         }
     }
 
-
-    public function removerfoto(Request $request)
-    {
+    public function removerfoto(Request $request) {
         $matricula = $request->input('matricula');
-        \File::delete('fotoaluno/'.$matricula.'.jpg');
+        \File::delete('fotoaluno/' . $matricula . '.jpg');
         return ['sucesso' => "Foto Excluída com Sucesso"];
-
-
     }
 
-    public function importar()
-    {
+    public function importar() {
         return view('aluno.importar');
     }
 
+    public function upload(Request $request) {
 
-    public function upload(Request $request)
-    {
-
-        ini_set("memory_limit","7G");
+        ini_set("memory_limit", "7G");
         ini_set('max_execution_time', '0');
         ini_set('max_input_time', '0');
         set_time_limit(0);
         ignore_user_abort(true);
 
 
-        if($request->hasFile('alunos')){
+        if ($request->hasFile('alunos')) {
 
-            //set_time_limit(78000000);
             $arquivo = $request->file('alunos');
-            $arquivo->move('upload','alunos.txt');
+            $arquivo->move('upload', 'alunos.txt');
 
-            $msg =  ['sucesso' => "Upload Realizado com Sucesso"];
-
-
-
-        }else{
-            $msg =  ['erro' => "Upload Não foi Realizado"];
+            $msg = ['sucesso' => "Upload Realizado com Sucesso"];
+        } else {
+            $msg = ['erro' => "Upload Não foi Realizado"];
         }
 
 
 
         return response()->json($msg);
-
-
     }
 
-    public function importacaodados()
-    {
-        ini_set("memory_limit","7G");
+    public function importacaodados() {
+        
+        ini_set("memory_limit", "7G");
         ini_set('max_execution_time', '0');
         ini_set('max_input_time', '0');
         set_time_limit(0);
         ignore_user_abort(true);
         DB::connection()->disableQueryLog();
-
-        $arraydados = Aluno::geradados('upload/alunos.txt');
-
-
-        \File::delete('upload/alunos.txt');
-
-
-        Turma::getTurma();
-
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('alunos')->delete();
-        DB::statement('ALTER TABLE alunos AUTO_INCREMENT = 0 ');
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $cont = 0;
+        $arraydados = Aluno::geradados('upload/alunos.txt');
+        Turma::getTurma();
+        $alunos = [];
+        foreach ($arraydados as $aluno) {
 
-        foreach($arraydados as $aluno){
-
-            $turma = Turma::checkTurma($aluno['turma'],$aluno['codcurso']);
+            $aluno['turma_id'] = Turma::checkTurma($aluno['turma'], $aluno['codcurso']);
             unset($aluno['turma']);
             unset($aluno['codcurso']);
-            if($turma == false){ $turma = null; }
-            $alunoc = Aluno::create($aluno);
-            $alunoc->turma()->associate($turma)->save();
-            $cont++;
-            //echo $aluno['matricula']."<br>";
-
+            
+            $alunos[] = $aluno;
+   
+           
+        }
+        
+        $dados = array_chunk($alunos,1000);
+        foreach($dados as $d){
+              DB::table('alunos')->insert($d);
         }
 
-        if($cont){
-            $msg =  ['sucesso' => "$cont alunos importados com sucesso"];
-        }else{
+        $quantidade = count($alunos);
+        if ($quantidade) {
+            $msg = ['sucesso' => "{$quantidade} alunos importados com sucesso"];
+        } else {
             $msg = ['erro' => "Nenhum aluno pode ser importado"];
         }
 
         return response()->json($msg);
     }
 
-    public function regenerarnotas()
-    {
-
-        ini_set("memory_limit","7G");
-        ini_set('max_execution_time', '0');
-        ini_set('max_input_time', '0');
-        set_time_limit(0);
-        ignore_user_abort(true);
-        DB::connection()->disableQueryLog();
-
-        $alunos = Aluno::all();
-        $quantidade = 0;
-
-        foreach($alunos as $aluno) {
-
-            Nota::regenerarNotas($aluno->matricula,$aluno->id);
-            $quantidade++;
-
-
-        }
-
-        if($quantidade){
-            $msg =  ['sucesso' => "$quantidade alunos tiveram as notas regeneradas"];
-        }else{
-            $msg = ['erro' => "Erro ao regenerar as notas"];
-        }
-
-        return response()->json($msg);
-
-    }
-
-
-    public function regenerarocorrencias()
-    {
-
-        ini_set("memory_limit","7G");
-        ini_set('max_execution_time', '0');
-        ini_set('max_input_time', '0');
-        set_time_limit(0);
-        ignore_user_abort(true);
-        DB::connection()->disableQueryLog();
-
-        $alunos = Aluno::all();
-        $quantidade = 0;
-
-        foreach($alunos as $aluno) {
-
-           Aluno_ocorrencia::regenerarOcorrencias($aluno->matricula,$aluno->id);
-            $quantidade++;
-
-
-        }
-
-        if($quantidade){
-            $msg =  ['sucesso' => "$quantidade alunos tiveram as ocorrências regeneradas"];
-        }else{
-            $msg = ['erro' => "Erro ao Regenerar as Ocorrências"];
-        }
-
-        return response()->json($msg);
-    }
-
+      
 
 }

@@ -34,8 +34,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/alunos/importar', ['as' => 'alunos.importar', 'uses' => 'AlunoController@importar']);
     Route::post('/alunos/upload', ['as' => 'alunos.upload', 'uses' => 'AlunoController@upload']);
     Route::post('/alunos/importacaodados', ['as' => 'alunos.importacaodados', 'uses' => 'AlunoController@importacaodados']);
-    Route::post('/alunos/regenerarnotas', ['as' => 'alunos.regenerarnotas', 'uses' => 'AlunoController@regenerarnotas']);
-    Route::post('/alunos/regenerarocorrencias', ['as' => 'alunos.regenerarocorrencias', 'uses' => 'AlunoController@regenerarocorrencias']);
+    Route::get('/alunos/regenerarnotas', ['as' => 'alunos.regenerarnotas', 'uses' => 'AlunoController@regenerarnotas']);
+    Route::get('/alunos/regenerarocorrencias', ['as' => 'alunos.regenerarocorrencias', 'uses' => 'AlunoController@regenerarocorrencias']);
     Route::get('/alunos/cadastrar', ['as' => 'alunos.cadastrar', 'uses' => 'AlunoController@create']);
     Route::get('/alunos/{id}/editar', ['as' => 'alunos.editar', 'uses' => 'AlunoController@edit']);
     Route::put('/alunos/{id}/editar', ['as' => 'alunos.update', 'uses' => 'AlunoController@update']);

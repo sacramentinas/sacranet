@@ -108,75 +108,6 @@
                                                      }, 4000);
 
 
-
-
-                                                     $.ajax({
-                                                         type: 'POST',
-                                                         url: "<?=route('alunos.regenerarnotas')?>",
-                                                         processData: false,
-                                                         dataType: 'json',
-                                                         encode: true,
-                                                         cache: false,
-                                                         contentType: false,
-                                                         success: function (msg) {
-                                                             $('.sucesso').html("<i class='icon fa fa-check'></i>" + msg.sucesso);
-                                                             $('.alert-success').fadeIn('fast');
-                                                             $('#mensagem').animate({top: "0"}, 500);
-
-                                                             setTimeout(function () {
-                                                                 $('#mensagem').animate({top: -$('#mensagem').outerHeight()}, 1500);
-                                                                 $(".alert-success").fadeOut(3000);
-
-                                                             }, 4000);
-
-
-                                                             $.ajax({
-                                                                 type: 'POST',
-                                                                 url: "<?=route('alunos.regenerarocorrencias')?>",
-                                                                 processData: false,
-                                                                 dataType: 'json',
-                                                                 encode: true,
-                                                                 cache: false,
-                                                                 contentType: false,
-                                                                 success: function (msg) {
-                                                                     $('.sucesso').html("<i class='icon fa fa-check'></i>" + msg.sucesso);
-                                                                     $('.alert-success').fadeIn('fast');
-                                                                     $('#mensagem').animate({top: "0"}, 500);
-
-                                                                     setTimeout(function () {
-                                                                         $('#mensagem').animate({top: -$('#mensagem').outerHeight()}, 1500);
-                                                                         $(".alert-success").fadeOut(3000);
-
-                                                                     }, 4000);
-
-                                                                     $('#form').trigger("reset");
-                                                                     $('#salvar').html('<i class="fa fa-upload"></i> Enviar').removeAttr('disabled');
-                                                                 },
-                                                                 error:function(){
-                                                                     $('.alert-danger').fadeIn('fast');
-                                                                     $('#mensagem').animate({top:"0"}, 500);
-                                                                     $('.erro-msg').html("<i class='icon fa  fa-exclamation-triangle'></i>Erro ao Regenerar as Ocorrências");
-                                                                     $('#form').trigger("reset");
-                                                                     $('#salvar').html('<i class="fa fa-upload"></i> Enviar').removeAttr('disabled');
-                                                                 }
-
-                                                             });
-
-
-
-                                                         },
-                                                         error:function(){
-                                                             $('.alert-danger').fadeIn('fast');
-                                                             $('#mensagem').animate({top:"0"}, 500);
-                                                            $('.erro-msg').html("<i class='icon fa  fa-exclamation-triangle'></i>Erro ao Regenerar as Notas");
-                                                            $('#form').trigger("reset");
-                                                            $('#salvar').html('<i class="fa fa-upload"></i> Enviar').removeAttr('disabled');
-                                                         }
-                                                     });
-
-
-
-
                                                  }else{
                                                      $('.alert-danger').fadeIn('fast');
                                                      $('#mensagem').animate({top:"0"}, 500);
@@ -187,6 +118,9 @@
                                                          $(".alert-danger").fadeOut(3000);
                                                      },4000);
                                                  }
+                                                 
+                                                 $('#form').trigger("reset");
+                                                 $('#salvar').html('<i class="fa fa-upload"></i> Enviar').removeAttr('disabled');
 
                                              },
                                              error:function(){

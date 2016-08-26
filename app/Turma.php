@@ -40,7 +40,7 @@ class Turma extends Model
             }
         }
 
-        return false;
+        return null;
 
     }
 

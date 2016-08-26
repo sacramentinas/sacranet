@@ -8,7 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "^5.1",
-        "genealabs/laravel-caffeine": "~0.2",
+        "genealabs/laravel-caffeine": "~0.2.0",
         "yajra/laravel-datatables-oracle": "~5.0",
         "orangehill/iseed": "^2.0",
         "sboo/multiauth": "^4.0"

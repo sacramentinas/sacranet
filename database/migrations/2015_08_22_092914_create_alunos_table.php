@@ -13,7 +13,7 @@ class CreateAlunosTable extends Migration
     public function up()
     {
         Schema::create('alunos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id');
             $table->integer('matricula');
             $table->string('nomealuno',100);
             $table->date('datanascimento')->nullable();

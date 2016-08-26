@@ -13,7 +13,7 @@ class Aluno extends Model implements AuthenticatableContract
 
 
 
-    protected $fillable = ['matricula','nomealuno','datanascimento','sexo','turma_id','numero','endereco',
+    protected $fillable = ['id','matricula','nomealuno','datanascimento','sexo','turma_id','numero','endereco',
                            'bairro','cep','municipio','nomemae','nomepai','senha','senhatexto','telefone','telefonemae','telefonepai',
                            'emailmae','emailpai','emailcontratante','celular','telefonecomercial' ];
 
@@ -98,11 +98,12 @@ class Aluno extends Model implements AuthenticatableContract
          foreach($arquivogravado as $a){
 
 
-             if(!(substr($a,0,15) == "MATRIC ALUNO(A)" || substr($a,0,4) == "----" || substr($a,0,15) == "Quantidade de a" || substr($a,0,6) == "ATIVOS" || substr($a,0,7) == "COLEGIO" || substr($a,0,4) == "(Mod" || substr($a,0,73) == "                                                                      PAG"))
+             if(!(substr($a,0,15) == "MATRIC ALUNO(A)" || substr($a,0,4) == "----" || substr($a,0,15) == "Quantidade de a" || substr($a,0,6) == "ATIVOS" || substr($a,0,14) == "DESCONFIRMADOS"  || substr($a,0,7) == "COLEGIO" || substr($a,0,4) == "(Mod" || substr($a,0,73) == "                                                                      PAG"))
              {
 
 
                  $ini = 0;
+                 $dados['id'] = trim(substr($a,$ini,strlen($quant[0]) ) );
                  $dados['matricula'] = trim(substr($a,$ini,strlen($quant[0]) ) );
                  $dados['nomealuno'] = trim(substr($a,$ini += strlen($quant[0]) ,strlen($quant[1])));
                  $data =  explode("/",trim(substr($a,$ini += strlen($quant[1]) ,strlen($quant[2]))));
@@ -114,7 +115,6 @@ class Aluno extends Model implements AuthenticatableContract
                  }
 
                  $dados['sexo'] = trim(substr($a,$ini += strlen($quant[2]) ,strlen($quant[3])));
-                 // $dados['senhaaluno'] = trim(substr($a,$ini += strlen($quant[3]) ,strlen($quant[4])));
                  $ini += strlen($quant[3]);
                  $ini += strlen($quant[4]);
                  $dados['codcurso'] = trim(substr($a,$ini += strlen($quant[5]) ,strlen($quant[6])));
@@ -128,6 +128,7 @@ class Aluno extends Model implements AuthenticatableContract
                  $dados['nomemae'] = trim(substr($a,$ini += strlen($quant[13]) ,strlen($quant[14])));
                  $dados['nomepai'] = trim(substr($a,$ini += strlen($quant[14]) ,strlen($quant[15])));
                  $dados['senhatexto'] =  trim(substr($a,$ini += strlen($quant[15]) ,strlen($quant[16])));
+                 $dados['senha'] = \Hash::make($dados['senhatexto']);
                  $dados['telefone'] = trim(substr($a,$ini += strlen($quant[16]) ,strlen($quant[17])));
                  $dados['telefonemae'] = trim(substr($a,$ini += strlen($quant[17]) ,strlen($quant[18])));
                  $dados['telefonepai'] = trim(substr($a,$ini += strlen($quant[18]) ,strlen($quant[19])));
@@ -137,8 +138,6 @@ class Aluno extends Model implements AuthenticatableContract
                  $dados['celular'] = trim(substr($a,$ini += strlen($quant[22]),strlen($quant[23])));
                  $dados['telefonecomercial'] = trim(substr($a,$ini += strlen($quant[23])));
 
-
-                 //$alunos .= implode(';',$dados).PHP_EOL;
                  array_push($arraydados,$dados);
              }
 
@@ -146,7 +145,8 @@ class Aluno extends Model implements AuthenticatableContract
 
 
          }
-
+          
+         \File::delete($arquivo);
           return $arraydados;
 
          }else{
